@@ -6,15 +6,6 @@
 import { map, merge } from 'lodash';
 
 /**
- * The compose package is a collection of handy Hooks and Higher Order Components (HOCs).
- * The compose function is an alias to `flowRight` from Lodash.
- *
- * @ignore
- * @see 	https://github.com/WordPress/gutenberg/blob/trunk/packages/compose/README.md
- */
-import { useInstanceId } from '@wordpress/compose';
-
-/**
  * WordPress specific abstraction layer atop React.
  *
  * @ignore
@@ -45,12 +36,10 @@ import { Path } from '@wordpress/primitives';
  * <GenerateSvgPaths path={ path } attributes={ { style: { fill: '#BADA55' } } } />
  */
 function GenerateSvgPaths( { paths, attributes } ) {
-	const instanceId = useInstanceId( GenerateSvgPaths );
-
 	return (
 		<Fragment>
 			{ map( paths, ( { d, attrs }, index ) => (
-				<Path key={ `path-${ index }-${ instanceId }` } d={ d } { ...merge( {}, attrs, attributes ) } />
+				<Path key={ `path-${ index }` } d={ d } { ...merge( {}, attrs, attributes ) } />
 			) ) }
 		</Fragment>
 	);
