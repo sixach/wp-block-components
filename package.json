@@ -34,7 +34,7 @@
 		"lint:md:js": "wp-scripts lint-md-js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
-		"prepublishOnly": "npm run format && npm run build",
+		"prepublishOnly": "npm run format && npm run build && npm run docs",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",
 		"docs": "documentation build src/** -f html --github -o docs"
@@ -59,16 +59,12 @@
 			"@babel/preset-react"
 		]
 	},
-	"dependencies": {
-		"react": "^17.0.2"
-	},
 	"devDependencies": {
 		"@babel/cli": "^7.14.3",
 		"@babel/core": "^7.14.3",
 		"@babel/preset-env": "^7.14.2",
 		"@babel/preset-react": "^7.13.13",
 		"@wordpress/scripts": "^16.0.0",
-		"babel-core": "^7.0.0-bridge.0",
 		"classnames": "^2.3.1",
 		"cross-env": "^7.0.3",
 		"husky": "^6.0.0",
