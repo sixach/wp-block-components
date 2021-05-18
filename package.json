@@ -1,0 +1,97 @@
+{
+	"name": "@sixach/wp-block-components",
+	"version": "0.1.1",
+	"description": "A collection of most used React components crafted for the sixa projects.",
+	"keywords": [
+		"gutenberg",
+		"wordpress",
+		"components",
+		"react"
+	],
+	"homepage": "https://github.com/sixach/wp-block-components#readme",
+	"bugs": {
+		"url": "https://github.com/sixach/wp-block-components/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sixach/wp-block-components.git"
+	},
+	"license": "GPL-3.0-or-later",
+	"author": "sixa AG",
+	"sideEffects": false,
+	"main": "build/index.js",
+	"module": "build/index.js",
+	"scripts": {
+		"build": "cross-env BABEL_ENV=default NODE_ENV=production && rm -rf build && mkdir build && babel src --out-dir build --copy-files",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:css-fix": "wp-scripts lint-style --fix",
+		"lint:js": "wp-scripts lint-js",
+		"lint:js-fix": "wp-scripts lint-js --fix",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:md:js": "wp-scripts lint-md-js",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"prepublishOnly": "npm run format && npm run build",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js",
+		"docs": "documentation build src/** -f html --github -o docs"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.css": [
+			"npm run lint:css"
+		],
+		"*.{js,ts,tsx}": [
+			"npm run lint:js",
+			"npm run format:js"
+		]
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		]
+	},
+	"dependencies": {
+		"react": "^17.0.2"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.14.3",
+		"@babel/core": "^7.14.3",
+		"@babel/preset-env": "^7.14.2",
+		"@babel/preset-react": "^7.13.13",
+		"@wordpress/scripts": "^16.0.0",
+		"babel-core": "^7.0.0-bridge.0",
+		"classnames": "^2.3.1",
+		"cross-env": "^7.0.3",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"lodash": "^4.17.21"
+	},
+	"peerDependencies": {
+		"@wordpress/api-fetch": "5.x",
+		"@wordpress/block-editor": "6.x",
+		"@wordpress/blocks": "9.x",
+		"@wordpress/components": "14.x",
+		"@wordpress/compose": "4.x",
+		"@wordpress/data": "5.x",
+		"@wordpress/dom-ready": "3.x",
+		"@wordpress/element": "3.x",
+		"@wordpress/escape-html": "2.x",
+		"@wordpress/hooks": "3.x",
+		"@wordpress/i18n": "4.x",
+		"@wordpress/icons": "3.x",
+		"@wordpress/primitives": "2.x",
+		"@wordpress/url": "3.x"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	}
+}
