@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>@sixach/wp-block-components 0.1.0 | Documentation</title>
+  <title>@sixach/wp-block-components 0.1.1 | Documentation</title>
   <meta name='description' content='A collection of most used React components crafted for the sixa projects.'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>@sixach/wp-block-components</h3>
-          <div class='mb1'><code>0.1.0</code></div>
+          <div class='mb1'><code>0.1.1</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -29,9 +29,29 @@
               
                 
                 <li><a
+                  href='#backgroundsizecontrol'
+                  class="">
+                  BackgroundSizeControl
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#generatesvgpaths'
                   class="">
                   GenerateSvgPaths
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loading'
+                  class="">
+                  Loading
                   
                 </a>
                 
@@ -52,13 +72,193 @@
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='backgroundsizecontrol'>
+      BackgroundSizeControl
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/background-size-control/index.js#L88-L141'>
+      <span>src/background-size-control/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>UI controls that are designed to provide ability to adjust CSS background size properties.
+There are four different syntaxes you can choose from with this control: the keyword syntax ("auto", "cover", "contain" and "custom").</p>
+
+    <div class='pre p1 fill-light mt0'>BackgroundSizeControl(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  <div>Author: Mahdi Yazdani</div>
+  <div>Copyright: sixa AG
+</div>
+  <div>Since: 1.0.0</div>
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>props</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The props that were defined by the caller of this component.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.id</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>The id of the element to which labels and help text are being generated.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.label</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Label shown before the spinner.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.hideLabelFromVision</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  </td>
+  <td class='break-word'><span>Whether to accessibly hide the label.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.help</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  </td>
+  <td class='break-word'><span>Optional help text for the control.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.sizes</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
+  
+    (default <code>sizesTable</code>)
+  </td>
+  <td class='break-word'><span>Optionally override background position options.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.className</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>The class that will be added with “components-background-size” to the classes of the wrapper div.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.value</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>
+  </td>
+  <td class='break-word'><span>Value of the control.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.onChange</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a></code>
+  </td>
+  <td class='break-word'><span>Handle changes.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        UI controls.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>&lt;BackgroundSizeControl
+	label={ __( <span class="hljs-string">&#x27;Background Size&#x27;</span> ) }
+	value={ backgroundSize }
+	onChange={ <span class="hljs-function">(<span class="hljs-params"> value </span>) =&gt;</span> setAttributes( { <span class="hljs-attr">backgroundSize</span>: value } ) }
+/&gt;
+
+<span class="hljs-comment">// =&gt; Object { selection: &quot;custom&quot;, width: &quot;15%&quot;, height: &quot;12%&quot; }</span></pre>
+    
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='generatesvgpaths'>
       GenerateSvgPaths
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/8c32ebac351f0a4e0ec2fb7750d08331373806df/src/generate-svg-paths.js#L38-L46'>
-      <span>src/generate-svg-paths.js</span>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/generate-svg-paths/index.js#L40-L48'>
+      <span>src/generate-svg-paths/index.js</span>
       </a>
     
   </div>
@@ -66,15 +266,16 @@
 
   <p>Generates corresponding HTML <code>Path</code> elements and enables the shape to be drawn.</p>
 
-    <div class='pre p1 fill-light mt0'>GenerateSvgPaths(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): WPElement</div>
+    <div class='pre p1 fill-light mt0'>GenerateSvgPaths(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
   
   
 
   
   
   
-  
-  
+  <div>Author: Mahdi Yazdani</div>
+  <div>Copyright: sixa AG
+</div>
   <div>Since: 1.0.0</div>
 
   
@@ -132,7 +333,7 @@
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>WPElement</code>:
+      <code>JSX.Element</code>:
         Corresponding HTML 
 <code>Path</code>
  elements.
@@ -151,6 +352,123 @@
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> path = { <span class="hljs-attr">d</span>: <span class="hljs-string">&#x27;M649.97 0L550.03 0 599.91 54.12 649.97 0z&#x27;</span>, <span class="hljs-attr">attrs</span>: { <span class="hljs-attr">opacity</span>: <span class="hljs-string">&#x27;0.5&#x27;</span> } };
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">GenerateSvgPaths</span> <span class="hljs-attr">path</span>=<span class="hljs-string">{</span> <span class="hljs-attr">path</span> } <span class="hljs-attr">attributes</span>=<span class="hljs-string">{</span> { <span class="hljs-attr">style:</span> { <span class="hljs-attr">fill:</span> &#x27;#<span class="hljs-attr">BADA55</span>&#x27; } } } /&gt;</span></span></pre>
+    
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loading'>
+      Loading
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/loading/index.js#L32-L41'>
+      <span>src/loading/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Spinners notify users that their action is being processed.</p>
+
+    <div class='pre p1 fill-light mt0'>Loading(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  <div>Author: Mahdi Yazdani</div>
+  <div>Copyright: sixa AG
+</div>
+  <div>Since: 1.0.0</div>
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>props</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The props that were defined by the caller of this component.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.label</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Label shown before the spinner.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.className</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>The class that will be added with “components-loading” to the classes of the wrapper div.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        Spinner element to signal the users that the processing of their request is underway.
+
+      
+    
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>&lt;Loading label={ __( <span class="hljs-string">&#x27;Loading posts…&#x27;</span> ) } /&gt;</pre>
     
   
 
