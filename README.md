@@ -1,6 +1,6 @@
 # Sixa Components
 
-This packages includes a library of generic sixa specific React components to be used for creating common UI elements shared between screens and features of the WordPress editor and dashboard.
+This package includes a library of generic sixa specific React components to be used for creating common UI elements shared between screens and features of the WordPress editor and dashboard.
 
 ## Installation
 
