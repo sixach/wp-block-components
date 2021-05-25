@@ -25,7 +25,7 @@ import { BaseControl } from '@wordpress/components';
  *
  * @function
  * @since 	 	1.0.0
- * @param  	 	{Object}     props                    The props that were defined by the caller of this component.
+ * @param       {Object}     props                    The props that were defined by the caller of this component.
  * @param    	{string}     props.attribute          The attribute type.
  * @param    	{string}     props.id                 A custom id set for the PostMultiSelect instance.
  * @param    	{Array}      props.entities           Array of entities passed to 'selectOptions' to generate the list of selected posts.
@@ -34,7 +34,7 @@ import { BaseControl } from '@wordpress/components';
  * @param    	{string}     props.reset              Used to reset the values of another 'PostMultiSelect' component.
  * @param    	{Array}      props.selected           The user-selected posts from the dropdown.
  * @param    	{boolean}    props.isTerm             Whether or not it is a taxonomy item.
- * @return 	 	{JSX.Element}                         Post multi-select element.
+ * @return      {JSX.Element}                         Post multi-select element.
  * @example
  *
  * <PostMultiSelect
