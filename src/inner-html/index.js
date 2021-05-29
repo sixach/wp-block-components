@@ -25,6 +25,10 @@ import { createElement } from '@wordpress/element';
  * @param  	   {string}      props.tagName           The tag name of the wrapper element.
  * @param  	   {string}      props.children          Children should be a string of HTML.
  * @return 	   {JSX.Element}                   		 Dangerously-rendering component.
+ * @example
+ *
+ * const content = '<span class=\"amount\"><bdi><span class=\"currency-symbol\">&pound;<\/span>11.05<\/bdi><\/span>';
+ * <InnerHTML tagName="span">{ content }</InnerHTML>
  */
 function InnerHTML( { tagName = 'div', children, ...props } ) {
 	// The DIV wrapper will be stripped by serializer, unless there are
