@@ -49,6 +49,16 @@
               
                 
                 <li><a
+                  href='#innerhtml'
+                  class="">
+                  InnerHTML
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#loading'
                   class="">
                   Loading
@@ -77,7 +87,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/background-size-control/index.js#L88-L141'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/ee29b362b76299bd4ea64c3863a05ac927b0084f/src/background-size-control/index.js#L86-L139'>
       <span>src/background-size-control/index.js</span>
       </a>
     
@@ -94,9 +104,8 @@ There are four different syntaxes you can choose from with this control: the key
   
   
   
-  <div>Author: Mahdi Yazdani</div>
-  <div>Copyright: sixa AG
-</div>
+  
+  
   <div>Since: 1.0.0</div>
 
   
@@ -257,7 +266,7 @@ There are four different syntaxes you can choose from with this control: the key
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/generate-svg-paths/index.js#L40-L48'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/ee29b362b76299bd4ea64c3863a05ac927b0084f/src/generate-svg-paths/index.js#L38-L46'>
       <span>src/generate-svg-paths/index.js</span>
       </a>
     
@@ -273,9 +282,8 @@ There are four different syntaxes you can choose from with this control: the key
   
   
   
-  <div>Author: Mahdi Yazdani</div>
-  <div>Copyright: sixa AG
-</div>
+  
+  
   <div>Since: 1.0.0</div>
 
   
@@ -372,12 +380,135 @@ There are four different syntaxes you can choose from with this control: the key
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='innerhtml'>
+      InnerHTML
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/ee29b362b76299bd4ea64c3863a05ac927b0084f/src/inner-html/index.js#L29-L36'>
+      <span>src/inner-html/index.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Component used as equivalent of Fragment with unescaped HTML, in cases where
+it is desirable to render dangerous HTML without needing a wrapper element.
+To preserve additional props, a <code>div</code> wrapper <em>will</em> be created if any props
+aside from <code>children</code> are passed.</p>
+
+    <div class='pre p1 fill-light mt0'>InnerHTML(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  <div>Since: 1.0.0</div>
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>props</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    The props that will be passed through to the wrapper element.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.tagName</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  
+    (default <code>&#39;div&#39;</code>)
+  </td>
+  <td class='break-word'><span>The tag name of the wrapper element.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.children</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
+  </td>
+  <td class='break-word'><span>Children should be a string of HTML.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.props</span> <code class='quiet'>...any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        Dangerously-rendering component.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='loading'>
       Loading
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/baea42ccf435534938a9ac16674686152040cfb0/src/loading/index.js#L32-L41'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/sixach/wp-block-components/blob/ee29b362b76299bd4ea64c3863a05ac927b0084f/src/loading/index.js#L30-L39'>
       <span>src/loading/index.js</span>
       </a>
     
@@ -393,9 +524,8 @@ There are four different syntaxes you can choose from with this control: the key
   
   
   
-  <div>Author: Mahdi Yazdani</div>
-  <div>Copyright: sixa AG
-</div>
+  
+  
   <div>Since: 1.0.0</div>
 
   
