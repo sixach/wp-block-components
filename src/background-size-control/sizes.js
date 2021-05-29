@@ -14,11 +14,9 @@ import { __ } from '@wordpress/i18n';
  * this CSS property from MDN docs.
  *
  * @constant
- * @since 	 	1.0.0
- * @author	 	Mahdi Yazdani
- * @copyright	sixa AG
- * @type        {Array}
- * @see         https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+ * @since 	   1.0.0
+ * @type       {Array}
+ * @see        https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
  * @ignore
  */
 export default [

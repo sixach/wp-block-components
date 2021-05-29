@@ -18,13 +18,11 @@ import { Flex, FlexBlock, FlexItem, Spinner } from '@wordpress/components';
  * Spinners notify users that their action is being processed.
  *
  * @function
- * @since 	 	1.0.0
- * @author	 	Mahdi Yazdani
- * @copyright	sixa AG
- * @param  	 	{Object}    props                  The props that were defined by the caller of this component.
- * @param    	{string}    props.label            Label shown before the spinner.
- * @param    	{string}    props.className        The class that will be added with “components-loading” to the classes of the wrapper div.
- * @return 	 	{JSX.Element}                      Spinner element to signal the users that the processing of their request is underway.
+ * @since 	   1.0.0
+ * @param  	   {Object}    props                  The props that were defined by the caller of this component.
+ * @param      {string}    props.label            Label shown before the spinner.
+ * @param      {string}    props.className        The class that will be added with “components-loading” to the classes of the wrapper div.
+ * @return 	   {JSX.Element}                      Spinner element to signal the users that the processing of their request is underway.
  * @example
  *
  * <Loading label={ __( 'Loading posts…' ) } />
