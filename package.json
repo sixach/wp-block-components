@@ -1,6 +1,6 @@
 {
 	"name": "@sixach/wp-block-components",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"gutenberg",
@@ -85,7 +85,7 @@
 		"@wordpress/escape-html": "2.x",
 		"@wordpress/hooks": "3.x",
 		"@wordpress/i18n": "4.x",
-		"@wordpress/icons": "3.x",
+		"@wordpress/icons": "4.x",
 		"@wordpress/primitives": "2.x",
 		"@wordpress/url": "3.x"
 	},
