@@ -29,8 +29,8 @@ import ConditionalWrap from 'conditional-wrap';
 import InnerHTML from '../inner-html';
 
 /**
- * Component used to go though given post collection node(s), and
- * convert all numeric HTML entities to their named counterparts.
+ * Conditionally wraps a given post-collection node or object with an HTML element 
+ * and converts all numeric HTML entities to their named counterparts.
  *
  * @function
  * @since 	   1.0.0
