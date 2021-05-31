@@ -29,22 +29,22 @@ import ConditionalWrap from 'conditional-wrap';
 import InnerHTML from '../inner-html';
 
 /**
- * Conditionally wraps a given post-collection node or object with an HTML element 
+ * Conditionally wraps a given content-collection node or object with an HTML element
  * and converts all numeric HTML entities to their named counterparts.
  *
  * @function
  * @since 	   1.0.0
  * @param  	   {Object}       props             		The props that were defined by the caller of this component.
- * @param  	   {Object}       props.post              	The post object.
+ * @param  	   {Object}       props.content             The content object.
  * @param  	   {Array|string} props.path              	Path of the property or node element to retrieve.
  * @param  	   {string}       props.tagName           	Tag name of the wrapper element.
  * @param  	   {string}       props.tagProps          	Props that will be passed through to the wrapper element.
  * @return 	   {JSX.Element}                   		 	Generated HTML output of the elements.
  * @example
  *
- * <PrintHTML post={ product } path="price_html" tagName="span" tagProps={ { className: 'price' } } />
+ * <PrintHTML content={ product } path="price_html" tagName="span" tagProps={ { className: 'price' } } />
  */
-function PrintHTML( { post, path, tagName, tagProps } ) {
+function PrintHTML( { content, path, tagName, tagProps } ) {
 	return (
 		<ConditionalWrap
 			condition={ ! isUndefined( tagName ) }
@@ -54,7 +54,7 @@ function PrintHTML( { post, path, tagName, tagProps } ) {
 				</InnerHTML>
 			) }
 		>
-			{ formattedContent( get( post, path ) ) }
+			{ formattedContent( get( content, path ) ) }
 		</ConditionalWrap>
 	);
 }
