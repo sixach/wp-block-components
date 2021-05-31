@@ -1,6 +1,6 @@
 {
 	"name": "@sixach/wp-block-components",
-	"version": "0.1.2",
+	"version": "1.0.0",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"gutenberg",
@@ -68,12 +68,14 @@
 		"@emotion/styled": "11.3.0",
 		"@wordpress/scripts": "16.1.0",
 		"classnames": "2.3.1",
+		"conditional-wrap": "^1.0.2",
 		"cross-env": "7.0.3",
 		"husky": "^6.0.0",
 		"lint-staged": "11.0.0",
 		"lodash": "4.17.21"
 	},
 	"peerDependencies": {
+		"@sixach/wp-block-utils": "1.x",
 		"@wordpress/api-fetch": "5.x",
 		"@wordpress/block-editor": "6.x",
 		"@wordpress/blocks": "9.x",
@@ -84,6 +86,7 @@
 		"@wordpress/element": "3.x",
 		"@wordpress/escape-html": "2.x",
 		"@wordpress/hooks": "3.x",
+		"@wordpress/html-entities": "3.x",
 		"@wordpress/i18n": "4.x",
 		"@wordpress/icons": "4.x",
 		"@wordpress/primitives": "2.x",
