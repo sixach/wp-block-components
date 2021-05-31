@@ -6,10 +6,17 @@
 import { get, isUndefined } from 'lodash';
 
 /**
+ * HTML to React parser.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/html-react-parser
+ */
+import parse from 'html-react-parser';
+
+/**
  * Utility helper methods specific for Sixa projects.
  *
  * @ignore
- * @see 	https://www.npmjs.com/package/conditional-wrap
  */
 import { formattedContent } from '@sixach/wp-block-utils';
 
@@ -32,7 +39,7 @@ import InnerHTML from '../inner-html';
  * and converts all numeric HTML entities to their named counterparts.
  *
  * @function
- * @since 	   1.0.1
+ * @since 	   1.0.2
  * @param  	   {Object}       props             		The props that were defined by the caller of this component.
  * @param  	   {Object}       props.content             The content object.
  * @param  	   {Array|string} props.path              	Path of the property or node element to retrieve.
@@ -44,16 +51,19 @@ import InnerHTML from '../inner-html';
  * <PrintHTML content={ product } path="price_html" tagName="span" tagProps={ { className: 'price' } } />
  */
 function PrintHTML( { content, path, tagName, tagProps } ) {
+	const isTagName = ! isUndefined( tagName );
+	const getContent = formattedContent( get( content, path ) );
+
 	return (
 		<ConditionalWrap
-			condition={ ! isUndefined( tagName ) }
+			condition={ isTagName }
 			wrap={ ( children ) => (
 				<InnerHTML tagName={ tagName } { ...tagProps }>
 					{ children }
 				</InnerHTML>
 			) }
 		>
-			{ formattedContent( get( content, path ) ) }
+			{ isTagName ? getContent : parse( getContent ) }
 		</ConditionalWrap>
 	);
 }
