@@ -10,7 +10,7 @@ import classnames from 'classnames';
  *
  * @ignore
  */
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 
 /**
  * Utility helper methods specific for Sixa projects.
@@ -18,6 +18,13 @@ import Select from 'react-select';
  * @ignore
  */
 import { selectOptions } from '@sixach/wp-block-utils';
+
+/**
+ * Retrieves the translation of text.
+ *
+ * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ */
+import { __ } from '@wordpress/i18n';
 
 /**
  * This packages includes a library of generic WordPress components to be used for
@@ -43,6 +50,14 @@ import { useRef } from '@wordpress/element';
 import selectAllOption from './select-all';
 
 /**
+ * The styled components generated using @emotion/react API.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/@emotion/styled
+ */
+import { SelectionLimit } from './style';
+
+/**
  * Multi-select element for both taxonomy groups and individual posts selections.
  *
  * @function
@@ -55,8 +70,9 @@ import selectAllOption from './select-all';
  * @param       {boolean}     props.help                     Optional help text for the control.
  * @param       {string}      props.className                The class that will be added with “components-background-size” to the classes of the wrapper div.
  * @param       {boolean}     props.isTerm                   Whether or not it is a taxonomy item.
- * @param       {boolean}     props.value                    Whether or not it is a taxonomy item.
- * @param       {boolean}     props.onChange                 Whether or not it is a taxonomy item.
+ * @param       {Object}      props.selected                 Currently selected option.
+ * @param       {Function}    props.onChange                 Handle changes.
+ * @param       {number}      props.selectionLimit           Set a limit on number of items that can be selected.
  * @return      {JSX.Element}                                Post multi-select element.
  * @example
  *
@@ -69,19 +85,20 @@ import selectAllOption from './select-all';
  * 		value={ posts }
  * />
  */
-function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, className, value, onChange } ) {
+function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, className, selected, onChange, selectionLimit } ) {
 	const optionsList = selectOptions( posts, { id: 'value', [ isTerm ? 'name' : 'title.rendered' ]: 'label' } );
 
-	const valueRef = useRef( value );
-	valueRef.current = value;
+	// Select All options
+	const valueRef = useRef( selected );
+	valueRef.current = selected;
 
 	const isSelectAllSelected = () => valueRef.current.length === optionsList.length;
 
-	const isOptionSelected = () => valueRef.current.some( () => value === optionsList.value ) || isSelectAllSelected();
+	const isOptionSelected = ( option ) => valueRef.current.some( ( { value } ) => value === option.value ) || isSelectAllSelected();
 
 	const getOptions = () => [ selectAllOption, ...optionsList ];
 
-	const getValue = () => ( isSelectAllSelected() ? [ selectAllOption ] : value );
+	const getValue = () => ( isSelectAllSelected() ? [ selectAllOption ] : selected );
 
 	const handleOnChange = ( newValue, actionMeta ) => {
 		const { action, option, removedValue } = actionMeta;
@@ -95,12 +112,24 @@ function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, cla
 			onChange( [], actionMeta );
 		} else if ( actionMeta.action === 'deselect-option' && isSelectAllSelected() ) {
 			onChange(
-				optionsList.filter( () => value !== option.value ),
+				optionsList.filter( ( { value } ) => value !== option.value ),
 				actionMeta
 			);
 		} else {
 			onChange( newValue || [], actionMeta );
 		}
+	};
+
+	// Limit Selection
+	const isValidNewOption = ( inputValue, selectValue ) => inputValue.length > 0 && selectValue.length < selectionLimit;
+
+	const Menu = ( props ) => {
+		const optionSelectedLength = props.getValue().length || 0;
+		return (
+			<components.Menu { ...props }>
+				{ optionSelectedLength < selectionLimit ? props.children : <SelectionLimit>{ __( 'Selection limit reached', 'sixa' ) }</SelectionLimit> }
+			</components.Menu>
+		);
 	};
 
 	return (
@@ -113,11 +142,14 @@ function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, cla
 		>
 			<Select
 				isMulti
+				components={ { Menu } }
 				className={ `sixa-multi-select` }
 				classNamePrefix="sixa-select"
 				closeMenuOnSelect={ false }
+				hideSelectedOptions={ false }
+				isValidNewOption={ isValidNewOption }
 				isOptionSelected={ isOptionSelected }
-				options={ getOptions() }
+				options={ selected.length === selectionLimit ? [] : getOptions() }
 				value={ getValue() }
 				onChange={ handleOnChange }
 			/>
