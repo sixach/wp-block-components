@@ -24,7 +24,7 @@ import { selectOptions } from '@sixach/wp-block-utils';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * This packages includes a library of generic WordPress components to be used for
@@ -127,7 +127,12 @@ function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, cla
 		const optionSelectedLength = props.getValue().length || 0;
 		return (
 			<components.Menu { ...props }>
-				{ optionSelectedLength < selectionLimit ? props.children : <SelectionLimit>{ __( 'Selection limit reached', 'sixa' ) }</SelectionLimit> }
+				{ optionSelectedLength < selectionLimit ? (
+					props.children
+				) : (
+					/* eslint-disable-next-line @wordpress/i18n-translator-comments */
+					<SelectionLimit>{ sprintf( __( 'Only %1$s options may be selected', 'sixa' ), selectionLimit ) }</SelectionLimit>
+				) }
 			</components.Menu>
 		);
 	};
