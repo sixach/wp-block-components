@@ -62,19 +62,17 @@ const UNITCONTROL_MAX = 100;
  * There are four different syntaxes you can choose from with this control: the keyword syntax ("auto", "cover", "contain" and "custom").
  *
  * @function
- * @since 	 	1.0.0
- * @author	 	Mahdi Yazdani
- * @copyright	sixa AG
- * @param  	 	{Object}    props                           The props that were defined by the caller of this component.
- * @param    	{string}    props.id                        The id of the element to which labels and help text are being generated.
- * @param    	{string}    props.label                     Label shown before the spinner.
- * @param    	{boolean}   props.hideLabelFromVision       Whether to accessibly hide the label.
- * @param    	{boolean}   props.help                      Optional help text for the control.
- * @param    	{Array}     props.sizes                     Optionally override background position options.
- * @param    	{string}    props.className                 The class that will be added with “components-background-size” to the classes of the wrapper div.
- * @param    	{Object}    props.value                     Value of the control.
- * @param    	{Function}  props.onChange                  Handle changes.
- * @return 	 	{JSX.Element}                               UI controls.
+ * @since 	   1.0.0
+ * @param  	   {Object}      props                           	The props that were defined by the caller of this component.
+ * @param      {string}      props.id                        	The id of the element to which labels and help text are being generated.
+ * @param      {string}      props.label                     	Label shown before the spinner.
+ * @param      {boolean}     props.hideLabelFromVision       	Whether to accessibly hide the label.
+ * @param      {boolean}     props.help                      	Optional help text for the control.
+ * @param      {Array}       props.sizes                     	Optionally override background position options.
+ * @param      {string}      props.className                 	The class that will be added with “components-background-size” to the classes of the wrapper div.
+ * @param      {Object}      props.value                     	Value of the control.
+ * @param      {Function}    props.onChange                  	Handle changes.
+ * @return 	   {JSX.Element}                               		UI controls.
  * @example
  *
  * <BackgroundSizeControl

@@ -19,10 +19,8 @@ import { Flex } from '@wordpress/components';
  * Wrapper around the component.
  *
  * @constant
- * @since 	 	1.0.0
- * @author	 	Mahdi Yazdani
- * @copyright	sixa AG
- * @type        {JSX.Element}
+ * @since 	   1.0.0
+ * @type       {JSX.Element}
  * @ignore
  */
 export const ComponentWrapper = styled( Flex )`
@@ -33,10 +31,8 @@ export const ComponentWrapper = styled( Flex )`
  * Wrapper around the control.
  *
  * @constant
- * @since 	 	1.0.0
- * @author	 	Mahdi Yazdani
- * @copyright	sixa AG
- * @type        {JSX.Element}
+ * @since 	   1.0.0
+ * @type       {JSX.Element}
  * @ignore
  */
 export const ControlWrapper = styled( Flex )`
