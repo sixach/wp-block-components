@@ -10,7 +10,7 @@ import classnames from 'classnames';
  *
  * @ignore
  */
-import Select, { components } from 'react-select';
+import Select from 'react-select';
 
 /**
  * Utility helper methods specific for Sixa projects.
@@ -18,13 +18,6 @@ import Select, { components } from 'react-select';
  * @ignore
  */
 import { selectOptions } from '@sixach/wp-block-utils';
-
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
- */
-import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * This packages includes a library of generic WordPress components to be used for
@@ -50,12 +43,12 @@ import { useRef } from '@wordpress/element';
 import selectAllOption from './select-all';
 
 /**
- * The styled components generated using @emotion/react API.
+ * The styled components.
  *
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import { SelectionLimit } from './style';
+import { Option, Menu } from './select-components';
 
 /**
  * Multi-select element for both taxonomy groups and individual posts selections.
@@ -68,8 +61,10 @@ import { SelectionLimit } from './style';
  * @param       {string}      props.label                    A custom label for the 'BaseControl' component.
  * @param       {boolean}     props.hideLabelFromVision      Whether to accessibly hide the label.
  * @param       {boolean}     props.help                     Optional help text for the control.
- * @param       {string}      props.className                The class that will be added with “components-background-size” to the classes of the wrapper div.
+ * @param       {string}      props.className                The class that will be added with “components-multi-select” to the classes of the wrapper div.
  * @param       {boolean}     props.isTerm                   Whether or not it is a taxonomy item.
+ * @param       {boolean}     props.closeMenuOnSelect        Close the select menu when the user selects an option.
+ * @param       {boolean}     props.hideSelectedOptions      Hide the selected option from the menu.
  * @param       {Object}      props.selected                 Currently selected option.
  * @param       {Function}    props.onChange                 Handle changes.
  * @param       {number}      props.selectionLimit           Set a limit on number of items that can be selected.
@@ -85,7 +80,20 @@ import { SelectionLimit } from './style';
  * 		value={ posts }
  * />
  */
-function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, className, selected, onChange, selectionLimit } ) {
+function MultiSelect( {
+	id,
+	label,
+	hideLabelFromVision,
+	help,
+	posts,
+	isTerm,
+	className,
+	selected,
+	onChange,
+	selectionLimit,
+	closeMenuOnSelect,
+	hideSelectedOptions,
+} ) {
 	const optionsList = selectOptions( posts, { id: 'value', [ isTerm ? 'name' : 'title.rendered' ]: 'label' } );
 
 	// Select All options
@@ -120,22 +128,8 @@ function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, cla
 		}
 	};
 
-	// Limit Selection
+	// Prevent keyboard option input
 	const isValidNewOption = ( inputValue, selectValue ) => inputValue.length > 0 && selectValue.length < selectionLimit;
-
-	const Menu = ( props ) => {
-		const optionSelectedLength = props.getValue().length || 0;
-		return (
-			<components.Menu { ...props }>
-				{ optionSelectedLength < selectionLimit ? (
-					props.children
-				) : (
-					/* eslint-disable-next-line @wordpress/i18n-translator-comments */
-					<SelectionLimit>{ sprintf( __( 'Only %1$s options may be selected', 'sixa' ), selectionLimit ) }</SelectionLimit>
-				) }
-			</components.Menu>
-		);
-	};
 
 	return (
 		<BaseControl
@@ -147,11 +141,12 @@ function MultiSelect( { id, label, hideLabelFromVision, help, posts, isTerm, cla
 		>
 			<Select
 				isMulti
-				components={ { Menu } }
+				components={ { Option, Menu } }
+				selectProps={ { selectionLimit } }
 				className={ `sixa-multi-select` }
 				classNamePrefix="sixa-select"
-				closeMenuOnSelect={ false }
-				hideSelectedOptions={ false }
+				closeMenuOnSelect={ closeMenuOnSelect }
+				hideSelectedOptions={ hideSelectedOptions }
 				isValidNewOption={ isValidNewOption }
 				isOptionSelected={ isOptionSelected }
 				options={ selected.length === selectionLimit ? [] : getOptions() }
