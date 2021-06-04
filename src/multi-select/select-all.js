@@ -16,6 +16,6 @@ import { __, sprintf } from '@wordpress/i18n';
  */
 export default {
 	value: '',
-	/* eslint-disable-next-line @wordpress/i18n-translator-comments */
-	label: sprintf( __( '%1$s Select All %1$s' ), '—' ),
+	/* translators: %1$s is replaced with "—" */
+	label: sprintf( __( '%1$s Select All %1$s', 'sixa' ), '—' ),
 };
