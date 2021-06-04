@@ -12,13 +12,19 @@ import { __, sprintf } from '@wordpress/i18n';
  */
 import { components } from 'react-select';
 
-export const Option = ( props ) => {
-	const style = { verticalAlign: 'baseline' };
+/**
+ * The styled components generated using @emotion/react API.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/@emotion/styled
+ */
+import { SelectionLimit } from './style';
 
+export const Option = ( props ) => {
 	return (
 		<components.Option { ...props }>
 			<input type="checkbox" checked={ props.isSelected } onChange={ () => null } />
-			<span style={ style }>{ props.label }</span>
+			<span>{ props.label }</span>
 		</components.Option>
 	);
 };
@@ -26,7 +32,6 @@ export const Option = ( props ) => {
 export const Menu = ( props ) => {
 	const optionSelectedLength = props.getValue().length || 0;
 	const selectionLimitProp = props.selectProps.selectProps.selectionLimit;
-	const style = { margin: '15px' };
 
 	return (
 		<components.Menu { ...props }>
@@ -34,7 +39,7 @@ export const Menu = ( props ) => {
 				props.children
 			) : (
 				/* eslint-disable-next-line @wordpress/i18n-translator-comments */
-				<div style={ style }>{ sprintf( __( 'Only %1$s options may be selected', 'sixa' ), selectionLimitProp ) }</div>
+				<SelectionLimit>{ sprintf( __( 'Only %1$s options may be selected', 'sixa' ), selectionLimitProp ) }</SelectionLimit>
 			) }
 		</components.Menu>
 	);
