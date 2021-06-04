@@ -67,7 +67,7 @@ import { Option, Menu } from './select-components';
  * @param       {boolean}     props.hideSelectedOptions      Hide the selected option from the menu.
  * @param       {Object}      props.selected                 Currently selected option.
  * @param       {Function}    props.onChange                 Handle changes.
- * @param       {number}      props.selectionLimit           Set a limit on number of items that can be selected.
+ * @param       {number}      props.selectionLimit           Set a limit on the number of items that can be selected.
  * @return      {JSX.Element}                                Post multi-select element.
  * @example
  *
@@ -75,24 +75,28 @@ import { Option, Menu } from './select-components';
  * 		attribute="posts"
  * 		posts={ allPosts }
  * 		id={ `my-component-multi-select` }
- * 		label={ __( 'MyPosts:', 'sixa' ) }
- * 		setAttributes={ setAttributes }
+ * 		label={ __( 'PostType:', 'sixa' ) }
  * 		value={ posts }
+ * 		selected={ selected }
+ * 		onChange={ setSelected }
+ * 		selectionLimit={2}
+ * 		closeMenuOnSelect={false}
+ * 		hideSelectedOptions={false}
  * />
  */
 function MultiSelect( {
 	id,
+	posts,
 	label,
 	hideLabelFromVision,
 	help,
-	posts,
-	isTerm,
 	className,
+	isTerm,
+	closeMenuOnSelect,
+	hideSelectedOptions,
 	selected,
 	onChange,
 	selectionLimit,
-	closeMenuOnSelect,
-	hideSelectedOptions,
 } ) {
 	const optionsList = selectOptions( posts, { id: 'value', [ isTerm ? 'name' : 'title.rendered' ]: 'label' } );
 
