@@ -67,6 +67,7 @@ import { Option, Menu } from './select-components';
  * @param       {boolean}     props.hideSelectedOptions      Hide the selected option from the menu.
  * @param       {Object}      props.selected                 Currently selected option.
  * @param       {Function}    props.onChange                 Handle changes.
+ * @param       {boolean}     props.allowSelectAll           Whether the - Select All - option is available.
  * @param       {number}      props.selectionLimit           Set a limit on the number of items that can be selected.
  * @return      {JSX.Element}                                Post multi-select element.
  * @example
@@ -80,6 +81,7 @@ import { Option, Menu } from './select-components';
  * 		selected={ selected }
  * 		onChange={ setSelected }
  * 		selectionLimit={2}
+ * 		allowSelectAll={false}
  * 		closeMenuOnSelect={false}
  * 		hideSelectedOptions={false}
  * />
@@ -96,6 +98,7 @@ function MultiSelect( {
 	hideSelectedOptions,
 	selected,
 	onChange,
+	allowSelectAll,
 	selectionLimit,
 } ) {
 	const optionsList = selectOptions( posts, { id: 'value', [ isTerm ? 'name' : 'title.rendered' ]: 'label' } );
@@ -108,9 +111,9 @@ function MultiSelect( {
 
 	const isOptionSelected = ( option ) => valueRef.current.some( ( { value } ) => value === option.value ) || isSelectAllSelected();
 
-	const getOptions = () => [ selectAllOption, ...optionsList ];
+	const getOptions = () => ( allowSelectAll ? [ selectAllOption, ...optionsList ] : [ ...optionsList ] );
 
-	const getValue = () => ( isSelectAllSelected() ? [ selectAllOption ] : selected );
+	const getValue = () => ( isSelectAllSelected() && allowSelectAll ? [ selectAllOption ] : selected );
 
 	const handleOnChange = ( newValue, actionMeta ) => {
 		const { action, option, removedValue } = actionMeta;
@@ -133,7 +136,13 @@ function MultiSelect( {
 	};
 
 	// Prevent keyboard option input
-	const isValidNewOption = ( inputValue, selectValue ) => inputValue.length > 0 && selectValue.length < selectionLimit;
+	const isValidNewOption = ( inputValue, selectValue ) => selectionLimit && inputValue.length > 0 && selectValue.length < selectionLimit;
+
+	// Decision block on which component to render based on passed props
+	const componentsProp = allowSelectAll || ! selectionLimit ? { Option } : { Option, Menu };
+
+	// Decision block on which options to display based on passed props
+	const optionsProp = allowSelectAll || ! selectionLimit || ! ( selected.length === selectionLimit ) ? getOptions() : [];
 
 	return (
 		<BaseControl
@@ -145,7 +154,7 @@ function MultiSelect( {
 		>
 			<Select
 				isMulti
-				components={ { Option, Menu } }
+				components={ componentsProp }
 				selectProps={ { selectionLimit } }
 				className={ `sixa-multi-select` }
 				classNamePrefix="sixa-select"
@@ -153,7 +162,7 @@ function MultiSelect( {
 				hideSelectedOptions={ hideSelectedOptions }
 				isValidNewOption={ isValidNewOption }
 				isOptionSelected={ isOptionSelected }
-				options={ selected.length === selectionLimit ? [] : getOptions() }
+				options={ optionsProp }
 				value={ getValue() }
 				onChange={ handleOnChange }
 			/>
