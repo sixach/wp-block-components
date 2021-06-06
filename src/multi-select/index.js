@@ -6,7 +6,7 @@
  */
 import styled from '@emotion/styled';
 
-import { indexOf, xor, escapeRegExp, invoke, filter } from 'lodash';
+import { indexOf, get, escapeRegExp, invoke, filter, map, some, remove } from 'lodash';
 
 /**
  * Retrieves the translation of text.
@@ -21,7 +21,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
-import { TextControl, Notice } from '@wordpress/components';
+import { TextControl, CheckboxControl } from '@wordpress/components';
 
 /**
  * WordPress specific abstraction layer atop React.
@@ -31,6 +31,7 @@ import { TextControl, Notice } from '@wordpress/components';
 import { useState, useEffect, useRef, RawHTML } from '@wordpress/element';
 
 import Item from './item';
+import Tag from '../tag';
 import { ComponentWrapper } from "./style";
 
 
@@ -46,58 +47,70 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 		return filter( items, ({ label }) => invoke( label, 'match', pattern ) );
 	};
 
-	const isItemSelected = ( itemId ) => {
-		return indexOf( selectedItems, itemId ) !== -1
+	const isItemSelected = ( itemValue ) => {
+		return some( selectedItems, [ 'value', itemValue ] );
 	};
 
 	const areAllItemsSelected = selectedItems.length === items.length;
 
 	const handleChangeSelectAll = () => {
 		if ( areAllItemsSelected ) {
-			onChange([]);
+			onChange( [] );
 		} else {
-			onChange( items.map( ({ id }) => id ) );
+			onChange( items );
 		}
+	}
+
+	const toggleItemInSelectedItems = ( item ) => {
+		if ( isItemSelected( get( item, 'value' ) ) ) {
+			return filter( selectedItems, ({ value }) => value !== get( item, 'value' ) );
+		}
+		return [ ...selectedItems, item ];
 	}
 
 	return (
 		<ComponentWrapper>
+			{ !! selectedItems.length && (
+				<ul>
+					{ map( selectedItems, ({ value, label }) => (
+						<li key={value}>
+							{ label }
+						</li>
+					))}
+				</ul>
+			)}
 			<TextControl
 				label={ __( 'Search for items to display', 'sixa' ) }
 				type="search"
 				value={ searchText }
 				onChange={ setSearchText }
 			/>
-			<ul>
-				{ !! searchText.length && ! filteredOptions().length && (
-					<li>
-						<p>{ __( 'No resuls found for your search term', 'sixa' ) }</p>
-					</li>
-				)
-				}
-				{ ! searchText.length && (
-					<li>
-						<Item
-							id={ 'sixa-multi-select-all' }
-							name={ 'sixa-multi-select-all'}
-							label={ __( 'Select all', 'sixa' ) }
-							isSelected={ areAllItemsSelected }
-							onChange={ handleChangeSelectAll }
-						/>
-					</li>
-				)}
-				{ filteredOptions().map( ({ id, name, label }) => (
-					<li key={id}>
-						<Item
-							id={ id }
-							name={ name }
-							label={ label }
-							isSelected={ isItemSelected( id ) }
-							onChange={ ( id ) => onChange( xor( selectedItems, [ id ] ) ) }
-						/>
-					</li>
-				))}
-			</ul>
+			{ !! searchText.length && ! filteredOptions().length ? (
+				<p>{ __( 'No resuls found for your search term', 'sixa' ) }</p>
+			) : (
+				<ul>
+					{ ! searchText.length && (
+						<li>
+							<CheckboxControl
+								type="checkbox"
+								checked={ areAllItemsSelected }
+								onChange={ handleChangeSelectAll }
+								label={ __( 'Select all', 'sixa' ) }
+							/>
+						</li>
+					)}
+					{ map( filteredOptions(), ({ value, label }) => (
+						<li key={ value }>
+							<CheckboxControl
+								type="checkbox"
+								checked={ isItemSelected( value ) }
+								onChange={ () => onChange( toggleItemInSelectedItems( { value, label } ) ) }
+								label={ label }
+							/>
+						</li>
+					))}
+				</ul>
+			)}
 		</ComponentWrapper>
 	);
 }

@@ -14,13 +14,12 @@ import styled from '@emotion/styled';
  */
 import { CheckboxControl } from '@wordpress/components';
 
-function Item({ id, name, label, isSelected, onChange, showId = true }) {
+function Item({ value, label, isSelected, onChange }) {
 	return (
 		<CheckboxControl
 			type="checkbox"
-			name={ name }
 			checked={ isSelected }
-			onChange={ ( value ) => onChange( id, value ) }
+			onChange={ ( checked ) => onChange( { value, label }, checked ) }
 			label={ label }
 		/>
 	);
