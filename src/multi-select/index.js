@@ -152,6 +152,7 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 								type="checkbox"
 								checked={ areAllOptionsSelected }
 								onChange={ handleOnChangeSelectAll }
+								/* translators: Number of options selected from list. */
 								label={ sprintf( __( 'Select all (%d)', 'sixa' ), options.length ) }
 							/>
 						</li>
