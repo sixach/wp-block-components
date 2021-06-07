@@ -6,7 +6,7 @@
  */
 import styled from '@emotion/styled';
 
-import { indexOf, get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
+import { get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
 
 /**
  * Retrieves the translation of text.
@@ -28,14 +28,18 @@ import { TextControl, CheckboxControl } from '@wordpress/components';
  *
  * @see https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  */
-import { useState, useEffect, useRef, RawHTML } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 
 import { removeAtIndex } from "@sixach/wp-block-utils/src";
 
-import Item from './item';
-import Tag from '../tag';
-import { ListTag } from "../tag/style";
-import { ComponentWrapper, HorizontalList,  } from "./style";
+import { ComponentWrapper } from "./style";
+
+/**
+ * List of tags to display the selected options.
+ *
+ * @ignore
+ */
+import SelectedTagList from "./selected-tag-list";
 
 
 function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, className }) {
@@ -46,6 +50,10 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 	useEffect( () => {
 		setSelected( map( selectedItems, ( value ) => find( items, [ 'value', value ] ) ) );
 	}, [] );
+
+	useEffect( () => {
+		onChange( selected );
+	}, [ selected ] );
 
 	const filteredOptions = () => {
 		// bail early in case there is no search term entered.
@@ -63,7 +71,8 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 	const areAllItemsSelected = selected.length === items.length;
 
 	const handleOnClickTagButton = ( index ) => {
-		updateSelected( removeAtIndex( selected, index ) );
+		console.log({ index });
+		setSelected( removeAtIndex( selected, index ) );
 	}
 
 	const handleOnChangeSelectAll = () => {
@@ -71,7 +80,7 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 		if ( ! areAllItemsSelected ) {
 			newSelected = items;
 		}
-		updateSelected( newSelected );
+		setSelected( newSelected );
 	}
 
 	const handleOnChangeOption = ( item ) => {
@@ -79,21 +88,13 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 		if ( isItemSelected( get( item, 'value' ) ) ) {
 			newSelected = filter( selected, ({ value }) => value !== get( item, 'value' ) );
 		}
-		updateSelected( newSelected );
-	}
-
-	const updateSelected = ( newSelected ) => {
-		setSelected( newSelected, () => onChange( newSelected ) );
+		setSelected( newSelected );
 	}
 
 	return (
 		<ComponentWrapper>
 			{ !! selected.length && (
-				<HorizontalList>
-					{ map( selected, ({ value, label }, index) => (
-						<Tag key={value} label={label} onRemove={() => handleOnClickTagButton( index )} />
-					))}
-				</HorizontalList>
+				<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
 			)}
 			<TextControl
 				label={ __( 'Search for items to display', 'sixa' ) }
