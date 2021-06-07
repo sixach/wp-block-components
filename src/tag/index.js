@@ -7,11 +7,15 @@
 import { Button } from '@wordpress/components';
 
 /**
+ * Tag element with a remove button.
  *
- * @param label
- * @param onRemove
- * @param className
- * @returns {JSX.Element}
+ * @function
+ * @since 1.0.0
+ * @param 	{Object} 	props			The props that were defined by the caller of this component.
+ * @param 	{string}	props.label		Label shown in the element.
+ * @param 	{Function}	props.onRemove	Callback function when the remove button is clicked.
+ * @param 	{string}	props.className	The class that will be added to the classes of the wrapper span.
+ * @returns {JSX.Element}				Tag element.
  * @constructor
  */
 function Tag({ label, onRemove, className }) {
