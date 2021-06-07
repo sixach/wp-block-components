@@ -134,9 +134,7 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 			<p>
 				<strong>{ selectionMessage }</strong>
 			</p>
-			{ !! selected.length && (
-				<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
-			) }
+			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
 			<TextControl label={ __( 'Search for items to display', 'sixa' ) } type="search" value={ searchText } onChange={ setSearchText } />
 			{ !! searchText.length && ! filteredOptions().length ? (
 				<p>{ __( 'No resuls found for your search term', 'sixa' ) }</p>
