@@ -133,13 +133,11 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 
 	return (
 		<ComponentWrapper>
+			<p>
+				<strong>{ selectionMessage }</strong>
+			</p>
 			{ !! selected.length && (
-				<>
-					<p>
-						<strong>{ selectionMessage }</strong>
-					</p>
-					<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
-				</>
+				<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
 			) }
 			<TextControl label={ __( 'Search for items to display', 'sixa' ) } type="search" value={ searchText } onChange={ setSearchText } />
 			{ !! searchText.length && ! filteredOptions().length ? (
