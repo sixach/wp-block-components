@@ -81,15 +81,13 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
-	// Initially set selected options in state to selected options from props.
+	// Build options from selected ids. Allows us to persist order in which items are selected
+	// and enables drag & drop support (for ordering) by moving the order logic into MultiSelect.
+	// Without this, parent components would be required to pass `selectedOptions` in the correct
+	// order, which may or may not introduce huge complexities depending on the data being passed.
 	useEffect( () => {
 		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
-	}, [] );
-
-	// Call parent onChange whenever the selection changes.
-	useEffect( () => {
-		onChange( selected );
-	}, [ selected ] );
+	}, [ selectedOptions ] );
 
 	const filteredOptions = () => {
 		// Bail early in case there is no search term entered.
@@ -111,23 +109,23 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 		selected.length
 	);
 
-	const handleOnClickTagButton = ( index ) => {
-		setSelected( removeAtIndex( selected, index ) );
+	const handleOnClickTagButton = ( optionIndex ) => {
+		onChange( removeAtIndex( selected, optionIndex ) );
 	};
 
 	const handleOnChangeSelectAll = () => {
 		if ( ! areAllOptionsSelected ) {
-			setSelected( options );
+			onChange( options );
 		} else {
-			setSelected( [] );
+			onChange( [] );
 		}
 	};
 
 	const handleOnChangeOption = ( option ) => {
 		if ( isOptionSelected( get( option, 'value' ) ) ) {
-			setSelected( filter( selected, ( { value } ) => value !== get( option, 'value' ) ) );
+			onChange( filter( selected, ( { value } ) => value !== get( option, 'value' ) ) );
 		} else {
-			setSelected( concat( selected, option ) );
+			onChange( concat( selected, option ) );
 		}
 	};
 
