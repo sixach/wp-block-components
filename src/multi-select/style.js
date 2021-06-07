@@ -19,8 +19,8 @@ import { FlexBlock } from '@wordpress/components';
  * Wrapper around the component.
  *
  * @constant
- * @since 	   1.0.0
- * @type       {JSX.Element}
+ * @since		1.0.0
+ * @type		{JSX.Element}
  * @ignore
  */
 export const ComponentWrapper = styled( FlexBlock )`
@@ -42,8 +42,8 @@ export const ComponentWrapper = styled( FlexBlock )`
  * Makes native `ul` element horizontal.
  *
  * @constant
- * @since 	   1.0.0
- * @type       {JSX.Element}
+ * @since		1.0.0
+ * @type		{JSX.Element}
  * @ignore
  */
 export const SelectedTagListWrapper = styled.ul`

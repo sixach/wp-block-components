@@ -28,10 +28,10 @@ import { StyledTag } from '../tag/style';
  *
  * @function
  * @since	1.0.0
- * @param  	{Object}		props			The props that were defined by the caller of this component.
- * @param 	{Array}			props.items		List of items that should be displayed as Tags.
- * @param 	{Function}		props.onRemove	Callback function to trigger when the remove button in a tag is clicked.
- * @return 	{JSX.Element}					Horizontal list of Tags.
+ * @param	{Object}		props			The props that were defined by the caller of this component.
+ * @param	{Array}			props.items		List of items that should be displayed as Tags.
+ * @param	{Function}		props.onRemove	Callback function to trigger when the remove button in a tag is clicked.
+ * @return	{JSX.Element}					Horizontal list of Tags.
  * @example
  *
  * <SelectedTagList

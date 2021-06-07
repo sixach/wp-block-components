@@ -64,7 +64,7 @@ import SelectedTagList from './selected-tag-list';
  * @param 	{Array} 			props.options					Set of { label, value } pairs that can be selected.
  * @param 	{Array} 			props.selectedOptions			List of values of the options that are currently selected.
  * @param 	{Function}			props.onChange					Callback function to be triggered when the selected options change.
- * @return {JSX.Element}										MultiSelect component.
+ * @return 	{JSX.Element}										MultiSelect component.
  * @example
  *
  * <MultiSelect
