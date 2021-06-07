@@ -1,11 +1,8 @@
 /**
- * The styled API for @emotion/react.
+ * Utility for libraries from the `Lodash`.
  *
  * @ignore
- * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import styled from '@emotion/styled';
-
 import { get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
 
 /**
@@ -30,8 +27,19 @@ import { TextControl, CheckboxControl } from '@wordpress/components';
  */
 import { useState, useEffect } from '@wordpress/element';
 
+/**
+ * Utility helper methods specific for Sixa projects.
+ *
+ * @ignore
+ */
 import { removeAtIndex } from "@sixach/wp-block-utils/src";
 
+/**
+ * The styled components generated using @emotion/react API.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/@emotion/styled
+ */
 import { ComponentWrapper } from "./style";
 
 /**
