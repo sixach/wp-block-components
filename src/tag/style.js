@@ -1,8 +1,26 @@
+/**
+ * The styled API for @emotion/react.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/@emotion/styled
+ */
 import styled from "@emotion/styled";
 
-
+/**
+ * The unstyled Tag component.
+ *
+ * @ignore
+ */
 import Tag from "./index";
 
+/**
+ * Styled Tag component.
+ *
+ * @constant
+ * @since		1.0.0
+ * @type		{JSX.Element}
+ * @ignore
+ */
 export const StyledTag = styled( Tag )`
 	display: flex;
     flex-direction: row;
