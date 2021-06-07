@@ -84,7 +84,7 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 	// Initially set selected options in state to selected options from props.
 	useEffect( () => {
 		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
-	}, [ options ] );
+	}, [] );
 
 	// Call parent onChange whenever the selection changes.
 	useEffect( () => {
