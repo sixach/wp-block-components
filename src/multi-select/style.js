@@ -36,3 +36,8 @@ export const ComponentWrapper = styled( FlexBlock )`
 		list-style-type: none;
 	}
 `;
+
+export const HorizontalList = styled.ul`
+	display: flex;
+	flex-wrap: wrap;
+`;

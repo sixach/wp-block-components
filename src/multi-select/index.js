@@ -6,7 +6,7 @@
  */
 import styled from '@emotion/styled';
 
-import { indexOf, get, escapeRegExp, invoke, filter, map, some, remove } from 'lodash';
+import { indexOf, get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
 
 /**
  * Retrieves the translation of text.
@@ -30,13 +30,22 @@ import { TextControl, CheckboxControl } from '@wordpress/components';
  */
 import { useState, useEffect, useRef, RawHTML } from '@wordpress/element';
 
+import { removeAtIndex } from "@sixach/wp-block-utils/src";
+
 import Item from './item';
 import Tag from '../tag';
-import { ComponentWrapper } from "./style";
+import { ListTag } from "../tag/style";
+import { ComponentWrapper, HorizontalList,  } from "./style";
 
 
 function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, className }) {
 	const [ searchText, setSearchText ] = useState( '' );
+	const [ selected, setSelected ] = useState( [] );
+
+	// initially set selected items in state to selected items from props.
+	useEffect( () => {
+		setSelected( map( selectedItems, ( value ) => find( items, [ 'value', value ] ) ) );
+	}, [] );
 
 	const filteredOptions = () => {
 		// bail early in case there is no search term entered.
@@ -48,36 +57,43 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 	};
 
 	const isItemSelected = ( itemValue ) => {
-		return some( selectedItems, [ 'value', itemValue ] );
+		return some( selected, [ 'value', itemValue ] );
 	};
 
-	const areAllItemsSelected = selectedItems.length === items.length;
+	const areAllItemsSelected = selected.length === items.length;
 
-	const handleChangeSelectAll = () => {
-		if ( areAllItemsSelected ) {
-			onChange( [] );
-		} else {
-			onChange( items );
-		}
+	const handleOnClickTagButton = ( index ) => {
+		updateSelected( removeAtIndex( selected, index ) );
 	}
 
-	const toggleItemInSelectedItems = ( item ) => {
-		if ( isItemSelected( get( item, 'value' ) ) ) {
-			return filter( selectedItems, ({ value }) => value !== get( item, 'value' ) );
+	const handleOnChangeSelectAll = () => {
+		let newSelected = [];
+		if ( ! areAllItemsSelected ) {
+			newSelected = items;
 		}
-		return [ ...selectedItems, item ];
+		updateSelected( newSelected );
+	}
+
+	const handleOnChangeOption = ( item ) => {
+		let newSelected = [ ...selected, item ];
+		if ( isItemSelected( get( item, 'value' ) ) ) {
+			newSelected = filter( selected, ({ value }) => value !== get( item, 'value' ) );
+		}
+		updateSelected( newSelected );
+	}
+
+	const updateSelected = ( newSelected ) => {
+		setSelected( newSelected, () => onChange( newSelected ) );
 	}
 
 	return (
 		<ComponentWrapper>
-			{ !! selectedItems.length && (
-				<ul>
-					{ map( selectedItems, ({ value, label }) => (
-						<li key={value}>
-							{ label }
-						</li>
+			{ !! selected.length && (
+				<HorizontalList>
+					{ map( selected, ({ value, label }, index) => (
+						<Tag key={value} label={label} onRemove={() => handleOnClickTagButton( index )} />
 					))}
-				</ul>
+				</HorizontalList>
 			)}
 			<TextControl
 				label={ __( 'Search for items to display', 'sixa' ) }
@@ -94,7 +110,7 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 							<CheckboxControl
 								type="checkbox"
 								checked={ areAllItemsSelected }
-								onChange={ handleChangeSelectAll }
+								onChange={ handleOnChangeSelectAll }
 								label={ __( 'Select all', 'sixa' ) }
 							/>
 						</li>
@@ -104,7 +120,7 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 							<CheckboxControl
 								type="checkbox"
 								checked={ isItemSelected( value ) }
-								onChange={ () => onChange( toggleItemInSelectedItems( { value, label } ) ) }
+								onChange={ () => handleOnChangeOption( { value, label } ) }
 								label={ label }
 							/>
 						</li>
