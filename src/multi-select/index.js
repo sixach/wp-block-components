@@ -32,7 +32,7 @@ import { useState, useEffect } from '@wordpress/element';
  *
  * @ignore
  */
-import { removeAtIndex } from "@sixach/wp-block-utils/src";
+import { removeAtIndex } from '@sixach/wp-block-utils/src';
 
 /**
  * The styled components generated using @emotion/react API.
@@ -40,14 +40,14 @@ import { removeAtIndex } from "@sixach/wp-block-utils/src";
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import { ComponentWrapper } from "./style";
+import { ComponentWrapper } from './style';
 
 /**
  * List of tags to display the selected options.
  *
  * @ignore
  */
-import SelectedTagList from "./selected-tag-list";
+import SelectedTagList from './selected-tag-list';
 
 /**
  * MultiSelect component designed to provide the ability to search for and select any number of options from
@@ -64,7 +64,7 @@ import SelectedTagList from "./selected-tag-list";
  * @param 	{Array} 			props.options					Set of { label, value } pairs that can be selected.
  * @param 	{Array} 			props.selectedOptions			List of values of the options that are currently selected.
  * @param 	{Function}			props.onChange					Callback function to be triggered when the selected options change.
- * @returns {JSX.Element}										MultiSelect component.
+ * @return {JSX.Element}										MultiSelect component.
  * @example
  *
  * <MultiSelect
@@ -77,14 +77,14 @@ import SelectedTagList from "./selected-tag-list";
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect({ options, selectedOptions, onChange }) {
+function MultiSelect( { options, selectedOptions, onChange } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
 	// Initially set selected options in state to selected options from props.
 	useEffect( () => {
 		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
-	}, [] );
+	}, [ options ] );
 
 	// Call parent onChange whenever the selection changes.
 	useEffect( () => {
@@ -97,7 +97,7 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 			return options;
 		}
 		const pattern = new RegExp( escapeRegExp( searchText ), 'i' );
-		return filter( options, ({ label }) => invoke( label, 'match', pattern ) );
+		return filter( options, ( { label } ) => invoke( label, 'match', pattern ) );
 	};
 
 	const isOptionSelected = ( optionValue ) => {
@@ -107,18 +107,13 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 	const areAllOptionsSelected = selected.length === options.length;
 	const selectionMessage = sprintf(
 		/* translators: Number of options selected from list. */
-		_n(
-			'%d item selected',
-			'%d items selected',
-			selectedOptions.length,
-			'sixa'
-		),
+		_n( '%d item selected', '%d items selected', selectedOptions.length, 'sixa' ),
 		selected.length
 	);
 
 	const handleOnClickTagButton = ( index ) => {
 		setSelected( removeAtIndex( selected, index ) );
-	}
+	};
 
 	const handleOnChangeSelectAll = () => {
 		if ( ! areAllOptionsSelected ) {
@@ -126,15 +121,15 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 		} else {
 			setSelected( [] );
 		}
-	}
+	};
 
 	const handleOnChangeOption = ( option ) => {
 		if ( isOptionSelected( get( option, 'value' ) ) ) {
-			setSelected( filter( selected, ({ value }) => value !== get( option, 'value' ) ) );
+			setSelected( filter( selected, ( { value } ) => value !== get( option, 'value' ) ) );
 		} else {
 			setSelected( concat( selected, option ) );
 		}
-	}
+	};
 
 	return (
 		<ComponentWrapper>
@@ -145,13 +140,8 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 					</p>
 					<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
 				</>
-			)}
-			<TextControl
-				label={ __( 'Search for items to display', 'sixa' ) }
-				type="search"
-				value={ searchText }
-				onChange={ setSearchText }
-			/>
+			) }
+			<TextControl label={ __( 'Search for items to display', 'sixa' ) } type="search" value={ searchText } onChange={ setSearchText } />
 			{ !! searchText.length && ! filteredOptions().length ? (
 				<p>{ __( 'No resuls found for your search term', 'sixa' ) }</p>
 			) : (
@@ -165,8 +155,8 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 								label={ sprintf( __( 'Select all (%d)', 'sixa' ), options.length ) }
 							/>
 						</li>
-					)}
-					{ map( filteredOptions(), ({ value, label }) => (
+					) }
+					{ map( filteredOptions(), ( { value, label } ) => (
 						<li key={ value }>
 							<CheckboxControl
 								type="checkbox"
@@ -175,9 +165,9 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 								label={ label }
 							/>
 						</li>
-					))}
+					) ) }
 				</ul>
-			)}
+			) }
 		</ComponentWrapper>
 	);
 }

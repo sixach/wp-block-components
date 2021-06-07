@@ -11,7 +11,7 @@ import { map } from 'lodash';
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import { HorizontalList } from "./style";
+import { HorizontalList } from './style';
 
 /**
  * The styled Tag component generated using @emotion/react API.
@@ -19,7 +19,7 @@ import { HorizontalList } from "./style";
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import { StyledTag } from "../tag/style";
+import { StyledTag } from '../tag/style';
 
 /**
  * Horizontal list of Tags.
@@ -31,16 +31,18 @@ import { StyledTag } from "../tag/style";
  * @param  	{Object}		props			The props that were defined by the caller of this component.
  * @param 	{Array}			props.items		List of items that should be displayed as Tags.
  * @param 	{Function}		props.onRemove	Callback function to trigger when the remove button in a tag is clicked.
- * @returns {JSX.Element}					Horizontal list of Tags.
+ * @return {JSX.Element}					Horizontal list of Tags.
  * @example
  *
  * <SelectedTagList
  * 		items={ selectedOptions}
  * 		onRemove={ handleOnClickSelectedOptionTag }
  */
-const SelectedTagList = ({ items, onRemove }) => (
+const SelectedTagList = ( { items, onRemove } ) => (
 	<HorizontalList>
-		{ map( items, ({ label, value }, index ) => <StyledTag key={ value } label={ label } onRemove={() => onRemove(index)} /> ) }
+		{ map( items, ( { label, value }, index ) => (
+			<StyledTag key={ value } label={ label } onRemove={ () => onRemove( index ) } />
+		) ) }
 	</HorizontalList>
 );
 

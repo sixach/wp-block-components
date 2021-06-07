@@ -14,15 +14,8 @@ import styled from '@emotion/styled';
  */
 import { CheckboxControl } from '@wordpress/components';
 
-function Item({ value, label, isSelected, onChange }) {
-	return (
-		<CheckboxControl
-			type="checkbox"
-			checked={ isSelected }
-			onChange={ ( checked ) => onChange( { value, label }, checked ) }
-			label={ label }
-		/>
-	);
+function Item( { value, label, isSelected, onChange } ) {
+	return <CheckboxControl type="checkbox" checked={ isSelected } onChange={ ( checked ) => onChange( { value, label }, checked ) } label={ label } />;
 }
 
 export default Item;

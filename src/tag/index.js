@@ -17,7 +17,7 @@ import { Button } from '@wordpress/components';
  * @param 	{string}	props.label		Label shown in the element.
  * @param 	{Function}	props.onRemove	Callback function to trigger when the remove button is clicked.
  * @param 	{string}	props.className	The class that will be added to the classes of the wrapper span.
- * @returns {JSX.Element}				Tag element.
+ * @return {JSX.Element}				Tag element.
  * @example
  *
  * const { label } = item;
@@ -26,7 +26,7 @@ import { Button } from '@wordpress/components';
  * 		onRemove={ handleOnClickTag }
  * />
  */
-function Tag({ label, onRemove, className }) {
+function Tag( { label, onRemove, className } ) {
 	return (
 		<span className={ className }>
 			{ label }
