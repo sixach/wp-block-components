@@ -7,7 +7,7 @@
 import styled from '@emotion/styled';
 
 /**
- * The unstyled Tag component.
+ * The Tag component.
  *
  * @ignore
  */

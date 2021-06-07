@@ -37,7 +37,16 @@ export const ComponentWrapper = styled( FlexBlock )`
 	}
 `;
 
-export const HorizontalList = styled.ul`
+/**
+ * Wrapper around `SelectedTagList`.
+ * Makes native `ul` element horizontal.
+ *
+ * @constant
+ * @since 	   1.0.0
+ * @type       {JSX.Element}
+ * @ignore
+ */
+export const SelectedTagListWrapper = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
 `;
