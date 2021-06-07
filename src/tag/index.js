@@ -8,6 +8,8 @@ import { Button } from '@wordpress/components';
 
 /**
  * Tag element with a remove button.
+ * This component is typically used as the output when iterating over a collection of items that should
+ * be displayed as tags rather than standalone.
  *
  * @function
  * @since 1.0.0
@@ -16,7 +18,13 @@ import { Button } from '@wordpress/components';
  * @param 	{Function}	props.onRemove	Callback function when the remove button is clicked.
  * @param 	{string}	props.className	The class that will be added to the classes of the wrapper span.
  * @returns {JSX.Element}				Tag element.
- * @constructor
+ * @example
+ *
+ * const { label } = item;
+ * <Tag
+ * 		label={ label }
+ * 		onRemove={ handleOnClickTag }
+ * />
  */
 function Tag({ label, onRemove, className }) {
 	return (
