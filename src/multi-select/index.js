@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
+import { get, escapeRegExp, invoke, filter, map, some, find, concat } from 'lodash';
 
 /**
  * Retrieves the translation of text.
@@ -81,9 +81,9 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
-	// Initially set selected items in state to selected items from props.
+	// Initially set selected options in state to selected options from props.
 	useEffect( () => {
-		setSelected( map( selectedOptions, ( value ) => find( items, [ 'value', value ] ) ) );
+		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
 	}, [] );
 
 	// Call parent onChange whenever the selection changes.
@@ -94,19 +94,19 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 	const filteredOptions = () => {
 		// Bail early in case there is no search term entered.
 		if ( ! searchText.length ) {
-			return items;
+			return options;
 		}
 		const pattern = new RegExp( escapeRegExp( searchText ), 'i' );
-		return filter( items, ({ label }) => invoke( label, 'match', pattern ) );
+		return filter( options, ({ label }) => invoke( label, 'match', pattern ) );
 	};
 
 	const isOptionSelected = ( optionValue ) => {
 		return some( selected, [ 'value', optionValue ] );
 	};
 
-	const areAllOptionsSelected = selected.length === items.length;
+	const areAllOptionsSelected = selected.length === options.length;
 	const selectionMessage = sprintf(
-		/* translators: Number of items selected from list. */
+		/* translators: Number of options selected from list. */
 		_n(
 			'%d item selected',
 			'%d items selected',
@@ -121,19 +121,19 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 	}
 
 	const handleOnChangeSelectAll = () => {
-		let newSelected = [];
 		if ( ! areAllOptionsSelected ) {
-			newSelected = options;
+			setSelected( options );
+		} else {
+			setSelected( [] );
 		}
-		setSelected( newSelected );
 	}
 
 	const handleOnChangeOption = ( option ) => {
-		let newSelected = [ ...selected, option ];
 		if ( isOptionSelected( get( option, 'value' ) ) ) {
-			newSelected = filter( selected, ({ value }) => value !== get( option, 'value' ) );
+			setSelected( filter( selected, ({ value }) => value !== get( option, 'value' ) ) );
+		} else {
+			setSelected( concat( selected, option ) );
 		}
-		setSelected( newSelected );
 	}
 
 	return (
@@ -162,7 +162,7 @@ function MultiSelect({ options, selectedOptions, onChange }) {
 								type="checkbox"
 								checked={ areAllOptionsSelected }
 								onChange={ handleOnChangeSelectAll }
-								label={ sprintf( __( 'Select all (%d)', 'sixa' ), items.length ) }
+								label={ sprintf( __( 'Select all (%d)', 'sixa' ), options.length ) }
 							/>
 						</li>
 					)}
