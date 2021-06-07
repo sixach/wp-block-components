@@ -49,14 +49,41 @@ import { ComponentWrapper } from "./style";
  */
 import SelectedTagList from "./selected-tag-list";
 
-
-function MultiSelect({ items, selectedItems, onChange }) {
+/**
+ * MultiSelect component designed to provide the ability to search for and select any number of options from
+ * a set of { label, value } pairs in any order.
+ *
+ * Interface details:
+ * MultiSelect expects a list of { label, value } pairs for the options that are displayed. Whenever an option
+ * is selected or unselected, MultiSelect calls the `onChange` callback with the values of the selected options
+ * only. That is, `selectedOptions` is an array of values only, not an array of { label, value } pairs.
+ *
+ * @function
+ * @since 	1.0.0
+ * @param  	{Object}      		props                           The props that were defined by the caller of this component.
+ * @param 	{Array} 			props.options					Set of { label, value } pairs that can be selected.
+ * @param 	{Array} 			props.selectedOptions			List of values of the options that are currently selected.
+ * @param 	{Function}			props.onChange					Callback function to be triggered when the selected options change.
+ * @returns {JSX.Element}										MultiSelect component.
+ * @example
+ *
+ * <MultiSelect
+ *		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
+ *		selectedOptions={ postIds }
+ *		onChange={( items ) => {
+ *			setAttributes({ postIds: map( items, ({ value }) => value ) });
+ *		} }
+ * />
+ *
+ * // => Array [ 100, 108 ]
+ */
+function MultiSelect({ options, selectedOptions, onChange }) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
 	// Initially set selected items in state to selected items from props.
 	useEffect( () => {
-		setSelected( map( selectedItems, ( value ) => find( items, [ 'value', value ] ) ) );
+		setSelected( map( selectedOptions, ( value ) => find( items, [ 'value', value ] ) ) );
 	}, [] );
 
 	// Call parent onChange whenever the selection changes.
@@ -73,22 +100,21 @@ function MultiSelect({ items, selectedItems, onChange }) {
 		return filter( items, ({ label }) => invoke( label, 'match', pattern ) );
 	};
 
-	const isItemSelected = ( itemValue ) => {
-		return some( selected, [ 'value', itemValue ] );
+	const isOptionSelected = ( optionValue ) => {
+		return some( selected, [ 'value', optionValue ] );
 	};
 
-	const areAllItemsSelected = selected.length === items.length;
+	const areAllOptionsSelected = selected.length === items.length;
 	const selectionMessage = sprintf(
 		/* translators: Number of items selected from list. */
 		_n(
 			'%d item selected',
 			'%d items selected',
-			selectedItems.length,
+			selectedOptions.length,
 			'sixa'
 		),
 		selected.length
 	);
-
 
 	const handleOnClickTagButton = ( index ) => {
 		setSelected( removeAtIndex( selected, index ) );
@@ -96,16 +122,16 @@ function MultiSelect({ items, selectedItems, onChange }) {
 
 	const handleOnChangeSelectAll = () => {
 		let newSelected = [];
-		if ( ! areAllItemsSelected ) {
-			newSelected = items;
+		if ( ! areAllOptionsSelected ) {
+			newSelected = options;
 		}
 		setSelected( newSelected );
 	}
 
-	const handleOnChangeOption = ( item ) => {
-		let newSelected = [ ...selected, item ];
-		if ( isItemSelected( get( item, 'value' ) ) ) {
-			newSelected = filter( selected, ({ value }) => value !== get( item, 'value' ) );
+	const handleOnChangeOption = ( option ) => {
+		let newSelected = [ ...selected, option ];
+		if ( isOptionSelected( get( option, 'value' ) ) ) {
+			newSelected = filter( selected, ({ value }) => value !== get( option, 'value' ) );
 		}
 		setSelected( newSelected );
 	}
@@ -134,7 +160,7 @@ function MultiSelect({ items, selectedItems, onChange }) {
 						<li>
 							<CheckboxControl
 								type="checkbox"
-								checked={ areAllItemsSelected }
+								checked={ areAllOptionsSelected }
 								onChange={ handleOnChangeSelectAll }
 								label={ sprintf( __( 'Select all (%d)', 'sixa' ), items.length ) }
 							/>
@@ -144,7 +170,7 @@ function MultiSelect({ items, selectedItems, onChange }) {
 						<li key={ value }>
 							<CheckboxControl
 								type="checkbox"
-								checked={ isItemSelected( value ) }
+								checked={ isOptionSelected( value ) }
 								onChange={ () => handleOnChangeOption( { value, label } ) }
 								label={ label }
 							/>
