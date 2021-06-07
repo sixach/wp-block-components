@@ -10,7 +10,7 @@ import { get, escapeRegExp, invoke, filter, map, some, find } from 'lodash';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 
 /**
  * This packages includes a library of generic WordPress components to be used for
@@ -50,21 +50,22 @@ import { ComponentWrapper } from "./style";
 import SelectedTagList from "./selected-tag-list";
 
 
-function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, className }) {
+function MultiSelect({ items, selectedItems, onChange }) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
-	// initially set selected items in state to selected items from props.
+	// Initially set selected items in state to selected items from props.
 	useEffect( () => {
 		setSelected( map( selectedItems, ( value ) => find( items, [ 'value', value ] ) ) );
 	}, [] );
 
+	// Call parent onChange whenever the selection changes.
 	useEffect( () => {
 		onChange( selected );
 	}, [ selected ] );
 
 	const filteredOptions = () => {
-		// bail early in case there is no search term entered.
+		// Bail early in case there is no search term entered.
 		if ( ! searchText.length ) {
 			return items;
 		}
@@ -77,9 +78,19 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 	};
 
 	const areAllItemsSelected = selected.length === items.length;
+	const selectionMessage = sprintf(
+		/* translators: Number of items selected from list. */
+		_n(
+			'%d item selected',
+			'%d items selected',
+			selectedItems.length,
+			'sixa'
+		),
+		selected.length
+	);
+
 
 	const handleOnClickTagButton = ( index ) => {
-		console.log({ index });
 		setSelected( removeAtIndex( selected, index ) );
 	}
 
@@ -102,7 +113,12 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 	return (
 		<ComponentWrapper>
 			{ !! selected.length && (
-				<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
+				<>
+					<p>
+						<strong>{ selectionMessage }</strong>
+					</p>
+					<SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } />
+				</>
 			)}
 			<TextControl
 				label={ __( 'Search for items to display', 'sixa' ) }
@@ -120,7 +136,7 @@ function MultiSelect({ items, selectedItems, groups, selectedGroups, onChange, c
 								type="checkbox"
 								checked={ areAllItemsSelected }
 								onChange={ handleOnChangeSelectAll }
-								label={ __( 'Select all', 'sixa' ) }
+								label={ sprintf( __( 'Select all (%d)', 'sixa' ), items.length ) }
 							/>
 						</li>
 					)}
