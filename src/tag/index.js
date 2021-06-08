@@ -1,4 +1,11 @@
 /**
+ * Utility for conditionally joining CSS class names together.
+ *
+ * @ignore
+ */
+import classnames from 'classnames';
+
+/**
  * This packages includes a library of generic WordPress components to be used for
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
@@ -28,7 +35,7 @@ import { Button } from '@wordpress/components';
  */
 function Tag( { label, onRemove, className } ) {
 	return (
-		<span className={ className }>
+		<span className={ classnames( 'components-tag', className ) }>
 			{ label }
 			<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
 		</span>
