@@ -27,7 +27,6 @@ import { Button } from '@wordpress/components';
  * @return	{JSX.Element}					Tag element.
  * @example
  *
- * const { label } = item;
  * <Tag
  * 		label={ label }
  * 		onRemove={ handleOnClickTag }
