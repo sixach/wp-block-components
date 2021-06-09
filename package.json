@@ -69,7 +69,7 @@
 		"@babel/preset-react": "7.13.13",
 		"@emotion/react": "11.4.0",
 		"@emotion/styled": "11.3.0",
-		"@wordpress/scripts": "16.1.1",
+		"@wordpress/scripts": "16.1.2",
 		"classnames": "2.3.1",
 		"cross-env": "7.0.3",
 		"husky": "^6.0.0",
