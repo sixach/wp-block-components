@@ -147,7 +147,6 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 					{ ! searchText.length && (
 						<li>
 							<CheckboxControl
-								type="checkbox"
 								checked={ areAllOptionsSelected }
 								onChange={ handleOnChangeSelectAll }
 								/* translators: Number of options selected from list. */
@@ -158,7 +157,6 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 					{ map( filteredOptions(), ( { value, label } ) => (
 						<li key={ value }>
 							<CheckboxControl
-								type="checkbox"
 								checked={ isOptionSelected( value ) }
 								onChange={ () => handleOnChangeOption( { value, label } ) }
 								label={ label }
