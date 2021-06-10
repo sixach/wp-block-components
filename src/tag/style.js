@@ -29,10 +29,10 @@ export const StyledTag = styled( Tag )`
 	margin-right: 12px;
 	background-color: #efefef;
 	padding-left: 12px;
-	border-radius: 12px 0 0 12px;
+	border-radius: 12px;
 	color: #555d66;
 
-	> button {
+	.sixa-component-tag__remove-button {
 		margin-left: 4px;
 	}
 `;
