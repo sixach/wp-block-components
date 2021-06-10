@@ -29,6 +29,14 @@ import { withInstanceId } from '@wordpress/compose';
 import { escapeHTML } from '@wordpress/escape-html';
 
 /**
+ * HTML entity utilities for WordPress.
+ *
+ * @see     https://github.com/WordPress/gutenberg/blob/trunk/packages/html-entities/README.md
+ * @ignore
+ */
+import { decodeEntities } from '@wordpress/html-entities';
+
+/**
  * Tag element with a remove button.
  * This component is typically used as the output when iterating over a collection of items that should
  * be displayed as tags rather than standalone.
@@ -49,7 +57,7 @@ import { escapeHTML } from '@wordpress/escape-html';
  */
 const Tag = ( { instanceId, label, onRemove, className } ) => (
 	<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
-		{ escapeHTML( label ) }
+		{ escapeHTML( decodeEntities( label ) ) }
 		<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
 	</span>
 );
