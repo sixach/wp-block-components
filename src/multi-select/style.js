@@ -26,13 +26,13 @@ import { FlexBlock } from '@wordpress/components';
 export const ComponentWrapper = styled( FlexBlock )`
 	padding-top: 12px;
 
-	& .sixa-component-multiselect__option-list {
+	.sixa-component-multiselect__option-list {
 		margin: 0;
 		padding: 4px !important;
 		max-height: 300px;
 		overflow-y: scroll;
 	}
-	& .sixa-component-multiselect__option-list li {
+	.sixa-component-multiselect__option-list li {
 		list-style-type: none;
 	}
 `;
@@ -49,4 +49,5 @@ export const ComponentWrapper = styled( FlexBlock )`
 export const SelectedTagListWrapper = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
+	padding-left: 0 !important;
 `;
