@@ -154,8 +154,8 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 							/>
 						</li>
 					) }
-					{ map( filteredOptions(), ( { value, label } ) => (
-						<li key={ value }>
+					{ map( filteredOptions(), ( { value, label }, index ) => (
+						<li key={ index }>
 							<CheckboxControl
 								checked={ isOptionSelected( value ) }
 								onChange={ () => handleOnChangeOption( { value, label } ) }

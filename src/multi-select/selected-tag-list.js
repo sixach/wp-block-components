@@ -42,8 +42,8 @@ import { StyledTag } from '../tag/style';
  */
 const SelectedTagList = ( { items, onRemove } ) => (
 	<Flex justify="flex-start" className="sixa-component-multiselect__tag-list">
-		{ map( items, ( { label, value }, index ) => (
-			<FlexItem key={ value }>
+		{ map( items, ( { label }, index ) => (
+			<FlexItem key={ index }>
 				<StyledTag label={ label } onRemove={ () => onRemove( index ) } />
 			</FlexItem>
 		) ) }
