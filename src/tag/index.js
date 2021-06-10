@@ -56,7 +56,7 @@ import { decodeEntities } from '@wordpress/html-entities';
  * />
  */
 const Tag = ( { instanceId, label, onRemove, className } ) => (
-	<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
+	<span id={ `sixa-component-tag-${ instanceId }` } className={ classnames( 'sixa-component-tag', className ) }>
 		{ escapeHTML( decodeEntities( label ) ) }
 		<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
 	</span>
