@@ -28,11 +28,12 @@ export const StyledTag = styled( Tag )`
 	align-items: center;
 	margin-right: 12px;
 	background-color: #efefef;
-	padding-left: 12px;
+	padding: 0 12px;
 	border-radius: 12px;
 	color: #555d66;
 
 	.sixa-component-tag__remove-button {
 		margin-left: 4px;
+		margin-right: -12px !important;
 	}
 `;
