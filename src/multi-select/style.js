@@ -36,19 +36,8 @@ export const ComponentWrapper = styled( FlexBlock )`
 	.sixa-component-multiselect__option-list li {
 		list-style-type: none;
 	}
-`;
 
-/**
- * Wrapper around `SelectedTagList`.
- * Makes native `ul` element horizontal.
- *
- * @constant
- * @since		1.0.0
- * @type		{JSX.Element}
- * @ignore
- */
-export const SelectedTagListWrapper = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-	padding-left: 0 !important;
+	.sixa-component-multiselect__tag-list {
+		margin-bottom: 21px;
+	}
 `;
