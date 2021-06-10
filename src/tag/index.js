@@ -14,6 +14,14 @@ import classnames from 'classnames';
 import { Button } from '@wordpress/components';
 
 /**
+ * Collection of handy hooks and higher-order components (HOCs) to wrap WordPress
+ * components and provide some basic features like state, instance id, and pure.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
+ */
+import { withInstanceId } from '@wordpress/compose';
+
+/**
  * Tag element with a remove button.
  * This component is typically used as the output when iterating over a collection of items that should
  * be displayed as tags rather than standalone.
@@ -32,13 +40,13 @@ import { Button } from '@wordpress/components';
  * 		onRemove={ handleOnClickTag }
  * />
  */
-function Tag( { label, onRemove, className } ) {
+function Tag( { instanceId, label, onRemove, className } ) {
 	return (
-		<span className={ classnames( 'components-tag', className ) }>
+		<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
 			{ label }
 			<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
 		</span>
 	);
 }
 
-export default Tag;
+export default withInstanceId( Tag );
