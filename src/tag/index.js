@@ -40,13 +40,11 @@ import { withInstanceId } from '@wordpress/compose';
  * 		onRemove={ handleOnClickTag }
  * />
  */
-function Tag( { instanceId, label, onRemove, className } ) {
-	return (
-		<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
-			{ label }
-			<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
-		</span>
-	);
-}
+const Tag = ( { instanceId, label, onRemove, className } ) => (
+	<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
+		{ label }
+		<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
+	</span>
+);
 
 export default withInstanceId( Tag );
