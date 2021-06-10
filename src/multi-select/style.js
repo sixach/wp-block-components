@@ -26,13 +26,13 @@ import { FlexBlock } from '@wordpress/components';
 export const ComponentWrapper = styled( FlexBlock )`
 	padding-top: 12px;
 
-	& > ul {
+	& .sixa-component-multiselect__option-list {
 		margin: 0;
 		padding: 4px !important;
 		max-height: 300px;
 		overflow-y: scroll;
 	}
-	& > ul > li {
+	& .sixa-component-multiselect__option-list li {
 		list-style-type: none;
 	}
 `;

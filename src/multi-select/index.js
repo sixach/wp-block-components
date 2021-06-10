@@ -134,7 +134,7 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 	};
 
 	return (
-		<ComponentWrapper>
+		<ComponentWrapper className="sixa-component-multiselect">
 			<p>
 				<strong>{ selectionMessage }</strong>
 			</p>
@@ -143,7 +143,7 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 			{ !! searchText.length && ! filteredOptions().length ? (
 				<p>{ __( 'No results found for your search term', 'sixa' ) }</p>
 			) : (
-				<ul>
+				<ul className="sixa-component-multiselect__option-list">
 					{ ! searchText.length && (
 						<li>
 							<CheckboxControl
