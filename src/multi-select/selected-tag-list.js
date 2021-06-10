@@ -38,6 +38,7 @@ import { StyledTag } from '../tag/style';
  * <SelectedTagList
  * 		items={ selectedOptions}
  * 		onRemove={ handleOnClickSelectedOptionTag }
+ * 	/>
  */
 const SelectedTagList = ( { items, onRemove } ) => (
 	<Flex justify="flex-start" className="sixa-component-multiselect__tag-list">
