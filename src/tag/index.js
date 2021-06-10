@@ -22,6 +22,13 @@ import { Button } from '@wordpress/components';
 import { withInstanceId } from '@wordpress/compose';
 
 /**
+ * Utility for escaping HTML content.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-escape-html/
+ */
+import { escapeHTML } from '@wordpress/escape-html';
+
+/**
  * Tag element with a remove button.
  * This component is typically used as the output when iterating over a collection of items that should
  * be displayed as tags rather than standalone.
@@ -42,7 +49,7 @@ import { withInstanceId } from '@wordpress/compose';
  */
 const Tag = ( { instanceId, label, onRemove, className } ) => (
 	<span id={ `components-tag-${ instanceId }` } className={ classnames( 'components-tag', className ) }>
-		{ label }
+		{ escapeHTML( label ) }
 		<Button variant="link" icon="remove" isSmall onClick={ onRemove } />
 	</span>
 );
