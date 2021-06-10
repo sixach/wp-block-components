@@ -32,6 +32,7 @@ export const ComponentWrapper = styled( FlexBlock )`
 		max-height: 300px;
 		overflow-y: scroll;
 	}
+
 	.sixa-component-multiselect__option-list li {
 		list-style-type: none;
 	}
