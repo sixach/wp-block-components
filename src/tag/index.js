@@ -52,8 +52,8 @@ import { decodeEntities } from '@wordpress/html-entities';
  * @example
  *
  * <Tag
- * label={ label }
- * onRemove={ handleOnClickTag }
+ * 		label={ label }
+ * 		onRemove={ handleOnClickTag }
  * />
  */
 const Tag = ( { instanceId, label, onRemove, className } ) => (
