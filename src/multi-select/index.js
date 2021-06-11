@@ -71,6 +71,7 @@ import defaultMessages from './messages';
  * @param 	{Array} 			props.options					Set of { label, value } pairs that can be selected.
  * @param 	{Array} 			props.selectedOptions			List of values of the options that are currently selected.
  * @param 	{Function}			props.onChange					Callback function to be triggered when the selected options change.
+ * @param	{boolean}			props.withSearchField			Enable search field to filter options from the list.
  * @param	{Object}			props.messages					Labels and notices for subcomponents. Is merged with a default value.
  * @return 	{JSX.Element}										MultiSelect component.
  * @example
@@ -85,7 +86,7 @@ import defaultMessages from './messages';
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { options, selectedOptions, onChange, messages = {} } ) {
+function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {} } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 
@@ -145,7 +146,7 @@ function MultiSelect( { options, selectedOptions, onChange, messages = {} } ) {
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
 			</p>
 			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
-			<TextControl label={ mergedMessages.search } type="search" value={ searchText } onChange={ handleOnChangeSearchText } />
+			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" value={ searchText } onChange={ handleOnChangeSearchText } /> }
 			{ !! searchText.length && ! filteredOptions().length ? (
 				<p>{ mergedMessages.noResults }</p>
 			) : (
