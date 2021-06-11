@@ -5,3 +5,4 @@ export { default as InnerHTML } from './inner-html';
 export { default as Loading } from './loading';
 export { default as MultiSelect } from './multi-select';
 export { default as PrintHTML } from './print-html';
+export { default as Tag } from './tag';
