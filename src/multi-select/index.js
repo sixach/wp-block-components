@@ -32,7 +32,7 @@ import { TextControl, CheckboxControl } from '@wordpress/components';
  *
  * @see https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  */
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 
 /**
  * Utility helper methods specific for Sixa projects.
@@ -108,14 +108,14 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
 	}, [ selectedOptions ] );
 
-	const filteredOptions = () => {
+	const filteredOptions = useMemo( () => {
 		// Bail early in case there is no search term entered.
 		if ( ! searchText.length ) {
 			return options;
 		}
 		const pattern = new RegExp( escapeRegExp( searchText ), 'i' );
 		return filter( options, ( { label } ) => invoke( label, 'match', pattern ) );
-	};
+	}, [ searchText ] );
 
 	const isOptionSelected = ( optionValue ) => {
 		return some( selected, [ 'value', optionValue ] );
@@ -125,7 +125,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const handleOnChangeSearchText = useDebouncedCallback( ( value ) => {
 		setSearchText( value );
-	}, 2000 );
+	}, 500 );
 
 	const handleOnClickTagButton = ( optionIndex ) => {
 		onChange( removeAtIndex( selected, optionIndex ) );
@@ -153,8 +153,8 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
 			</p>
 			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
-			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" value={ searchText } onChange={ handleOnChangeSearchText } /> }
-			{ !! searchText.length && ! filteredOptions().length ? (
+			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
+			{ !! searchText.length && ! filteredOptions.length ? (
 				<p>{ mergedMessages.noResults }</p>
 			) : (
 				<ul className="sixa-component-multiselect__option-list">
@@ -168,7 +168,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 							/>
 						</li>
 					) }
-					{ map( filteredOptions(), ( { value, label }, index ) => (
+					{ map( filteredOptions, ( { value, label }, index ) => (
 						<li key={ index }>
 							<CheckboxControl
 								checked={ isOptionSelected( value ) }
