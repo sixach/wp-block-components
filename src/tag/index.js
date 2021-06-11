@@ -42,13 +42,13 @@ import { decodeEntities } from '@wordpress/html-entities';
  * be displayed as tags rather than standalone.
  *
  * @function
- * @since 	1.0.0
- * @param	{Object} props 					The props that were defined by the caller of this component.
- * @param	{string} props.label 			Label shown in the element.
- * @param	{number} props.instanceId		Unique ID of the component.
- * @param	{Function} props.onRemove 		Callback function to trigger when the remove button is clicked.
- * @param	{string} props.className 		The class that will be added to the classes of the wrapper span.
- * @return	{JSX.Element} 					Tag element.
+ * @since		1.1.0
+ * @param		{Object} props 					The props that were defined by the caller of this component.
+ * @param		{string} props.label 			Label shown in the element.
+ * @param		{number} props.instanceId		Unique ID of the component.
+ * @param		{Function} props.onRemove 		Callback function to trigger when the remove button is clicked.
+ * @param		{string} props.className 		The class that will be added to the classes of the wrapper span.
+ * @return		{JSX.Element} 					Tag element.
  * @example
  *
  * <Tag

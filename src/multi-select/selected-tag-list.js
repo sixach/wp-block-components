@@ -9,7 +9,7 @@ import { map } from 'lodash';
  * The styled Tag component generated using @emotion/react API.
  *
  * @ignore
- * @see 	https://www.npmjs.com/package/@emotion/styled
+ * @see		https://www.npmjs.com/package/@emotion/styled
  */
 import { StyledTag } from '../tag/style';
 
@@ -17,7 +17,7 @@ import { StyledTag } from '../tag/style';
  * The styled component wrapper generated using @emotion/react API.
  *
  * @ignore
- * @see 	https://www.npmjs.com/package/@emotion/styled
+ * @see		https://www.npmjs.com/package/@emotion/styled
  */
 import { SelectedTagListWrapper } from './style';
 
@@ -27,11 +27,11 @@ import { SelectedTagListWrapper } from './style';
  * provided as { label, value } pairs and can be deselected by clicking the remove button.
  *
  * @function
- * @since	1.0.0
- * @param	{Object}		props			The props that were defined by the caller of this component.
- * @param	{Array}			props.items		List of items that should be displayed as Tags.
- * @param	{Function}		props.onRemove	Callback function to trigger when the remove button in a tag is clicked.
- * @return	{JSX.Element}					Horizontal list of Tags.
+ * @since		1.1.0
+ * @param		{Object}		props				The props that were defined by the caller of this component.
+ * @param		{Array}			props.items			List of items that should be displayed as Tags.
+ * @param		{Function}		props.onRemove		Callback function to trigger when the remove button in a tag is clicked.
+ * @return		{JSX.Element}						Horizontal list of Tags.
  * @example
  *
  * <SelectedTagList

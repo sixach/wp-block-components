@@ -19,7 +19,7 @@ import { FlexBlock } from '@wordpress/components';
  * Wrapper around the component.
  *
  * @constant
- * @since		1.0.0
+ * @since		1.1.0
  * @type		{JSX.Element}
  * @ignore
  */

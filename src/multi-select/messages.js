@@ -13,8 +13,8 @@ import { __, _n, sprintf } from '@wordpress/i18n';
  * provided.
  *
  * @constant
- * @since 	   1.0.0
- * @type       {Object}
+ * @since		1.1.0
+ * @type		{Object}
  * @ignore
  */
 export default {
