@@ -3,14 +3,14 @@
  *
  * @ignore
  */
-import { get, escapeRegExp, invoke, filter, map, some, find, concat } from 'lodash';
+import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign } from 'lodash';
 
 /**
  * Retrieves the translation of text.
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
-import { __, _n, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 /**
  * This packages includes a library of generic WordPress components to be used for
@@ -50,6 +50,13 @@ import { ComponentWrapper } from './style';
 import SelectedTagList from './selected-tag-list';
 
 /**
+ * Default messages for labels and notices.
+ *
+ * @ignore
+ */
+import defaultMessages from './messages';
+
+/**
  * MultiSelect component designed to provide the ability to search for and select any number of options from
  * a set of { label, value } pairs in any order.
  *
@@ -64,6 +71,7 @@ import SelectedTagList from './selected-tag-list';
  * @param 	{Array} 			props.options					Set of { label, value } pairs that can be selected.
  * @param 	{Array} 			props.selectedOptions			List of values of the options that are currently selected.
  * @param 	{Function}			props.onChange					Callback function to be triggered when the selected options change.
+ * @param	{Object}			props.messages					Labels and notices for subcomponents. Is merged with a default value.
  * @return 	{JSX.Element}										MultiSelect component.
  * @example
  *
@@ -77,9 +85,12 @@ import SelectedTagList from './selected-tag-list';
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { options, selectedOptions, onChange } ) {
+function MultiSelect( { options, selectedOptions, onChange, messages = {} } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
+
+	// Enable passing only a subset in `messages`.
+	const mergedMessages = assign( {}, defaultMessages, messages );
 
 	// Build options from selected ids. Allows us to persist order in which items are selected
 	// and enables drag & drop support (for ordering) by moving the order logic into MultiSelect.
@@ -103,11 +114,6 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 	};
 
 	const areAllOptionsSelected = selected.length === options.length;
-	const selectionMessage = sprintf(
-		/* translators: Number of options selected from list. */
-		_n( '%d item selected', '%d items selected', selectedOptions.length, 'sixa' ),
-		selected.length
-	);
 
 	const handleOnChangeSearchText = ( value ) => {
 		setSearchText( value );
@@ -136,12 +142,12 @@ function MultiSelect( { options, selectedOptions, onChange } ) {
 	return (
 		<ComponentWrapper className="sixa-component-multiselect">
 			<p>
-				<strong>{ selectionMessage }</strong>
+				<strong>{ mergedMessages.selected( selected.length ) }</strong>
 			</p>
 			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
-			<TextControl label={ __( 'Search for items to display', 'sixa' ) } type="search" value={ searchText } onChange={ handleOnChangeSearchText } />
+			<TextControl label={ mergedMessages.search } type="search" value={ searchText } onChange={ handleOnChangeSearchText } />
 			{ !! searchText.length && ! filteredOptions().length ? (
-				<p>{ __( 'No results found for your search term', 'sixa' ) }</p>
+				<p>{ mergedMessages.noResults }</p>
 			) : (
 				<ul className="sixa-component-multiselect__option-list">
 					{ ! searchText.length && (
