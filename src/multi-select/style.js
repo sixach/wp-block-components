@@ -38,6 +38,24 @@ export const ComponentWrapper = styled( FlexBlock )`
 	}
 
 	.sixa-component-multiselect__tag-list {
-		margin-bottom: 21px;
+		margin-bottom: 17px;
 	}
 `;
+
+/**
+ * Wrapper around `SelectedTagList`.
+ *
+ * @constant
+ * @since		1.1.0
+ * @type		{JSX.Element}
+ * @ignore
+ */
+export const SelectedTagListWrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	margin: -4px;
+
+	.sixa-component-tag {
+		margin: 4px;
+	}
+`

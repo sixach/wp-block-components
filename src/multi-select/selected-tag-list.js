@@ -6,21 +6,20 @@
 import { map } from 'lodash';
 
 /**
- * This packages includes a library of generic WordPress components to be used for
- * creating common UI elements shared between screens and features of the WordPress dashboard.
- *
- * @ignore
- * @see 	https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
- */
-import { Flex, FlexItem } from '@wordpress/components';
-
-/**
  * The styled Tag component generated using @emotion/react API.
  *
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
 import { StyledTag } from '../tag/style';
+
+/**
+ * The styled component wrapper generated using @emotion/react API.
+ *
+ * @ignore
+ * @see 	https://www.npmjs.com/package/@emotion/styled
+ */
+import { SelectedTagListWrapper } from "./style";
 
 /**
  * Horizontal list of Tags.
@@ -41,13 +40,11 @@ import { StyledTag } from '../tag/style';
  * 	/>
  */
 const SelectedTagList = ( { items, onRemove } ) => (
-	<Flex justify="flex-start" className="sixa-component-multiselect__tag-list">
+	<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
 		{ map( items, ( { label }, index ) => (
-			<FlexItem key={ index }>
-				<StyledTag label={ label } onRemove={ () => onRemove( index ) } />
-			</FlexItem>
+			<StyledTag key={ index } label={ label } onRemove={ () => onRemove( index ) } />
 		) ) }
-	</Flex>
+	</SelectedTagListWrapper>
 );
 
 export default SelectedTagList;
