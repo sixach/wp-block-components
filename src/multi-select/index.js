@@ -6,6 +6,13 @@
 import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign } from 'lodash';
 
 /**
+ * React hook for value and callback debouncing.
+ *
+ * @see https://github.com/xnimorz/use-debounce
+ */
+import { useDebouncedCallback } from 'use-debounce';
+
+/**
  * Retrieves the translation of text.
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
@@ -116,9 +123,9 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const areAllOptionsSelected = selected.length === options.length;
 
-	const handleOnChangeSearchText = ( value ) => {
+	const handleOnChangeSearchText = useDebouncedCallback( ( value ) => {
 		setSearchText( value );
-	};
+	}, 2000 );
 
 	const handleOnClickTagButton = ( optionIndex ) => {
 		onChange( removeAtIndex( selected, optionIndex ) );
