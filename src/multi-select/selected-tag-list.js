@@ -19,7 +19,7 @@ import { StyledTag } from '../tag/style';
  * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
  */
-import { SelectedTagListWrapper } from "./style";
+import { SelectedTagListWrapper } from './style';
 
 /**
  * Horizontal list of Tags.

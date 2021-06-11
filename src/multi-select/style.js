@@ -58,4 +58,4 @@ export const SelectedTagListWrapper = styled.div`
 	.sixa-component-tag {
 		margin: 4px;
 	}
-`
+`;
