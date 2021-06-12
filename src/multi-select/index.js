@@ -93,9 +93,18 @@ import defaultMessages from './messages';
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {} } ) {
+function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {}, ariaLabel, ariaDescription } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
+
+	const ariaAttributes = {};
+	if ( !! ariaLabel ) {
+		assign( ariaAttributes, { 'aria-label': ariaLabel } );
+	}
+
+	if ( !! ariaDescription ) {
+		assign( ariaAttributes, { 'aria-description': ariaDescription } );
+	}
 
 	// Enable passing only a subset in `messages`.
 	const mergedMessages = assign( {}, defaultMessages, messages );
@@ -148,7 +157,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	};
 
 	return (
-		<ComponentWrapper className="sixa-component-multiselect">
+		<ComponentWrapper className="sixa-component-multiselect" { ...ariaAttributes }>
 			<p>
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
 			</p>
