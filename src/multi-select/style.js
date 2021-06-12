@@ -54,6 +54,8 @@ export const SelectedTagListWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	margin: -4px;
+	max-height: 300px;
+	overflow-y: scroll;
 
 	.sixa-component-tag {
 		margin: 4px;
