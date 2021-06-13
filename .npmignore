@@ -12,3 +12,4 @@ node_modules
 docs/*
 sftp.json.github/
 readme.txt
+.idea
