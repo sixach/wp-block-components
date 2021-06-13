@@ -73,7 +73,17 @@ const Tag = ( { instanceId, label, onRemove, className, screenReaderText } ) => 
 	<span id={ `sixa-component-tag-${ instanceId }` } className={ classnames( 'sixa-component-tag', className ) }>
 		<VisuallyHidden as="span">{ screenReaderText || label }</VisuallyHidden>
 		<span aria-hidden="true">{ escapeHTML( decodeEntities( label ) ) }</span>
-		{ !! onRemove && <Button className="sixa-component-tag__remove-button" variant="link" icon="remove" isSmall onClick={ onRemove } label={ sprintf( __('Remove %s', 'sixa' ), label )} /> }
+		{ !! onRemove && (
+			<Button
+				className="sixa-component-tag__remove-button"
+				variant="link"
+				icon="remove"
+				isSmall
+				onClick={ onRemove }
+				/* translators: Label of Tag that will be removed. */
+				label={ sprintf( __( 'Remove %s', 'sixa' ), label ) }
+			/>
+		) }
 	</span>
 );
 
