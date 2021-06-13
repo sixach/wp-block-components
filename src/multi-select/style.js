@@ -26,6 +26,10 @@ import { FlexBlock } from '@wordpress/components';
 export const ComponentWrapper = styled( FlexBlock )`
 	padding-top: 12px;
 
+	.sixa-component-multiselect__clear-all-button {
+		margin-left: 12px;
+	}
+
 	.sixa-component-multiselect__option-list {
 		margin: 0;
 		padding: 4px !important;

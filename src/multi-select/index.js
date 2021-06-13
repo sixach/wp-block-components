@@ -25,7 +25,7 @@ import { __, sprintf } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
-import { TextControl, CheckboxControl } from '@wordpress/components';
+import { TextControl, CheckboxControl, Button } from '@wordpress/components';
 
 /**
  * WordPress specific abstraction layer atop React.
@@ -156,10 +156,15 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		}
 	};
 
+	const handleOnClickClearAllButton = () => {
+		onChange( [] );
+	};
+
 	return (
 		<ComponentWrapper className="sixa-component-multiselect" { ...ariaAttributes }>
 			<p>
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
+				{ !! selected.length && <Button className="sixa-component-multiselect__clear-all-button" isDestructive text={ __( 'Clear all', 'sixa' ) } onClick={ handleOnClickClearAllButton } /> }
 			</p>
 			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
 			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
