@@ -172,6 +172,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 						isDestructive
 						text={ __( 'Clear all', 'sixa' ) }
 						onClick={ handleOnClickClearAllButton }
+						aria-label={ __( 'Clear all selected items', 'sixa' ) }
 					/>
 				) }
 			</p>
