@@ -1,8 +1,8 @@
 /**
  * The styled API for @emotion/react.
  *
- * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
+ * @ignore
  */
 import styled from '@emotion/styled';
 

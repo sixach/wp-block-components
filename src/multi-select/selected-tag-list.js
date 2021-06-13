@@ -8,16 +8,16 @@ import { map } from 'lodash';
 /**
  * The styled Tag component generated using @emotion/react API.
  *
- * @ignore
  * @see		https://www.npmjs.com/package/@emotion/styled
+ * @ignore
  */
 import { StyledTag } from '../tag/style';
 
 /**
  * The styled component wrapper generated using @emotion/react API.
  *
- * @ignore
  * @see		https://www.npmjs.com/package/@emotion/styled
+ * @ignore
  */
 import { SelectedTagListWrapper } from './style';
 

@@ -1,7 +1,7 @@
 /**
  * Retrieves the translation of text.
  *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ * @see		https://developer.wordpress.org/block-editor/packages/packages-i18n/
  * @ignore
  */
 import { __, _n, sprintf } from '@wordpress/i18n';

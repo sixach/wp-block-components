@@ -8,14 +8,14 @@ import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign } fr
 /**
  * React hook for value and callback debouncing.
  *
- * @see https://github.com/xnimorz/use-debounce
+ * @see		https://github.com/xnimorz/use-debounce
  */
 import { useDebouncedCallback } from 'use-debounce';
 
 /**
  * Retrieves the translation of text.
  *
- * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ * @see		https://developer.wordpress.org/block-editor/packages/packages-i18n/
  * @ignore
  */
 import { __, sprintf } from '@wordpress/i18n';
@@ -24,7 +24,7 @@ import { __, sprintf } from '@wordpress/i18n';
  * This packages includes a library of generic WordPress components to be used for
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
+ * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  * @ignore
  */
 import { TextControl, CheckboxControl, Button } from '@wordpress/components';
@@ -32,7 +32,7 @@ import { TextControl, CheckboxControl, Button } from '@wordpress/components';
 /**
  * WordPress specific abstraction layer atop React.
  *
- * @see https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
+ * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  * @ignore
  */
 import { useState, useEffect, useMemo } from '@wordpress/element';
@@ -47,7 +47,7 @@ import { removeAtIndex } from '@sixach/wp-block-utils/src';
 /**
  * The styled components generated using @emotion/react API.
  *
- * @see 	https://www.npmjs.com/package/@emotion/styled
+ * @see		https://www.npmjs.com/package/@emotion/styled
  * @ignore
  */
 import { ComponentWrapper } from './style';
