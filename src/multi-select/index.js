@@ -75,20 +75,22 @@ import defaultMessages from './messages';
  * @function
  * @since		1.1.0
  * @param		{Object}		props                       The props that were defined by the caller of this component.
- * @param		{Array}			props.options				Set of { label, value } pairs that can be selected.
+ * @param		{Array}			props.options 				Set of { label, value } pairs that can be selected.
  * @param		{Array}			props.selectedOptions		List of values of the options that are currently selected.
- * @param		{Function}		props.onChange				Callback function to be triggered when the selected options change.
- * @param		{boolean}		props.withSearchField		Enable search field to filter options from the list.
- * @param		{Object}		props.messages				Labels and notices for subcomponents. Is merged with a default value.
- * @return		{JSX.Element}								MultiSelect component.
+ * @param		{Function}		props.onChange 				Callback function to be triggered when the selected options change.
+ * @param		{string}		props.ariaLabel				Aria-label value.
+ * @param		{string} 		props.ariaDescription		Aria-description value.
+ * @param		{boolean} 		props.withSearchField 		Enable search field to filter options from the list.
+ * @param		{Object} 		props.messages 				Labels and notices for subcomponents. Is merged with a default value.
+ * @return		{JSX.Element} 								MultiSelect component.
  * @example
  *
  * <MultiSelect
- *		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
- *		selectedOptions={ postIds }
- *		onChange={( items ) => {
- *			setAttributes({ postIds: map( items, ({ value }) => value ) });
- *		} }
+ * 		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
+ * 		selectedOptions={ postIds }
+ * 		onChange={( items ) => {
+ * 			setAttributes({ postIds: map( items, ({ value }) => value ) });
+ * 		} }
  * />
  *
  * // => Array [ 100, 108 ]
@@ -164,7 +166,14 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		<ComponentWrapper className="sixa-component-multiselect" { ...ariaAttributes }>
 			<p>
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
-				{ !! selected.length && <Button className="sixa-component-multiselect__clear-all-button" isDestructive text={ __( 'Clear all', 'sixa' ) } onClick={ handleOnClickClearAllButton } /> }
+				{ !! selected.length && (
+					<Button
+						className="sixa-component-multiselect__clear-all-button"
+						isDestructive
+						text={ __( 'Clear all', 'sixa' ) }
+						onClick={ handleOnClickClearAllButton }
+					/>
+				) }
 			</p>
 			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
 			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
