@@ -10,6 +10,7 @@ import classnames from 'classnames';
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
+ * @ignore
  */
 import { Button } from '@wordpress/components';
 
@@ -18,6 +19,7 @@ import { Button } from '@wordpress/components';
  * components and provide some basic features like state, instance id, and pure.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
+ * @ignore
  */
 import { withInstanceId } from '@wordpress/compose';
 
@@ -25,6 +27,7 @@ import { withInstanceId } from '@wordpress/compose';
  * Utility for escaping HTML content.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-escape-html/
+ * @ignore
  */
 import { escapeHTML } from '@wordpress/escape-html';
 
@@ -43,12 +46,12 @@ import { decodeEntities } from '@wordpress/html-entities';
  *
  * @function
  * @since		1.1.0
- * @param		{Object} props 					The props that were defined by the caller of this component.
- * @param		{string} props.label 			Label shown in the element.
- * @param		{number} props.instanceId		Unique ID of the component.
- * @param		{Function} props.onRemove 		Callback function to trigger when the remove button is clicked.
- * @param		{string} props.className 		The class that will be added to the classes of the wrapper span.
- * @return		{JSX.Element} 					Tag element.
+ * @param		{Object}		props 					The props that were defined by the caller of this component.
+ * @param		{string}		props.label 			Label shown in the element.
+ * @param		{number}		props.instanceId		Unique ID of the component.
+ * @param		{Function}		props.onRemove 			Callback function to trigger when the remove button is clicked.
+ * @param		{string}		props.className 		The class that will be added to the classes of the wrapper span.
+ * @return		{JSX.Element} 							Tag element.
  * @example
  *
  * <Tag
