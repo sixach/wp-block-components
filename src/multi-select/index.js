@@ -16,6 +16,7 @@ import { useDebouncedCallback } from 'use-debounce';
  * Retrieves the translation of text.
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-i18n/
+ * @ignore
  */
 import { __, sprintf } from '@wordpress/i18n';
 
@@ -24,6 +25,7 @@ import { __, sprintf } from '@wordpress/i18n';
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
+ * @ignore
  */
 import { TextControl, CheckboxControl, Button } from '@wordpress/components';
 
@@ -31,6 +33,7 @@ import { TextControl, CheckboxControl, Button } from '@wordpress/components';
  * WordPress specific abstraction layer atop React.
  *
  * @see https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
+ * @ignore
  */
 import { useState, useEffect, useMemo } from '@wordpress/element';
 
@@ -44,8 +47,8 @@ import { removeAtIndex } from '@sixach/wp-block-utils/src';
 /**
  * The styled components generated using @emotion/react API.
  *
- * @ignore
  * @see 	https://www.npmjs.com/package/@emotion/styled
+ * @ignore
  */
 import { ComponentWrapper } from './style';
 
