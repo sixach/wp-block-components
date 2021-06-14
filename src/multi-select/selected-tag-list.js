@@ -39,12 +39,14 @@ import { SelectedTagListWrapper } from './style';
  * 		onRemove={ handleOnClickSelectedOptionTag }
  * 	/>
  */
-const SelectedTagList = ( { items, onRemove } ) => (
-	<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
-		{ map( items, ( { label }, index ) => (
-			<StyledTag key={ index } label={ label } onRemove={ () => onRemove( index ) } />
-		) ) }
-	</SelectedTagListWrapper>
-);
+export default function SelectedTagList( { items, onRemove } ) {
+	return (
+		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
+			{ map( items, ( { label }, index ) => (
+				<StyledTag key={ index } label={ label } onRemove={ () => onRemove( index ) } />
+			) ) }
+		</SelectedTagListWrapper>
+	);
+}
 
 export default SelectedTagList;
