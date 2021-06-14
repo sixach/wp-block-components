@@ -161,7 +161,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		}
 	};
 
-	const handleOnClickClearAllButton = () => {
+	const handleOnClickClearAll = () => {
 		onChange( [] );
 	};
 
@@ -174,7 +174,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 						className="sixa-component-multiselect__clear-all-button"
 						isDestructive
 						text={ __( 'Clear all', 'sixa' ) }
-						onClick={ handleOnClickClearAllButton }
+						onClick={ handleOnClickClearAll }
 						aria-label={ __( 'Clear all selected items', 'sixa' ) }
 					/>
 				) }
