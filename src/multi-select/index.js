@@ -152,7 +152,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const handleOnChangeSelectAll = () => {
 		if ( ! areAllOptionsSelected ) {
-			onChange( options.map( ( { value } ) => value ) );
+			onChange( map( options, ( { value } ) => value ) );
 		} else {
 			onChange( [] );
 		}
