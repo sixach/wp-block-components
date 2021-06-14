@@ -40,6 +40,7 @@ import { SelectedTagListWrapper } from './style';
  * 	/>
  */
 export default function SelectedTagList( { items, onRemove } ) {
+	console.log({ items });
 	return (
 		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
 			{ map( items, ( { label }, index ) => (
@@ -48,5 +49,3 @@ export default function SelectedTagList( { items, onRemove } ) {
 		</SelectedTagListWrapper>
 	);
 }
-
-export default SelectedTagList;
