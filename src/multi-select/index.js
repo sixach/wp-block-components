@@ -146,7 +146,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		setSearchText( value );
 	}, 500 );
 
-	const handleOnClickTagButton = ( optionIndex ) => {
+	const handleOnClickRemoveTag = ( optionIndex ) => {
 		onChange( removeAtIndex( selectedOptions, optionIndex ) );
 	};
 
@@ -185,7 +185,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 					/>
 				) }
 			</p>
-			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickTagButton } /> }
+			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickRemoveTag } /> }
 			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
 			{ !! searchText.length && ! filteredOptions.length ? (
 				<p>{ mergedMessages.noResults }</p>
