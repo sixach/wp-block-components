@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, each } from 'lodash';
+import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, forEach } from 'lodash';
 
 /**
  * React hook for value and callback debouncing.
@@ -118,7 +118,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	// order, which may or may not introduce huge complexities depending on the data being passed.
 	useEffect( () => {
 		const updatedSelection = [];
-		each( selectedOptions, ( value ) => {
+		forEach( selectedOptions, ( value ) => {
 			const option = find( options, [ 'value', value ] );
 			if ( !! option ) {
 				updatedSelection.push( option );
