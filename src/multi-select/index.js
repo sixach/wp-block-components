@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign } from 'lodash';
+import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign, each } from 'lodash';
 
 /**
  * React hook for value and callback debouncing.
@@ -119,7 +119,14 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	// Without this, parent components would be required to pass `selectedOptions` in the correct
 	// order, which may or may not introduce huge complexities depending on the data being passed.
 	useEffect( () => {
-		setSelected( map( selectedOptions, ( value ) => find( options, [ 'value', value ] ) ) );
+		const updatedSelection = [];
+		each( selectedOptions, ( value ) => {
+			const option = find( options, [ 'value', value ] );
+			if ( !! option ) {
+				updatedSelection.push( option );
+			}
+		} );
+		setSelected( updatedSelection );
 	}, [ selectedOptions ] );
 
 	const filteredOptions = useMemo( () => {

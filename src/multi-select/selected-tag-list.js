@@ -40,7 +40,6 @@ import { SelectedTagListWrapper } from './style';
  * 	/>
  */
 function SelectedTagList( { items, onRemove } ) {
-	console.log({ items });
 	return (
 		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
 			{ map( items, ( { label }, index ) => (
