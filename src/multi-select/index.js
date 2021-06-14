@@ -42,7 +42,7 @@ import { useState, useEffect, useMemo } from '@wordpress/element';
  *
  * @ignore
  */
-import { removeAtIndex } from '@sixach/wp-block-utils/src';
+import { removeAtIndex } from '@sixach/wp-block-utils';
 
 /**
  * The styled components generated using @emotion/react API.
