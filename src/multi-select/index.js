@@ -125,7 +125,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 			}
 		} );
 		setSelected( updatedSelection );
-	}, [ selectedOptions ] );
+	}, [ selectedOptions, options ] );
 
 	const filteredOptions = useMemo( () => {
 		// Bail early in case there is no search term entered.
@@ -134,7 +134,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		}
 		const pattern = new RegExp( escapeRegExp( searchText ), 'i' );
 		return filter( options, ( { label } ) => invoke( label, 'match', pattern ) );
-	}, [ searchText ] );
+	}, [ searchText, options ] );
 
 	const isOptionSelected = ( optionValue ) => {
 		return indexOf( selectedOptions, optionValue ) !== -1;
