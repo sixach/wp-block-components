@@ -9,6 +9,7 @@ import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, forEa
  * React hook for value and callback debouncing.
  *
  * @see		https://github.com/xnimorz/use-debounce
+ * @ignore
  */
 import { useDebouncedCallback } from 'use-debounce';
 
