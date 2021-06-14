@@ -39,7 +39,7 @@ import { SelectedTagListWrapper } from './style';
  * 		onRemove={ handleOnClickSelectedOptionTag }
  * 	/>
  */
-export default function SelectedTagList( { items, onRemove } ) {
+function SelectedTagList( { items, onRemove } ) {
 	console.log({ items });
 	return (
 		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
@@ -49,3 +49,5 @@ export default function SelectedTagList( { items, onRemove } ) {
 		</SelectedTagListWrapper>
 	);
 }
+
+export default SelectedTagList;
