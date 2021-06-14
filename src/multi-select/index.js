@@ -160,7 +160,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const handleOnChangeOption = ( option ) => {
 		const optionIndex = indexOf( selectedOptions, option );
-		if ( optionIndex === -1 ) {
+		if ( -1 === optionIndex ) {
 			onChange( concat( selectedOptions, option ) );
 		} else {
 			onChange( removeAtIndex( selectedOptions, optionIndex ) );
