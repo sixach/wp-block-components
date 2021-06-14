@@ -32,20 +32,19 @@ import { withInstanceId } from '@wordpress/compose';
 import { escapeHTML } from '@wordpress/escape-html';
 
 /**
- * HTML entity utilities for WordPress.
- *
- * @see     https://github.com/WordPress/gutenberg/blob/trunk/packages/html-entities/README.md
- * @ignore
- */
-import { decodeEntities } from '@wordpress/html-entities';
-
-/**
  * Retrieves the translation of text.
  *
  * @see		https://developer.wordpress.org/block-editor/packages/packages-i18n/
  * @ignore
  */
 import { __, sprintf } from '@wordpress/i18n';
+
+/**
+ * Utility helper methods specific for Sixa projects.
+ *
+ * @ignore
+ */
+import { formattedContent } from '@sixach/wp-block-utils';
 
 /**
  * Tag element with a remove button.
@@ -72,7 +71,7 @@ function Tag( { instanceId, label, onRemove, className, screenReaderText } ) {
 	return (
 		<span id={ `sixa-component-tag-${ instanceId }` } className={ classnames( 'sixa-component-tag', className ) }>
 			<VisuallyHidden as="span">{ screenReaderText || label }</VisuallyHidden>
-			<span aria-hidden="true">{ escapeHTML( decodeEntities( label ) ) }</span>
+			<span aria-hidden="true">{ escapeHTML( formattedContent( label ) ) }</span>
 			{ !! onRemove && (
 				<Button
 					className="sixa-component-tag__remove-button"
