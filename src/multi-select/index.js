@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { get, escapeRegExp, invoke, filter, map, some, find, concat, assign, each } from 'lodash';
+import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, each } from 'lodash';
 
 /**
  * React hook for value and callback debouncing.
@@ -91,9 +91,7 @@ import defaultMessages from './messages';
  * <MultiSelect
  * 		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
  * 		selectedOptions={ postIds }
- * 		onChange={( items ) => {
- * 			setAttributes({ postIds: map( items, ({ value }) => value ) });
- * 		} }
+ * 		onChange={ ( items ) => { setAttributes( { postIds: items } ); } }
  * />
  *
  * // => Array [ 100, 108 ]
@@ -139,7 +137,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	}, [ searchText ] );
 
 	const isOptionSelected = ( optionValue ) => {
-		return some( selected, [ 'value', optionValue ] );
+		return indexOf( selectedOptions, optionValue ) !== -1;
 	};
 
 	const areAllOptionsSelected = selected.length === options.length;
@@ -149,22 +147,23 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	}, 500 );
 
 	const handleOnClickTagButton = ( optionIndex ) => {
-		onChange( removeAtIndex( selected, optionIndex ) );
+		onChange( removeAtIndex( selectedOptions, optionIndex ) );
 	};
 
 	const handleOnChangeSelectAll = () => {
 		if ( ! areAllOptionsSelected ) {
-			onChange( options );
+			onChange( options.map( ( { value } ) => value ) );
 		} else {
 			onChange( [] );
 		}
 	};
 
 	const handleOnChangeOption = ( option ) => {
-		if ( isOptionSelected( get( option, 'value' ) ) ) {
-			onChange( filter( selected, ( { value } ) => value !== get( option, 'value' ) ) );
+		const optionIndex = indexOf( selectedOptions, option );
+		if ( optionIndex === -1 ) {
+			onChange( concat( selectedOptions, option ) );
 		} else {
-			onChange( concat( selected, option ) );
+			onChange( removeAtIndex( selectedOptions, optionIndex ) );
 		}
 	};
 
@@ -204,11 +203,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 					) }
 					{ map( filteredOptions, ( { value, label }, index ) => (
 						<li key={ index }>
-							<CheckboxControl
-								checked={ isOptionSelected( value ) }
-								onChange={ () => handleOnChangeOption( { value, label } ) }
-								label={ label }
-							/>
+							<CheckboxControl checked={ isOptionSelected( value ) } onChange={ () => handleOnChangeOption( value ) } label={ label } />
 						</li>
 					) ) }
 				</ul>
