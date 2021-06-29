@@ -6,6 +6,13 @@
 import { map, merge } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * WordPress specific abstraction layer atop React.
  *
  * @ignore
@@ -25,7 +32,7 @@ import { Path } from '@wordpress/primitives';
  * Generates corresponding HTML `Path` elements and enables the shape to be drawn.
  *
  * @function
- * @since 	   1.0.0
+ * @since 	   1.2.0
  * @param  	   {Object}    	 props                    	The props that were defined by the caller of this component.
  * @param  	   {Array}     	 props.paths              	List of SVG path strings.
  * @param  	   {Object}    	 props.attributes         	Object of HTML attributes used inside the opening tag to control the element’s behaviour.
@@ -44,5 +51,10 @@ function GenerateSvgPaths( { paths, attributes } ) {
 		</Fragment>
 	);
 }
+
+GenerateSvgPaths.propTypes = {
+	paths: PropTypes.array.isRequired,
+	attributes: PropTypes.object,
+};
 
 export default GenerateSvgPaths;
