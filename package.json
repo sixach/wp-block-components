@@ -62,6 +62,7 @@
 	"dependencies": {
 		"array-move": "^3.0.1",
 		"html-react-parser": "^1.2.6",
+		"prop-types": "^15.7.2",
 		"react-easy-sort": "^1.0.2",
 		"use-debounce": "^6.0.1"
 	},
@@ -77,8 +78,7 @@
 		"cross-env": "7.0.3",
 		"husky": "^6.0.0",
 		"lint-staged": "11.0.0",
-		"lodash": "4.17.21",
-		"prop-types": "^15.7.2"
+		"lodash": "4.17.21"
 	},
 	"peerDependencies": {
 		"@sixach/wp-block-utils": "1.x",
