@@ -8,6 +8,13 @@
 import { get, isEqual, map, parseInt, merge } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * Utility for conditionally joining CSS class names together.
  *
  * @ignore
@@ -62,14 +69,14 @@ const UNITCONTROL_MAX = 100;
  * There are four different syntaxes you can choose from with this control: the keyword syntax ("auto", "cover", "contain" and "custom").
  *
  * @function
- * @since 	   1.0.0
+ * @since 	   1.2.0
  * @param  	   {Object}      props                           	The props that were defined by the caller of this component.
  * @param      {string}      props.id                        	The id of the element to which labels and help text are being generated.
  * @param      {string}      props.label                     	Label shown before the spinner.
  * @param      {boolean}     props.hideLabelFromVision       	Whether to accessibly hide the label.
- * @param      {boolean}     props.help                      	Optional help text for the control.
- * @param      {Array}       props.sizes                     	Optionally override background position options.
+ * @param      {string}      props.help                      	Optional help text for the control.
  * @param      {string}      props.className                 	The class that will be added with “components-background-size” to the classes of the wrapper div.
+ * @param      {Array}       props.sizes                     	Optionally override background position options.
  * @param      {Object}      props.value                     	Value of the control.
  * @param      {Function}    props.onChange                  	Handle changes.
  * @return 	   {JSX.Element}                               		UI controls.
@@ -83,7 +90,7 @@ const UNITCONTROL_MAX = 100;
  *
  * // => Object { selection: "custom", width: "15%", height: "12%" }
  */
-function BackgroundSizeControl( { id, label, hideLabelFromVision, help, sizes = sizesTable, className, value, onChange } ) {
+function BackgroundSizeControl( { id, label, hideLabelFromVision, help, className, sizes = sizesTable, value, onChange } ) {
 	const selection = get( value, 'selection' );
 	const valueX = get( value, 'width' );
 	const valueY = get( value, 'height' );
@@ -137,5 +144,16 @@ function BackgroundSizeControl( { id, label, hideLabelFromVision, help, sizes = 
 		</BaseControl>
 	);
 }
+
+BackgroundSizeControl.propTypes = {
+	id: PropTypes.string,
+	label: PropTypes.string,
+	hideLabelFromVision: PropTypes.bool,
+	help: PropTypes.string,
+	className: PropTypes.string,
+	sizes: PropTypes.array.isRequired,
+	value: PropTypes.object.isRequired,
+	onChange: PropTypes.func.isRequired,
+};
 
 export default BackgroundSizeControl;
