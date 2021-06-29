@@ -1,4 +1,11 @@
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * WordPress specific abstraction layer atop React.
  *
  * @ignore
@@ -10,7 +17,7 @@ import { cloneElement } from '@wordpress/element';
  * React component for wrapping children based on a condition.
  *
  * @function
- * @since 	   1.0.1
+ * @since 	   1.2.0
  * @param  	   {Object}      props             		    The props that were defined by the caller of this component.
  * @param  	   {boolean}     props.condition            Whether the component should be wrapped.
  * @param  	   {JSX.Element} props.children             Any React element or elements can be passed as children. They will be rendered within the wrapper.
@@ -32,5 +39,11 @@ import { cloneElement } from '@wordpress/element';
 function ConditionalWrap( { condition, children, wrap } ) {
 	return condition ? cloneElement( wrap( children ) ) : children;
 }
+
+ConditionalWrap.propTypes = {
+	condition: PropTypes.bool,
+	children: PropTypes.element,
+	wrap: PropTypes.func,
+};
 
 export default ConditionalWrap;
