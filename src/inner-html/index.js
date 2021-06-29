@@ -6,6 +6,13 @@
 import { omit } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * WordPress specific abstraction layer atop React.
  *
  * @ignore
@@ -20,7 +27,7 @@ import { createElement } from '@wordpress/element';
  * aside from `children` are passed.
  *
  * @function
- * @since 	   1.0.0
+ * @since 	   1.2.0
  * @param  	   {Object}      props             		 The props that will be passed through to the wrapper element.
  * @param  	   {string}      props.tagName           The tag name of the wrapper element.
  * @param  	   {string}      props.children          Children should be a string of HTML.
@@ -38,5 +45,10 @@ function InnerHTML( { tagName = 'div', children, ...props } ) {
 		...omit( props, 'tagName' ),
 	} );
 }
+
+InnerHTML.propTypes = {
+	tagName: PropTypes.string,
+	children: PropTypes.node,
+};
 
 export default InnerHTML;
