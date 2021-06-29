@@ -6,6 +6,13 @@
 import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, forEach } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * React hook for value and callback debouncing.
  *
  * @see		https://github.com/xnimorz/use-debounce
@@ -212,5 +219,15 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 		</ComponentWrapper>
 	);
 }
+
+MultiSelect.propTypes = {
+	options: PropTypes.array.isRequired,
+	selectedOptions: PropTypes.array.isRequired,
+	onChange: PropTypes.func.isRequired,
+	ariaLabel: PropTypes.string,
+	ariaDescription: PropTypes.string,
+	withSearchField: PropTypes.bool,
+	messages: PropTypes.object,
+};
 
 export default MultiSelect;
