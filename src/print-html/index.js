@@ -6,6 +6,13 @@
 import { get, isUndefined } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * HTML to React parser.
  *
  * @ignore
@@ -39,12 +46,12 @@ import InnerHTML from '../inner-html';
  * and converts all numeric HTML entities to their named counterparts.
  *
  * @function
- * @since 	   1.0.2
+ * @since 	   1.2.0
  * @param  	   {Object}       props             		The props that were defined by the caller of this component.
  * @param  	   {Object}       props.content             The content object.
  * @param  	   {Array|string} props.path              	Path of the property or node element to retrieve.
  * @param  	   {string}       props.tagName           	Tag name of the wrapper element.
- * @param  	   {string}       props.tagProps          	Props that will be passed through to the wrapper element.
+ * @param  	   {Object}       props.tagProps          	Props that will be passed through to the wrapper element.
  * @return 	   {JSX.Element}                   		 	Generated HTML output of the elements.
  * @example
  *
@@ -67,5 +74,12 @@ function PrintHTML( { content, path, tagName, tagProps } ) {
 		</ConditionalWrap>
 	);
 }
+
+PrintHTML.propTypes = {
+	content: PropTypes.object.isRequired,
+	path: PropTypes.oneOfType( [ PropTypes.array, PropTypes.string ] ),
+	tagName: PropTypes.string,
+	Object: PropTypes.object,
+};
 
 export default PrintHTML;
