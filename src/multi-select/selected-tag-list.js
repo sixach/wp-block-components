@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
  * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  * @ignore
  */
-import { useState, useEffect, useMemo, useCallback } from '@wordpress/element';
+import { useState, useEffect, useCallback } from '@wordpress/element';
 
 /**
  * The styled Tag component generated using @emotion/react API.
@@ -51,35 +51,20 @@ import { SelectedTagListWrapper } from './style';
  * @example
  *
  * <SelectedTagList
- * 		items={ selectedOptions}
+ * 		items={ selectedOptions }
  * 		onChange={ onChange }
  * 		onRemove={ handleOnClickSelectedOptionTag }
  * 	/>
  */
 function SelectedTagList( { items, onChange, onRemove } ) {
 	const [ options, setOptions ] = useState( [] );
-	const { values, labels } = useMemo( () => {
-		const tempValues = [];
-		const tempLabels = [];
-
-		forEach( items, ( { value, label } ) => {
-			tempValues.push( value );
-			tempLabels.push( label );
-		} );
-		return {
-			values: tempValues,
-			labels: tempLabels,
-		};
-	}, [ items ] );
 	const handleOnChange = useCallback( ( newItems ) => {
 		onChange( map( newItems, ( { props: { value } } ) => value ) );
 	}, [] );
 
 	useEffect( () => {
 		setOptions(
-			map( items, ( i, index ) => (
-				<StyledTag key={ index } label={ nth( labels, index ) } value={ nth( values, index ) } onRemove={ () => onRemove( index ) } />
-			) )
+			map( items, ( { value, label }, index ) => <StyledTag key={ index } label={ label } value={ value } onRemove={ () => onRemove( index ) } /> )
 		);
 	}, [ items ] );
 
