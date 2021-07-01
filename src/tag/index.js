@@ -1,4 +1,11 @@
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * Utility for conditionally joining CSS class names together.
  *
  * @ignore
@@ -18,18 +25,10 @@ import { Button, VisuallyHidden } from '@wordpress/components';
  * Collection of handy hooks and higher-order components (HOCs) to wrap WordPress
  * components and provide some basic features like state, instance id, and pure.
  *
- * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
+ * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
  * @ignore
  */
-import { withInstanceId } from '@wordpress/compose';
-
-/**
- * Utility for escaping HTML content.
- *
- * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-escape-html/
- * @ignore
- */
-import { escapeHTML } from '@wordpress/escape-html';
+import { useInstanceId } from '@wordpress/compose';
 
 /**
  * Retrieves the translation of text.
@@ -52,13 +51,14 @@ import { formattedContent } from '@sixach/wp-block-utils';
  * be displayed as tags rather than standalone.
  *
  * @function
+ * @since	   	1.2.0
+ * 			   	Introduced type checking.
  * @since		1.1.0
  * @param		{Object}		props 						The props that were defined by the caller of this component.
  * @param		{string}		props.label 				Label shown in the element.
- * @param		{number}		props.instanceId			Unique ID of the component.
- * @param		{Function}		props.onRemove 				Callback function to trigger when the remove button is clicked.
- * @param		{string}		props.screenReaderText		Text to be used for screen readers.
  * @param		{string}		props.className 			The class that will be added to the classes of the wrapper span.
+ * @param		{string}		props.screenReaderText		Text to be used for screen readers.
+ * @param		{Function}		props.onRemove 				Callback function to trigger when the remove button is clicked.
  * @return		{JSX.Element} 								Tag element.
  * @example
  *
@@ -67,17 +67,19 @@ import { formattedContent } from '@sixach/wp-block-utils';
  * 		onRemove={ handleOnClickTag }
  * />
  */
-function Tag( { instanceId, label, onRemove, className, screenReaderText } ) {
+function Tag( { label, className, screenReaderText, onRemove } ) {
+	const instanceId = useInstanceId( Tag );
+
 	return (
 		<span id={ `sixa-component-tag-${ instanceId }` } className={ classnames( 'sixa-component-tag', className ) }>
 			<VisuallyHidden as="span">{ screenReaderText || label }</VisuallyHidden>
-			<span aria-hidden="true">{ escapeHTML( formattedContent( label ) ) }</span>
+			<span aria-hidden="true">{ formattedContent( label ) }</span>
 			{ !! onRemove && (
 				<Button
+					isSmall
 					className="sixa-component-tag__remove-button"
 					variant="link"
 					icon="remove"
-					isSmall
 					onClick={ onRemove }
 					/* translators: Label of Tag that will be removed. */
 					label={ sprintf( __( 'Remove %s', 'sixa' ), label ) }
@@ -87,4 +89,11 @@ function Tag( { instanceId, label, onRemove, className, screenReaderText } ) {
 	);
 }
 
-export default withInstanceId( Tag );
+Tag.propTypes = {
+	label: PropTypes.string,
+	className: PropTypes.string,
+	screenReaderText: PropTypes.string,
+	onRemove: PropTypes.func,
+};
+
+export default Tag;
