@@ -16,6 +16,13 @@ import styled from '@emotion/styled';
 import { FlexBlock } from '@wordpress/components';
 
 /**
+ * Sortable component.
+ *
+ * @ignore
+ */
+import Sortable from '../sortable';
+
+/**
  * Wrapper around the component.
  *
  * @constant
@@ -47,14 +54,14 @@ export const ComponentWrapper = styled( FlexBlock )`
 `;
 
 /**
- * Wrapper around `SelectedTagList`.
+ * In place of the `Sortable` component.
  *
  * @constant
- * @since		1.1.0
+ * @since		1.2.0
  * @type		{JSX.Element}
  * @ignore
  */
-export const SelectedTagListWrapper = styled.div`
+export const SelectedTagListWrapper = styled( Sortable )`
 	display: flex;
 	flex-wrap: wrap;
 	margin: -4px;

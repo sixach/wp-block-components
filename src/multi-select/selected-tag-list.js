@@ -6,6 +6,21 @@
 import { map } from 'lodash';
 
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
+ * WordPress specific abstraction layer atop React.
+ *
+ * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
+ * @ignore
+ */
+import { useCallback } from '@wordpress/element';
+
+/**
  * The styled Tag component generated using @emotion/react API.
  *
  * @see		https://www.npmjs.com/package/@emotion/styled
@@ -27,26 +42,38 @@ import { SelectedTagListWrapper } from './style';
  * provided as { label, value } pairs and can be deselected by clicking the remove button.
  *
  * @function
- * @since		1.1.0
+ * @since		1.2.0
  * @param		{Object}		props				The props that were defined by the caller of this component.
  * @param		{Array}			props.items			List of items that should be displayed as Tags.
+ * @param		{Function}		props.onChange		Callback function to be triggered when the user finishes a sorting gesture.
  * @param		{Function}		props.onRemove		Callback function to trigger when the remove button in a tag is clicked.
  * @return		{JSX.Element}						Horizontal list of Tags.
  * @example
  *
  * <SelectedTagList
- * 		items={ selectedOptions}
+ * 		items={ selectedOptions }
+ * 		onChange={ onChange }
  * 		onRemove={ handleOnClickSelectedOptionTag }
  * 	/>
  */
-function SelectedTagList( { items, onRemove } ) {
+function SelectedTagList( { items, onChange, onRemove } ) {
+	const handleOnChange = useCallback( ( newItems ) => {
+		onChange( map( newItems, ( { props: { value } } ) => value ) );
+	}, [] );
+
 	return (
-		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list">
-			{ map( items, ( { label }, index ) => (
-				<StyledTag key={ index } label={ label } onRemove={ () => onRemove( index ) } />
+		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list" onChange={ handleOnChange }>
+			{ map( items, ( { value, label }, index ) => (
+				<StyledTag key={ index } label={ label } value={ value } onRemove={ () => onRemove( index ) } />
 			) ) }
 		</SelectedTagListWrapper>
 	);
 }
+
+SelectedTagList.propTypes = {
+	items: PropTypes.array.isRequired,
+	onChange: PropTypes.func.isRequired,
+	onRemove: PropTypes.func.isRequired,
+};
 
 export default SelectedTagList;

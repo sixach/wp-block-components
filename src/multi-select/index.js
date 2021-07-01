@@ -77,7 +77,7 @@ import defaultMessages from './messages';
  * only. That is, `selectedOptions` is an array of values only, not an array of { label, value } pairs.
  *
  * @function
- * @since		1.1.0
+ * @since		1.2.0
  * @param		{Object}		props                       The props that were defined by the caller of this component.
  * @param		{Array}			props.options 				Set of { label, value } pairs that can be selected.
  * @param		{Array}			props.selectedOptions		List of values of the options that are currently selected.
@@ -186,7 +186,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 					/>
 				) }
 			</p>
-			{ !! selected.length && <SelectedTagList items={ selected } onRemove={ handleOnClickRemoveTag } /> }
+			{ !! selected.length && <SelectedTagList items={ selected } onChange={ onChange } onRemove={ handleOnClickRemoveTag } /> }
 			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
 			{ !! searchText.length && ! filteredOptions.length ? (
 				<p>{ mergedMessages.noResults }</p>
