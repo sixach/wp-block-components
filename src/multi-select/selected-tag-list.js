@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { map, nth, forEach } from 'lodash';
+import { map } from 'lodash';
 
 /**
  * Runtime type checking for React props and similar objects.
@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
  * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  * @ignore
  */
-import { useState, useEffect, useCallback } from '@wordpress/element';
+import { useCallback } from '@wordpress/element';
 
 /**
  * The styled Tag component generated using @emotion/react API.
@@ -57,18 +57,17 @@ import { SelectedTagListWrapper } from './style';
  * 	/>
  */
 function SelectedTagList( { items, onChange, onRemove } ) {
-	const [ options, setOptions ] = useState( [] );
 	const handleOnChange = useCallback( ( newItems ) => {
 		onChange( map( newItems, ( { props: { value } } ) => value ) );
 	}, [] );
 
-	useEffect( () => {
-		setOptions(
-			map( items, ( { value, label }, index ) => <StyledTag key={ index } label={ label } value={ value } onRemove={ () => onRemove( index ) } /> )
-		);
-	}, [ items ] );
-
-	return <SelectedTagListWrapper className="sixa-component-multiselect__tag-list" items={ options } onChange={ handleOnChange } />;
+	return (
+		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list" onChange={ handleOnChange }>
+			{ map( items, ( { value, label }, index ) => (
+				<StyledTag key={ index } label={ label } value={ value } onRemove={ () => onRemove( index ) } />
+			) ) }
+		</SelectedTagListWrapper>
+	);
 }
 
 SelectedTagList.propTypes = {
