@@ -17,7 +17,9 @@ import { cloneElement } from '@wordpress/element';
  * React component for wrapping children based on a condition.
  *
  * @function
- * @since 	   1.2.0
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since 	   1.0.0
  * @param  	   {Object}      props             		    The props that were defined by the caller of this component.
  * @param  	   {boolean}     props.condition            Whether the component should be wrapped.
  * @param  	   {JSX.Element} props.children             Any React element or elements can be passed as children. They will be rendered within the wrapper.

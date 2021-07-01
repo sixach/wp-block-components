@@ -51,7 +51,9 @@ import { formattedContent } from '@sixach/wp-block-utils';
  * be displayed as tags rather than standalone.
  *
  * @function
- * @since		1.2.0
+ * @since	   	1.2.0
+ * 			   	Introduced type checking.
+ * @since		1.1.0
  * @param		{Object}		props 						The props that were defined by the caller of this component.
  * @param		{string}		props.label 				Label shown in the element.
  * @param		{string}		props.className 			The class that will be added to the classes of the wrapper span.

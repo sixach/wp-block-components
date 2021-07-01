@@ -32,7 +32,9 @@ import { Path } from '@wordpress/primitives';
  * Generates corresponding HTML `Path` elements and enables the shape to be drawn.
  *
  * @function
- * @since 	   1.2.0
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since 	   1.0.0
  * @param  	   {Object}    	 props                    	The props that were defined by the caller of this component.
  * @param  	   {Array}     	 props.paths              	List of SVG path strings.
  * @param  	   {Object}    	 props.attributes         	Object of HTML attributes used inside the opening tag to control the element’s behaviour.

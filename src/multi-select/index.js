@@ -84,16 +84,18 @@ import defaultMessages from './messages';
  * only. That is, `selectedOptions` is an array of values only, not an array of { label, value } pairs.
  *
  * @function
- * @since		1.2.0
- * @param		{Object}		props                       The props that were defined by the caller of this component.
- * @param		{Array}			props.options 				Set of { label, value } pairs that can be selected.
- * @param		{Array}			props.selectedOptions		List of values of the options that are currently selected.
- * @param		{Function}		props.onChange 				Callback function to be triggered when the selected options change.
- * @param		{string}		props.ariaLabel				Aria-label value.
- * @param		{string} 		props.ariaDescription		Aria-description value.
- * @param		{boolean} 		props.withSearchField 		Enable search field to filter options from the list.
- * @param		{Object} 		props.messages 				Labels and notices for subcomponents. Is merged with a default value.
- * @return		{JSX.Element} 								MultiSelect component.
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since	   1.1.0
+ * @param	   {Object}			props                       The props that were defined by the caller of this component.
+ * @param	   {Array}			props.options 				Set of { label, value } pairs that can be selected.
+ * @param	   {Array}			props.selectedOptions		List of values of the options that are currently selected.
+ * @param	   {Function}		props.onChange 				Callback function to be triggered when the selected options change.
+ * @param	   {string}			props.ariaLabel				Aria-label value.
+ * @param	   {string} 		props.ariaDescription		Aria-description value.
+ * @param	   {boolean} 		props.withSearchField 		Enable search field to filter options from the list.
+ * @param	   {Object} 		props.messages 				Labels and notices for subcomponents. Is merged with a default value.
+ * @return	   {JSX.Element} 								MultiSelect component.
  * @example
  *
  * <MultiSelect

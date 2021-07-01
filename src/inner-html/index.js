@@ -27,7 +27,9 @@ import { createElement } from '@wordpress/element';
  * aside from `children` are passed.
  *
  * @function
- * @since 	   1.2.0
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since 	   1.0.0
  * @param  	   {Object}      props             		 The props that will be passed through to the wrapper element.
  * @param  	   {string}      props.tagName           The tag name of the wrapper element.
  * @param  	   {string}      props.children          Children should be a string of HTML.

@@ -46,7 +46,9 @@ import InnerHTML from '../inner-html';
  * and converts all numeric HTML entities to their named counterparts.
  *
  * @function
- * @since 	   1.2.0
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since 	   1.0.2
  * @param  	   {Object}       props             		The props that were defined by the caller of this component.
  * @param  	   {Object}       props.content             The content object.
  * @param  	   {Array|string} props.path              	Path of the property or node element to retrieve.

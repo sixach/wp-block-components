@@ -25,7 +25,9 @@ import { Flex, FlexBlock, FlexItem, Spinner } from '@wordpress/components';
  * Spinners notify users that their action is being processed.
  *
  * @function
- * @since 	   1.2.0
+ * @since	   1.2.0
+ * 			   Introduced type checking.
+ * @since 	   1.0.0
  * @param  	   {Object}    props                  The props that were defined by the caller of this component.
  * @param      {string}    props.label            Label shown before the spinner.
  * @param      {string}    props.className        The class that will be added with “components-loading” to the classes of the wrapper div.
