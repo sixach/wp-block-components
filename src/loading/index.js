@@ -1,4 +1,11 @@
 /**
+ * Runtime type checking for React props and similar objects.
+ *
+ * @ignore
+ */
+import PropTypes from 'prop-types';
+
+/**
  * Utility for conditionally joining CSS class names together.
  *
  * @ignore
@@ -18,6 +25,8 @@ import { Flex, FlexBlock, FlexItem, Spinner } from '@wordpress/components';
  * Spinners notify users that their action is being processed.
  *
  * @function
+ * @since	   1.2.0
+ * 			   Introduced type checking.
  * @since 	   1.0.0
  * @param  	   {Object}    props                  The props that were defined by the caller of this component.
  * @param      {string}    props.label            Label shown before the spinner.
@@ -37,5 +46,10 @@ function Loading( { label, className } ) {
 		</Flex>
 	);
 }
+
+Loading.propTypes = {
+	label: PropTypes.string,
+	className: PropTypes.string,
+};
 
 export default Loading;
