@@ -3,7 +3,7 @@
  *
  * @ignore
  */
-import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, forEach } from 'lodash';
+import { escapeRegExp, invoke, filter, map, indexOf, find, concat, merge, forEach } from 'lodash';
 
 /**
  * Runtime type checking for React props and similar objects.
@@ -11,14 +11,6 @@ import { escapeRegExp, invoke, filter, map, indexOf, find, concat, assign, forEa
  * @ignore
  */
 import PropTypes from 'prop-types';
-
-/**
- * React hook for value and callback debouncing.
- *
- * @see		https://github.com/xnimorz/use-debounce
- * @ignore
- */
-import { useDebouncedCallback } from 'use-debounce';
 
 /**
  * Retrieves the translation of text.
@@ -43,7 +35,16 @@ import { TextControl, CheckboxControl, Button } from '@wordpress/components';
  * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  * @ignore
  */
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, useCallback } from '@wordpress/element';
+
+/**
+ * Collection of handy hooks and higher-order components (HOCs) to wrap WordPress
+ * components and provide some basic features like state, instance id, and pure.
+ *
+ * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
+ * @ignore
+ */
+import { useDebounce } from '@wordpress/compose';
 
 /**
  * Utility helper methods specific for Sixa projects.
@@ -84,6 +85,9 @@ import defaultMessages from './messages';
  * only. That is, `selectedOptions` is an array of values only, not an array of { label, value } pairs.
  *
  * @function
+ * @since	   1.2.1
+ * 			   Removed aria-description as being an invalid ARIA attribute.
+ * 			   Intrdouce useDebounce hook from the compose package.
  * @since	   1.2.0
  * 			   Introduced type checking.
  * @since	   1.1.0
@@ -92,35 +96,24 @@ import defaultMessages from './messages';
  * @param	   {Array}			props.selectedOptions		List of values of the options that are currently selected.
  * @param	   {Function}		props.onChange 				Callback function to be triggered when the selected options change.
  * @param	   {string}			props.ariaLabel				Aria-label value.
- * @param	   {string} 		props.ariaDescription		Aria-description value.
  * @param	   {boolean} 		props.withSearchField 		Enable search field to filter options from the list.
  * @param	   {Object} 		props.messages 				Labels and notices for subcomponents. Is merged with a default value.
  * @return	   {JSX.Element} 								MultiSelect component.
  * @example
  *
  * <MultiSelect
- * 		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
  * 		selectedOptions={ postIds }
+ * 		options={ [{ value: 100, label: 'My blog post' }, { value: 108, label: 'My other blog post' }] }
  * 		onChange={ ( items ) => { setAttributes( { postIds: items } ); } }
  * />
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {}, ariaLabel, ariaDescription } ) {
+function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {}, ariaLabel } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
-
-	const ariaAttributes = {};
-	if ( !! ariaLabel ) {
-		assign( ariaAttributes, { 'aria-label': ariaLabel } );
-	}
-
-	if ( !! ariaDescription ) {
-		assign( ariaAttributes, { 'aria-description': ariaDescription } );
-	}
-
 	// Enable passing only a subset in `messages`.
-	const mergedMessages = assign( {}, defaultMessages, messages );
+	const mergedMessages = merge( {}, defaultMessages, messages );
 
 	// Build options from selected ids. Allows us to persist order in which items are selected
 	// and enables drag & drop support (for ordering) by moving the order logic into MultiSelect.
@@ -152,9 +145,12 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const areAllOptionsSelected = selected.length === options.length;
 
-	const handleOnChangeSearchText = useDebouncedCallback( ( value ) => {
-		setSearchText( value );
-	}, 500 );
+	const handleOnChangeSearchText = useDebounce(
+		useCallback( ( value ) => {
+			setSearchText( value );
+		}, [] ),
+		500
+	);
 
 	const handleOnClickRemoveTag = ( optionIndex ) => {
 		onChange( removeAtIndex( selectedOptions, optionIndex ) );
@@ -182,7 +178,7 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	};
 
 	return (
-		<ComponentWrapper className="sixa-component-multiselect" { ...ariaAttributes }>
+		<ComponentWrapper className="sixa-component-multiselect" aria-label={ ariaLabel }>
 			<p>
 				<strong>{ mergedMessages.selected( selected.length ) }</strong>
 				{ !! selected.length && (
