@@ -23,7 +23,7 @@ import classnames from 'classnames';
  * WordPress specific abstraction layer atop React.
  *
  * @ignore
- * @see 	https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
+ * @see    https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  */
 import { forwardRef } from '@wordpress/element';
 
@@ -31,7 +31,7 @@ import { forwardRef } from '@wordpress/element';
  * A react wrapper for glider.js
  *
  * @ignore
- * @see 	https://github.com/hipstersmoothie/react-glider
+ * @see    https://github.com/hipstersmoothie/react-glider
  */
 import Glider from 'react-glider';
 
@@ -40,7 +40,7 @@ import Glider from 'react-glider';
  * components and provide some basic features like state, instance id, and pure.
  *
  * @ignore
- * @see 	https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
  */
 import { useInstanceId } from '@wordpress/compose';
 
@@ -56,12 +56,12 @@ import defaultOptions from './options';
  * A fast, dependency free, native scrolling list with paging controls.
  *
  * @function
- * @since	   1.3.0
- * @param	   {Object}		    props               The props that were defined by the caller of this component.
- * @param      {string}         props.className 	The CSS class name(s) that will be added to the wrapper element.
- * @param  	   {JSX.Element} 	props.children      Any React element or elements can be passed as children. They will be rendered within the wrapper.
- * @param  	   {Object} 		ref      			Component enhancer used to enable passing a ref to its wrapped component.
- * @return	   {JSX.Element}        				Slider component.
+ * @since    1.3.0
+ * @param	 {Object}		  props              The props that were defined by the caller of this component.
+ * @param    {string}         props.className    The CSS class name(s) that will be added to the wrapper element.
+ * @param  	 {JSX.Element}    props.children     Any React element or elements can be passed as children. They will be rendered within the wrapper.
+ * @param  	 {Object} 		  ref      			 Component enhancer used to enable passing a ref to its wrapped component.
+ * @return	 {JSX.Element}        				 Slider component.
  * @example
  *
  * <Slider hasArrows hasDots>

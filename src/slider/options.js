@@ -4,9 +4,9 @@
  * Default set of shared Glider options (methods).
  *
  * @constant
- * @since 	   1.3.0
- * @type       {Object}
- * @see        https://github.com/hipstersmoothie/react-glider#glider-methods
+ * @since    1.3.0
+ * @type     {Object}
+ * @see      https://github.com/hipstersmoothie/react-glider#glider-methods
  * @ignore
  */
 export default {
