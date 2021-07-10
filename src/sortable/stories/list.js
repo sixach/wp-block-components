@@ -2,7 +2,7 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { map, range, get } from 'lodash';
+import { map, range, get, add } from 'lodash';
 import { useState, useEffect } from '@wordpress/element';
 import { Flex } from '@wordpress/components';
 import { randomHexColor } from 'random-hex-color-generator';
@@ -16,25 +16,25 @@ import Sortable from '../';
 function ListWithState( { length, withKnobs } ) {
 	const [ items, setItems ] = useState( [] );
 	const handleOnSortEnd = ( value ) => {
-		setItems( map( value, ( { key, props } ) => ( { name: key, backgroundColor: get( props, 'style.backgroundColor' ) } ) ) );
+		setItems( map( value, ( { key, props } ) => ( { item: key, backgroundColor: get( props, 'style.backgroundColor' ) } ) ) );
 	};
 
 	useEffect( () => {
-		setItems( map( range( 1, length ), ( name ) => ( { name, backgroundColor: randomHexColor() } ) ) );
+		setItems( map( range( 0, length ), ( item ) => ( { item: add( item, 1 ), backgroundColor: randomHexColor() } ) ) );
 	}, [ length ] );
 
 	return (
 		<ListWrapper onChange={ handleOnSortEnd } withSortableKnob={ withKnobs }>
-			{ map( items, ( { name, backgroundColor } ) => (
+			{ map( items, ( { item, backgroundColor } ) => (
 				<ListItem
-					key={ name }
+					key={ item }
 					align="center"
 					justify="center"
 					withKnobs={ withKnobs }
 					style={ { backgroundColor } }
 					isDark={ isDarkColor( backgroundColor ) }
 				>
-					{ name }
+					{ item }
 				</ListItem>
 			) ) }
 		</ListWrapper>
