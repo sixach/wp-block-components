@@ -104,7 +104,7 @@ import defaultMessages from './messages';
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { className, withSearchField = false, withSelectAll = false, options, selectedOptions = [], aria = {}, messages = {}, onChange } ) {
+function MultiSelect( { className, withSearchField, withSelectAll, options, selectedOptions, aria, messages, onChange } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 	// Enable passing only a subset in `messages`.
