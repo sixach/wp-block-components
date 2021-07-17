@@ -60,7 +60,7 @@ import { Track } from './style';
  *	   <img src="https://picsum.photos/700/300" />
  * </Slider>
  */
-function Slider( { className, gap = '0', children = [], ...wrapperProps }, ref ) {
+function Slider( { className, gap, children, ...wrapperProps }, ref ) {
 	return (
 		<div className={ classnames( 'sixa-component-slider', 'glider-wrap', className ) }>
 			<Glider ref={ ref } { ...merge( {}, defaultOptions, wrapperProps ) } skipTrack>
