@@ -52,7 +52,7 @@ import { SelectedTagListWrapper } from './style';
  * 		onRemove={ handleOnClickSelectedOptionTag }
  * 	/>
  */
-function SelectedTagList( { items = [], onChange, onRemove } ) {
+function SelectedTagList( { items, onChange, onRemove } ) {
 	const handleOnChange = useCallback( ( newItems ) => {
 		onChange( map( newItems, ( { props: { value } } ) => value ) );
 	}, [] );
