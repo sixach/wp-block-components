@@ -61,6 +61,7 @@
 		]
 	},
 	"dependencies": {
+		"@sixach/icon-library": "^0.1.0",
 		"@sixach/wp-block-utils": "^1.0.0",
 		"@wordpress/api-fetch": "^5.1.1",
 		"@wordpress/components": "^14.1.6",
