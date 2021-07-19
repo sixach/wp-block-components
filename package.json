@@ -72,6 +72,7 @@
 		"@wordpress/primitives": "^2.1.1",
 		"@wordpress/url": "^3.1.1",
 		"array-move": "^3.0.1",
+		"glider-js": "^1.7.7",
 		"html-react-parser": "^1.2.7",
 		"prop-types": "^15.7.2",
 		"react-easy-sort": "^1.2.0",
