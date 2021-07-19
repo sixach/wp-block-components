@@ -92,14 +92,14 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 	const valueY = get( value, 'height' );
 	const isCustom = ( other = selection ) => isEqual( 'custom', other );
 	const handleOnClick = ( slug ) => {
-		handleOnChange( { selection: slug }, isCustom( slug ) ? noop() : {} );
+		handleOnChange( { selection: slug }, isCustom( slug ) ? { width: 'auto', height: 'auto' } : {} );
 	};
 	const handleOnChange = ( source, destination = value ) => {
 		onChange( assign( {}, destination, source ) );
 	};
-	const getParsedCoordinate = ( position ) => {
+	const getParsedCoordinate = ( position, fallback = '' ) => {
 		const noUnitsValue = parseInt( position );
-		return isNaN( noUnitsValue ) ? '' : `${ noUnitsValue }%`;
+		return isNaN( noUnitsValue ) ? fallback : `${ noUnitsValue }%`;
 	};
 
 	return (
@@ -136,7 +136,7 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 						unit="%"
 						label={ __( 'Width' ) }
 						value={ getParsedCoordinate( valueX ) }
-						onChange={ ( next ) => handleOnChange( { width: getParsedCoordinate( next ) } ) }
+						onChange={ ( next ) => handleOnChange( { width: getParsedCoordinate( next, 'auto' ) } ) }
 						dragDirection="e"
 						labelPosition="side"
 						max={ UNITCONTROL_MAX }
@@ -147,7 +147,7 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 						unit="%"
 						label={ __( 'Height' ) }
 						value={ getParsedCoordinate( valueY ) }
-						onChange={ ( next ) => handleOnChange( { height: getParsedCoordinate( next ) } ) }
+						onChange={ ( next ) => handleOnChange( { height: getParsedCoordinate( next, 'auto' ) } ) }
 						dragDirection="s"
 						labelPosition="side"
 						max={ UNITCONTROL_MAX }
