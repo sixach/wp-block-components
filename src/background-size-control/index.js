@@ -3,7 +3,7 @@
 /**
  * Utility for libraries from the `Lodash`.
  */
-import { get, isEqual, map, parseInt, assign, noop, isNaN, isEmpty } from 'lodash';
+import { get, isEqual, map, parseInt, assign, isNaN, isEmpty } from 'lodash';
 
 /**
  * Runtime type checking for React props and similar objects.
