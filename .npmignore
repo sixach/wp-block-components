@@ -10,6 +10,8 @@ node_modules
 *.cache
 .vscode/*
 docs/*
+.storybook/*
+storybook-static/*
 sftp.json.github/
 readme.txt
 .idea
