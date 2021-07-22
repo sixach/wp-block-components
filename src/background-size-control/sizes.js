@@ -1,8 +1,7 @@
 /**
  * Retrieves the translation of text.
  *
- * @see     https://developer.wordpress.org/block-editor/packages/packages-i18n/
- * @ignore
+ * @see    https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
 
@@ -14,9 +13,9 @@ import { __ } from '@wordpress/i18n';
  * this CSS property from MDN docs.
  *
  * @constant
- * @since 	   1.0.0
- * @type       {Array}
- * @see        https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+ * @since 	    1.0.0
+ * @type        {Array}
+ * @see         https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
  * @ignore
  */
 export default [

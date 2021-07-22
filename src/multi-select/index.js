@@ -1,22 +1,22 @@
 /**
  * Utility for libraries from the `Lodash`.
- *
- * @ignore
  */
-import { escapeRegExp, invoke, filter, map, indexOf, find, concat, merge, forEach } from 'lodash';
+import { escapeRegExp, invoke, filter, map, indexOf, find, concat, merge, forEach, includes, isEqual } from 'lodash';
 
 /**
  * Runtime type checking for React props and similar objects.
- *
- * @ignore
  */
 import PropTypes from 'prop-types';
 
 /**
+ * Utility for conditionally joining CSS class names together.
+ */
+import classnames from 'classnames';
+
+/**
  * Retrieves the translation of text.
  *
- * @see		https://developer.wordpress.org/block-editor/packages/packages-i18n/
- * @ignore
+ * @see    https://developer.wordpress.org/block-editor/packages/packages-i18n/
  */
 import { __, sprintf } from '@wordpress/i18n';
 
@@ -24,16 +24,14 @@ import { __, sprintf } from '@wordpress/i18n';
  * This packages includes a library of generic WordPress components to be used for
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
- * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
- * @ignore
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
-import { TextControl, CheckboxControl, Button } from '@wordpress/components';
+import { TextControl, CheckboxControl } from '@wordpress/components';
 
 /**
  * WordPress specific abstraction layer atop React.
  *
- * @see		https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
- * @ignore
+ * @see    https://github.com/WordPress/gutenberg/tree/HEAD/packages/element/README.md
  */
 import { useState, useEffect, useMemo, useCallback } from '@wordpress/element';
 
@@ -41,37 +39,29 @@ import { useState, useEffect, useMemo, useCallback } from '@wordpress/element';
  * Collection of handy hooks and higher-order components (HOCs) to wrap WordPress
  * components and provide some basic features like state, instance id, and pure.
  *
- * @see		https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
- * @ignore
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose
  */
 import { useDebounce } from '@wordpress/compose';
 
 /**
  * Utility helper methods specific for Sixa projects.
- *
- * @ignore
  */
 import { removeAtIndex } from '@sixach/wp-block-utils';
 
 /**
  * The styled components generated using @emotion/react API.
  *
- * @see		https://www.npmjs.com/package/@emotion/styled
- * @ignore
+ * @see    https://www.npmjs.com/package/@emotion/styled
  */
-import { ComponentWrapper } from './style';
+import { ComponentWrapper, OptionsWrapper, ClearButton } from './style';
 
 /**
  * List of tags to display the selected options.
- *
- * @ignore
  */
 import SelectedTagList from './selected-tag-list';
 
 /**
  * Default messages for labels and notices.
- *
- * @ignore
  */
 import defaultMessages from './messages';
 
@@ -85,20 +75,25 @@ import defaultMessages from './messages';
  * only. That is, `selectedOptions` is an array of values only, not an array of { label, value } pairs.
  *
  * @function
+ * @since	   1.3.0
+ * 			   Added default props.
+ *  		   Indented 4 spacing.
  * @since	   1.2.1
  * 			   Removed aria-description as being an invalid ARIA attribute.
  * 			   Intrdouce useDebounce hook from the compose package.
  * @since	   1.2.0
  * 			   Introduced type checking.
  * @since	   1.1.0
- * @param	   {Object}			props                       The props that were defined by the caller of this component.
- * @param	   {Array}			props.options 				Set of { label, value } pairs that can be selected.
- * @param	   {Array}			props.selectedOptions		List of values of the options that are currently selected.
- * @param	   {Function}		props.onChange 				Callback function to be triggered when the selected options change.
- * @param	   {string}			props.ariaLabel				Aria-label value.
- * @param	   {boolean} 		props.withSearchField 		Enable search field to filter options from the list.
- * @param	   {Object} 		props.messages 				Labels and notices for subcomponents. Is merged with a default value.
- * @return	   {JSX.Element} 								MultiSelect component.
+ * @param	   {Object}		    props                    The props that were defined by the caller of this component.
+ * @param      {string}         props.className          The CSS class name(s) that will be added to the wrapper element.
+ * @param	   {boolean} 	    props.withSearchField    Enable search field to filter options from the list.
+ * @param	   {boolean} 	    props.withSelectAll    	 Enable `Select All` checkbox option.
+ * @param	   {Array}		    props.options 			 Set of { label, value } pairs that can be selected.
+ * @param	   {Array}		    props.selectedOptions    List of values of the options that are currently selected.
+ * @param	   {string}		    props.aria			 	 Set of Aria attributes.
+ * @param	   {Object} 		props.messages 			 Labels and notices for subcomponents. Is merged with a default value.
+ * @param	   {Function}	    props.onChange 			 Callback function to be triggered when the selected options change.
+ * @return     {JSX.Element}     						 MultiSelect component.
  * @example
  *
  * <MultiSelect
@@ -109,7 +104,7 @@ import defaultMessages from './messages';
  *
  * // => Array [ 100, 108 ]
  */
-function MultiSelect( { options, selectedOptions, onChange, withSearchField, messages = {}, ariaLabel } ) {
+function MultiSelect( { className, withSearchField, withSelectAll, options, selectedOptions, aria, messages, onChange } ) {
 	const [ searchText, setSearchText ] = useState( '' );
 	const [ selected, setSelected ] = useState( [] );
 	// Enable passing only a subset in `messages`.
@@ -132,18 +127,16 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 
 	const filteredOptions = useMemo( () => {
 		// Bail early in case there is no search term entered.
-		if ( ! searchText.length ) {
+		if ( ! Boolean( searchText.length ) ) {
 			return options;
 		}
 		const pattern = new RegExp( escapeRegExp( searchText ), 'i' );
 		return filter( options, ( { label } ) => invoke( label, 'match', pattern ) );
 	}, [ searchText, options ] );
 
-	const isOptionSelected = ( optionValue ) => {
-		return indexOf( selectedOptions, optionValue ) !== -1;
-	};
+	const isOptionSelected = ( optionValue ) => includes( selectedOptions, optionValue );
 
-	const areAllOptionsSelected = selected.length === options.length;
+	const areAllOptionsSelected = isEqual( selected.length, options.length );
 
 	const handleOnChangeSearchText = useDebounce(
 		useCallback( ( value ) => {
@@ -178,26 +171,32 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 	};
 
 	return (
-		<ComponentWrapper className="sixa-component-multiselect" aria-label={ ariaLabel }>
+		<ComponentWrapper
+			className={ classnames( 'sixa-component-multiselect', className ) }
+			aria={ {
+				labelledby: aria?.labelledby,
+				describedby: aria?.describedby,
+			} }
+		>
 			<p>
-				<strong>{ mergedMessages.selected( selected.length ) }</strong>
-				{ !! selected.length && (
-					<Button
-						className="sixa-component-multiselect__clear-all-button"
+				<strong>{ mergedMessages?.selected( selected.length ) }</strong>
+				{ Boolean( selected.length ) && (
+					<ClearButton
 						isDestructive
+						className="sixa-component-multiselect__clear-all-button"
 						text={ __( 'Clear all', 'sixa' ) }
 						onClick={ handleOnClickClearAll }
 						aria-label={ __( 'Clear all selected items', 'sixa' ) }
 					/>
 				) }
 			</p>
-			{ !! selected.length && <SelectedTagList items={ selected } onChange={ onChange } onRemove={ handleOnClickRemoveTag } /> }
-			{ withSearchField && <TextControl label={ mergedMessages.search } type="search" onChange={ handleOnChangeSearchText } /> }
-			{ !! searchText.length && ! filteredOptions.length ? (
-				<p>{ mergedMessages.noResults }</p>
+			{ Boolean( selected.length ) && <SelectedTagList items={ selected } onChange={ onChange } onRemove={ handleOnClickRemoveTag } /> }
+			{ withSearchField && <TextControl label={ mergedMessages?.search } type="search" onChange={ handleOnChangeSearchText } /> }
+			{ Boolean( searchText.length ) && ! Boolean( filteredOptions.length ) ? (
+				<small>{ mergedMessages?.noResults }</small>
 			) : (
-				<ul className="sixa-component-multiselect__option-list">
-					{ ! searchText.length && (
+				<OptionsWrapper className="sixa-component-multiselect__option-list">
+					{ withSelectAll && ! Boolean( searchText.length ) && (
 						<li>
 							<CheckboxControl
 								checked={ areAllOptionsSelected }
@@ -207,25 +206,68 @@ function MultiSelect( { options, selectedOptions, onChange, withSearchField, mes
 							/>
 						</li>
 					) }
-					{ map( filteredOptions, ( { value, label }, index ) => (
-						<li key={ index }>
+					{ map( filteredOptions, ( { value, label } ) => (
+						<li key={ value }>
 							<CheckboxControl checked={ isOptionSelected( value ) } onChange={ () => handleOnChangeOption( value ) } label={ label } />
 						</li>
 					) ) }
-				</ul>
+				</OptionsWrapper>
 			) }
 		</ComponentWrapper>
 	);
 }
 
 MultiSelect.propTypes = {
-	options: PropTypes.array.isRequired,
-	selectedOptions: PropTypes.array.isRequired,
-	onChange: PropTypes.func.isRequired,
-	ariaLabel: PropTypes.string,
-	ariaDescription: PropTypes.string,
+	/**
+	 * The CSS class name that will be appended to the wrapper div.
+	 */
+	className: PropTypes.string,
+	/**
+	 * Whether or not the search field should be displayed.
+	 */
 	withSearchField: PropTypes.bool,
-	messages: PropTypes.object,
+	/**
+	 * Whether or not an option for selecting all options should be displayed.
+	 */
+	withSelectAll: PropTypes.bool,
+	/**
+	 * An array of objects that can be chosen from.
+	 */
+	options: PropTypes.array.isRequired,
+	/**
+	 * List of values that are currently being selected.
+	 */
+	selectedOptions: PropTypes.array,
+	/**
+	 * Set of attributes that adds more context to the component to make it more accessible.
+	 */
+	aria: PropTypes.shape( {
+		labelledby: PropTypes.string,
+		describedby: PropTypes.string,
+	} ),
+	/**
+	 * Labels and notices for subcomponents.
+	 */
+	messages: PropTypes.exact( {
+		noResults: PropTypes.string,
+		search: PropTypes.string,
+		selected: PropTypes.func,
+	} ),
+	/**
+	 * Callback function to be triggered when the selected options change.
+	 */
+	onChange: PropTypes.func.isRequired,
+};
+
+MultiSelect.defaultProps = {
+	className: null,
+	withSearchField: false,
+	withSelectAll: false,
+	options: undefined,
+	selectedOptions: [],
+	aria: {},
+	messages: {},
+	onChange: undefined,
 };
 
 export default MultiSelect;

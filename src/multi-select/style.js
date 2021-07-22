@@ -1,8 +1,7 @@
 /**
  * The styled API for @emotion/react.
  *
- * @see 	https://www.npmjs.com/package/@emotion/styled
- * @ignore
+ * @see    https://www.npmjs.com/package/@emotion/styled
  */
 import styled from '@emotion/styled';
 
@@ -10,15 +9,12 @@ import styled from '@emotion/styled';
  * This packages includes a library of generic WordPress components to be used for
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
- * @see 	https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
- * @ignore
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
-import { FlexBlock } from '@wordpress/components';
+import { Button, FlexBlock } from '@wordpress/components';
 
 /**
  * Sortable component.
- *
- * @ignore
  */
 import Sortable from '../sortable';
 
@@ -26,30 +22,41 @@ import Sortable from '../sortable';
  * Wrapper around the component.
  *
  * @constant
- * @since		1.1.0
- * @type		{JSX.Element}
- * @ignore
+ * @since	  1.3.0
+ * 			  Moved nested styles to their own components.
+ * @since	  1.1.0
+ * @type	  {JSX.Element}
  */
 export const ComponentWrapper = styled( FlexBlock )`
 	padding-top: 12px;
+`;
 
-	.sixa-component-multiselect__clear-all-button {
-		margin-left: 12px;
-	}
+/**
+ * Clear button component.
+ *
+ * @constant
+ * @since	  1.3.0
+ * @type	  {JSX.Element}
+ */
+export const ClearButton = styled( Button )`
+	margin-left: 12px;
+`;
 
-	.sixa-component-multiselect__option-list {
-		margin: 0;
-		padding: 4px !important;
-		max-height: 300px;
-		overflow-y: scroll;
-	}
+/**
+ * Options list wrapper.
+ *
+ * @constant
+ * @since	  1.3.0
+ * @type	  {JSX.Element}
+ */
+export const OptionsWrapper = styled.ul`
+	margin: 0;
+	padding: 4px;
+	max-height: 300px;
+	overflow-y: scroll;
 
-	.sixa-component-multiselect__option-list li {
+	li {
 		list-style-type: none;
-	}
-
-	.sixa-component-multiselect__tag-list {
-		margin-bottom: 17px;
 	}
 `;
 
@@ -57,6 +64,8 @@ export const ComponentWrapper = styled( FlexBlock )`
  * In place of the `Sortable` component.
  *
  * @constant
+ * @since		1.3.0
+ * 				Added `flex` styling.
  * @since		1.2.0
  * @type		{JSX.Element}
  * @ignore
@@ -64,11 +73,14 @@ export const ComponentWrapper = styled( FlexBlock )`
 export const SelectedTagListWrapper = styled( Sortable )`
 	display: flex;
 	flex-wrap: wrap;
-	margin: -4px;
+	flex-direction: row;
+	justify-content: flex-start;
 	max-height: 300px;
 	overflow-y: scroll;
+	margin-bottom: 17px;
 
 	.sixa-component-tag {
-		margin: 4px;
+		cursor: grab;
+		margin-bottom: calc( 4px * 2 );
 	}
 `;
