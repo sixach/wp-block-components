@@ -34,10 +34,11 @@
 		"lint:md:js": "wp-scripts lint-md-js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
-		"prepublishOnly": "npm run format && npm run build && build-storybook",
+		"prepublishOnly": "npm run format && npm run build && deploy-storybook",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",
 		"storybook": "start-storybook -p 6006",
+		"deploy-storybook": "storybook-to-ghpages",
 		"build-storybook": "build-storybook"
 	},
 	"husky": {
@@ -93,6 +94,7 @@
 		"@storybook/addon-links": "^6.3.2",
 		"@storybook/addon-viewport": "^6.3.2",
 		"@storybook/react": "^6.3.2",
+		"@storybook/storybook-deployer": "^2.8.10",
 		"@storybook/theming": "^6.3.2",
 		"@wordpress/scripts": "^17.0.0",
 		"babel-loader": "^8.2.2",
