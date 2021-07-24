@@ -34,7 +34,7 @@
 		"lint:md:js": "wp-scripts lint-md-js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
-		"prepublishOnly": "npm run format && npm run build && deploy-storybook",
+		"prepublishOnly": "npm run format && npm run build && npm run deploy-storybook",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",
 		"storybook": "start-storybook -p 6006",
