@@ -1,3 +1,5 @@
+/* eslint-disable @wordpress/no-unsafe-wp-apis */
+
 /**
  * Collection of block editor components, hooks, layouts, stores, and utilities to be used
  * for building custom editor blocks and components.
@@ -17,7 +19,7 @@ import { __experimentalBlockAlignmentMatrixToolbar, __experimentalBlockAlignment
  * @since 1.4.0
  * @example
  *
- * 	const { contentPosition } = attributes;
+ * const { contentPosition } = attributes;
  * <BlockAlignmentMatrixControl
  *     label={ __( 'Change content position', 'sixa' ) }
  *     value={ contentPosition }
