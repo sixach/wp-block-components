@@ -34,7 +34,7 @@ import schema from './schema';
  * @param      {number}         props.borderThickness    Border thickness for the accordion.
  * @param      {boolean}        props.borderActive       Define if accordion has a border.
  * @param      {boolean}        props.hasSchema          Adds or removes schema markup
- * @return     {JSX.Element}                             Spinner element to signal the users that the processing of their request is underway.
+ * @return     {JSX.Element}                             Vertically collapsible content..
  * @example
  * 
  * <Accordion>
