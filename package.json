@@ -58,6 +58,7 @@
 	"dependencies": {
 		"@emotion/styled": "^11.3.0",
 		"@sixach/icon-library": "^1.0.0",
+		"@storybook/addon-essentials": "^6.3.7",
 		"@wordpress/api-fetch": "^5.2.1",
 		"@wordpress/block-editor": "^7.0.0",
 		"@wordpress/components": "^15.0.0",
