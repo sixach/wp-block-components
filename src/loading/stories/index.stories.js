@@ -1,13 +1,3 @@
-/**
- * External dependencies
- */
-import { text } from '@storybook/addon-knobs';
-
-/**
- * Internal dependencies
- */
-import Loading from '../';
-
 export default {
 	title: 'Components/Loading',
 	component: Loading,
@@ -20,8 +10,10 @@ export default {
 	},
 };
 
-export const _default = () => {
-	const label = text( 'Label', 'Fetching…' );
-
-	return <Loading label={ label } />;
+export const _default = ( args ) => {
+	return <Loading { ...args } />;
 };
+
+_default.args = {
+	label: 'Fetching'
+}
