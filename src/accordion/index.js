@@ -3,7 +3,7 @@
  */
  import PropTypes from 'prop-types';
 
- /**
+/**
  * Utility for conditionally joining CSS class names together.
  */
 import classnames from 'classnames';
@@ -15,7 +15,7 @@ import classnames from 'classnames';
  */
  import { Accordion } from './style';
 
- /**
+/**
  * Internal dependencies
  */
 import schema from './schema';
@@ -25,23 +25,25 @@ import schema from './schema';
  *
  * @since 	   1.0.0
  * @param  	   {Object}         props                    The props that were defined by the caller of this component.
- * @param      {string}    	    props.heading            Label shown before the spinner.
+ * @param      {string}    	    props.heading            Text shown on the summary tag.
  * @param      {string}         props.content            Content shown inside the accordion.
- * @param      {string}         props.className          The class that will be added with “sixa-component-loading” to the classes of the wrapper div.
+ * @param      {string}         props.className          The class that will be added with “sixa-component-accordion" to the classes of the wrapper div.
  * @param      {string}         props.borderColor        Border color for the accordion.
  * @param      {string}         props.backgroundColor    Background color for the accordion.
  * @param      {string}         props.fontColor          Font color for the accordion text.
  * @param      {number}         props.borderThickness    Border thickness for the accordion.
- * @param      {boolean}        props.borderActive       Define if accordion has a border.
- * @param      {boolean}        props.hasSchema          Adds or removes schema markup
- * @return     {JSX.Element}                             Vertically collapsible content..
+ * @param      {boolean}        props.borderActive       Adds or removes a border.
+ * @param      {boolean}        props.hasSchema          Adds or removes schema markup.
+ * @return     {JSX.Element}                             Vertically collapsible content.
  * @example
  * 
  * <Accordion>
  *  <summary>
- *      FAQS:    
+ *    Click to open accordion   
  *  </summary>
- *  How do I close an accordion?
+ *  <div>
+ *    The accordion is now open.
+ *  </div>
  * </Accordion>
  */
 function AccordionStory( { heading, content, className, borderActive, borderColor, borderThickness, backgroundColor, fontColor, hasSchema} ){
@@ -72,7 +74,7 @@ function AccordionStory( { heading, content, className, borderActive, borderColo
 
 AccordionStory.propTypes = {
     /**
-	 * Text shown inside the container summary.
+	 * Text shown on the summary tag.
 	 */
 	heading: PropTypes.string,
     /**
@@ -80,7 +82,7 @@ AccordionStory.propTypes = {
      */
     content: PropTypes.string,
     /**
-     * Define if accordion has a border.
+     * Adds or removes a border.
      */
     borderActive: PropTypes.bool,
     /**
