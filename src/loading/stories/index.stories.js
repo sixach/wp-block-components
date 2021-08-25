@@ -1,3 +1,8 @@
+/**
+ * Internal dependencies
+ */
+ import Loading from '../';
+
 export default {
 	title: 'Components/Loading',
 	component: Loading,
