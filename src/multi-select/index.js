@@ -46,7 +46,7 @@ import { useDebounce } from '@wordpress/compose';
 /**
  * Utility helper methods specific for Sixa projects.
  */
-import { removeAtIndex } from '@sixach/wp-block-utils';
+import { removeAtIndex } from '@sixa/wp-block-utils';
 
 /**
  * The styled components generated using @emotion/react API.

@@ -18,7 +18,7 @@ import parse from 'html-react-parser';
 /**
  * Utility helper methods specific for Sixa projects.
  */
-import { formattedContent } from '@sixach/wp-block-utils';
+import { formattedContent } from '@sixa/wp-block-utils';
 
 /**
  * React component for wrapping children based on a condition.
