@@ -27,14 +27,14 @@ import { Flex, FlexItem, Spinner } from '@wordpress/components';
  * 			   Introduced type checking.
  * @since 	   1.0.0
  * @param  	   {Object}         props              The props that were defined by the caller of this component.
- * @param      {string}    	    props.label        Label shown before the spinner.
  * @param      {string}         props.className    The class that will be added with “sixa-component-loading” to the classes of the wrapper div.
+ * @param      {string}    	    props.label        Label shown before the spinner.
  * @return     {JSX.Element}                       Spinner element to signal the users that the processing of their request is underway.
  * @example
  *
  * <Loading label={ __( 'Loading posts…' ) } />
  */
-function Loading( { label, className } ) {
+function Loading( { className, label } ) {
 	return (
 		<Flex className={ classnames( 'sixa-component-loading', className ) } justify="flex-start">
 			{ label && <FlexItem>{ label }</FlexItem> }
@@ -47,18 +47,18 @@ function Loading( { label, className } ) {
 
 Loading.propTypes = {
 	/**
-	 * Label shown before the spinner.
-	 */
-	label: PropTypes.string,
-	/**
 	 * The CSS class name that will be appended to the wrapper div.
 	 */
 	className: PropTypes.string,
+	/**
+	 * Label shown before the spinner.
+	 */
+	label: PropTypes.string,
 };
 
 Loading.defaultProps = {
-	label: null,
-	className: null,
+	className: undefined,
+	label: undefined,
 };
 
 export default Loading;

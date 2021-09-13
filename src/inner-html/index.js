@@ -29,15 +29,15 @@ import { createElement } from '@wordpress/element';
  * 			   Introduced type checking.
  * @since 	   1.0.0
  * @param  	   {Object}      	props             The props that will be passed through to the wrapper element.
- * @param  	   {string}      	props.tagName     The tag name of the wrapper element.
  * @param  	   {string}      	props.children    Children should be a string of HTML.
+ * @param  	   {string}      	props.tagName     The tag name of the wrapper element.
  * @return 	   {JSX.Element}                      Dangerously-rendering component.
  * @example
  *
  * const content = '<span class=\"amount\"><bdi><span class=\"currency-symbol\">&pound;<\/span>11.05<\/bdi><\/span>';
  * <InnerHTML tagName="span">{ content }</InnerHTML>
  */
-function InnerHTML( { tagName, children, ...props } ) {
+function InnerHTML( { children, tagName, ...props } ) {
 	// The DIV wrapper will be stripped by serializer, unless there are
 	// non-children props present.
 	return createElement( tagName, {
@@ -48,18 +48,18 @@ function InnerHTML( { tagName, children, ...props } ) {
 
 InnerHTML.propTypes = {
 	/**
-	 * The tag name of the wrapper element.
-	 */
-	tagName: PropTypes.string,
-	/**
 	 * Children should be a string of HTML.
 	 */
 	children: PropTypes.node,
+	/**
+	 * The tag name of the wrapper element.
+	 */
+	tagName: PropTypes.string,
 };
 
 InnerHTML.defaultProps = {
-	tagName: 'div',
 	children: undefined,
+	tagName: 'div',
 };
 
 export default InnerHTML;

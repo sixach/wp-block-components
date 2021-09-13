@@ -12,11 +12,11 @@
 export default {
 	draggable: false,
 	dragVelocity: 3.3,
-	scrollLock: false,
-	scrollLockDelay: 250,
+	duration: 0.5,
 	hasArrows: false,
 	hasDots: false,
+	scrollLock: false,
+	scrollLockDelay: 250,
 	slidesToShow: 1,
 	slidesToScroll: 1,
-	duration: 0.5,
 };

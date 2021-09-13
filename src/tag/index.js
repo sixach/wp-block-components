@@ -58,8 +58,8 @@ import { Child, StyledTag } from './style';
  * 			   Introduced type checking.
  * @since	   1.1.0
  * @param	   {Object}			props 					  The props that were defined by the caller of this component.
- * @param	   {string}			props.label 			  Label shown in the element.
  * @param	   {string}			props.className 		  The class that will be added to the classes of the wrapper span.
+ * @param	   {string}			props.label 			  Label shown in the element.
  * @param	   {string}			props.screenReaderText    Text to be used for screen readers.
  * @param	   {Function}	    props.onRemove 			  Callback function to trigger when the remove button is clicked.
  * @return     {JSX.Element} 							  Tag element.
@@ -70,32 +70,32 @@ import { Child, StyledTag } from './style';
  *     onRemove={ handleOnClickTag }
  * />
  */
-function Tag( { label, className, screenReaderText, onRemove } ) {
+function Tag( { className, label, screenReaderText, onRemove } ) {
 	const instanceId = useInstanceId( Tag );
 
 	return (
 		<StyledTag
-			wrap
 			align="center"
-			direction="row"
-			justify="flex-start"
-			id={ `sixa-component-tag-${ instanceId }` }
 			className={ classnames( 'sixa-component-tag', className ) }
+			direction="row"
 			expanded={ false }
+			id={ `sixa-component-tag-${ instanceId }` }
+			justify="flex-start"
+			wrap
 		>
 			{ screenReaderText && <VisuallyHidden as="span">{ screenReaderText }</VisuallyHidden> }
-			<Child aria-hidden="true">{ label }</Child>
+			<Child aria-hidden>{ label }</Child>
 			{ onRemove && (
 				<Child>
 					<Button
-						isSmall
 						isLink
-						showTooltip
-						iconSize={ 20 }
+						isSmall
 						icon={ close }
-						onClick={ onRemove }
+						iconSize={ 20 }
 						/* translators: %s: Label of the tag element to be removed. */
 						label={ sprintf( __( 'Remove %s', 'sixa' ), label ) }
+						onClick={ onRemove }
+						showTooltip
 					/>
 				</Child>
 			) }
@@ -105,13 +105,13 @@ function Tag( { label, className, screenReaderText, onRemove } ) {
 
 Tag.propTypes = {
 	/**
-	 * Label shown before the spinner.
-	 */
-	label: PropTypes.string,
-	/**
 	 * The CSS class name that will be appended to the wrapper div.
 	 */
 	className: PropTypes.string,
+	/**
+	 * Label shown before the spinner.
+	 */
+	label: PropTypes.string,
 	/**
 	 * Label text to be used for screen readers.
 	 */
@@ -123,10 +123,10 @@ Tag.propTypes = {
 };
 
 Tag.defaultProps = {
-	label: null,
-	className: null,
-	screenReaderText: null,
-	onRemove: undefined,
+	className: undefined,
+	label: undefined,
+	screenReaderText: undefined,
+	onRemove: () => {},
 };
 
 export default Tag;
