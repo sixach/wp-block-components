@@ -2,15 +2,19 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { add, map, range, join } from 'lodash';
-import { useRef, useState } from '@wordpress/element';
-import { Flex } from '@wordpress/components';
+import { add, map, join, range } from 'lodash';
 import { randomHexColorWithArray } from 'random-hex-color-generator';
+
+/**
+ * WordPress dependencies
+ */
+import { Flex } from '@wordpress/components';
+import { useRef, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import Slider from '../';
+import Slider from '../../';
 
 function DefaultWithState( { length, ...wrapperProps } ) {
 	const sliderRef = useRef();
@@ -21,7 +25,7 @@ function DefaultWithState( { length, ...wrapperProps } ) {
 			{ map( items, ( item ) => {
 				const textContent = add( item, 1 );
 				return (
-					<Slide align="center" justify="center" key={ textContent } colors={ randomHexColorWithArray( 3 ) }>
+					<Slide align="center" colors={ randomHexColorWithArray( 3 ) } key={ textContent } justify="center">
 						{ textContent }
 					</Slide>
 				);
@@ -31,14 +35,14 @@ function DefaultWithState( { length, ...wrapperProps } ) {
 }
 
 const Slide = styled( Flex )`
+	background-color: #efefef;
+	border-image: ${ ( { colors } ) => `linear-gradient(to right, ${ join( colors, ',' ) } ) 5` };
+	border-style: solid;
+	border-width: 3px;
+	color: #555d66;
+	min-height: 300px;
 	font-size: 40px;
 	font-weight: 700;
-	min-height: 300px;
-	border-width: 3px;
-	border-style: solid;
-	background-color: #efefef;
-	color: #555d66;
-	border-image: ${ ( { colors } ) => `linear-gradient(to right, ${ join( colors, ',' ) } ) 5` };
 `;
 
 export default DefaultWithState;

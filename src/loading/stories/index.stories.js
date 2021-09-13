@@ -1,11 +1,22 @@
 /**
  * Internal dependencies
  */
- import Loading from '../';
+import Loading from '../';
 
 export default {
 	title: 'Components/Loading',
 	component: Loading,
+	argTypes: {
+		className: {
+			table: {
+				disable: true,
+			},
+		},
+		label: {
+			defaultValue: 'Fetching',
+			type: { name: 'string' },
+		},
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -15,10 +26,4 @@ export default {
 	},
 };
 
-export const _default = ( args ) => {
-	return <Loading { ...args } />;
-};
-
-_default.args = {
-	label: 'Fetching'
-}
+export const _default = ( props ) => <Loading { ...props } />;

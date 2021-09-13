@@ -3,6 +3,10 @@
  */
 import styled from '@emotion/styled';
 import { isEqual } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 
@@ -13,11 +17,11 @@ function Image( { size } ) {
 		<Fragment>
 			<small>{ __( 'Preview' ) }</small>
 			<Placeholder
-				image="https://s.w.org/images/core/5.3/MtBlanc1.jpg"
 				isCustom={ isCustom }
-				sizeSelection={ size?.selection }
+				image="https://s.w.org/images/core/5.3/MtBlanc1.jpg"
 				positionX={ size?.width || '' }
 				positionY={ size?.height || '' }
+				sizeSelection={ size?.selection }
 			/>
 		</Fragment>
 	);

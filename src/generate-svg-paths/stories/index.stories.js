@@ -1,19 +1,66 @@
 /**
  * External dependencies
  */
-import { size } from 'lodash';
-import { number } from '@storybook/addon-knobs';
+import size from 'lodash/size';
+import * as icons from '@sixach/icon-library';
 
 /**
  * Internal dependencies
  */
 import GenerateSvgPaths from '../';
-import DefaultWithState from './default';
-import * as icons from '@sixach/icon-library';
+import DefaultWithState from './components/DefaultWithState';
 
 export default {
 	title: 'Components/SVG Paths',
 	component: GenerateSvgPaths,
+	argTypes: {
+		attributes: {
+			table: {
+				disable: true,
+			},
+		},
+		length: {
+			control: {
+				max: size( icons ),
+				min: 1,
+				step: 1,
+				type: 'range',
+			},
+			defaultValue: 10,
+			name: 'Number of icons',
+			type: {
+				name: 'number',
+			},
+		},
+		paths: {
+			table: {
+				disable: true,
+			},
+		},
+		size: {
+			control: {
+				min: 25,
+				max: 120,
+				step: 5,
+				type: 'range',
+			},
+			defaultValue: 60,
+			name: 'Size',
+			type: {
+				name: 'number',
+			},
+		},
+		svgProps: {
+			table: {
+				disable: true,
+			},
+		},
+		withSvgWrapper: {
+			table: {
+				disable: true,
+			},
+		},
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -23,8 +70,4 @@ export default {
 	},
 };
 
-export const _default = () => {
-	const length = number( 'Icons', 10, { min: 1, step: 1, max: size( icons ), range: true } );
-	const sizes = number( 'Size', 50, { min: 25, step: 5, max: 120, range: true } );
-	return <DefaultWithState length={ length } size={ sizes } icons={ icons } />;
-};
+export const _default = ( props ) => <DefaultWithState icons={ icons } { ...props } />;
