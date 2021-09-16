@@ -9,7 +9,7 @@ import { randomHexColorWithArray } from 'random-hex-color-generator';
  * WordPress dependencies
  */
 import { Flex } from '@wordpress/components';
-import { useRef, useState } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -18,7 +18,11 @@ import Slider from '../../';
 
 function DefaultWithState( { length, ...wrapperProps } ) {
 	const sliderRef = useRef();
-	const [ items ] = useState( () => range( 0, length ) );
+	const [ items, setItems ] = useState( () => range( 0, length ) );
+
+	useEffect( () => {
+		setItems( range( 0, length ) );
+	}, [ length ] );
 
 	return (
 		<Slider ref={ sliderRef } { ...wrapperProps }>

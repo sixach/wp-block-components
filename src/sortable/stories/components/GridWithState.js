@@ -2,7 +2,7 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { map, range, get, add } from 'lodash';
+import { add, map, range } from 'lodash';
 import { randomHexColor } from 'random-hex-color-generator';
 import isDarkColor from 'is-dark-color';
 
