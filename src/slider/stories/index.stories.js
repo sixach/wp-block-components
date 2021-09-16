@@ -2,16 +2,12 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { number, boolean } from '@storybook/addon-knobs';
 
 /**
  * Internal dependencies
  */
 import Slider from '../';
-import DefaultWithState from './default';
-
-const GAP_CONFIG = { min: 0, step: 5, max: 50, range: true };
-const LENGTH_CONFIG = { min: 1, step: 1, max: 12, range: true };
+import DefaultWithState from './components/DefaultWithState';
 
 export default {
 	title: 'Components/Slider',
@@ -29,36 +25,72 @@ export default {
 				component: 'Native scrolling list with paging and navigation controls.',
 			},
 		},
+		controls: {
+			hideNoControlsWarning: true,
+		},
 	},
 };
 
-export const _default = () => {
-	const gap = number( 'Gap', 20, GAP_CONFIG );
-	const length = number( 'Items', 6, LENGTH_CONFIG );
-	const draggable = boolean( 'Draggable', false );
-	const arrows = boolean( 'Arrows', false );
-	const dots = boolean( 'Dots', false );
-	const rewind = boolean( 'Rewind', false );
-	return <DefaultWithState gap={ gap } length={ length } draggable={ draggable } rewind={ rewind } hasArrows={ arrows } hasDots={ dots } />;
-};
-
-export const single = () => {
-	return <DefaultWithState gap="20" length="8" hasArrows={ true } hasDots={ true } />;
-};
-
-export const multiple = () => {
-	return <DefaultWithState gap="10" length="9" hasArrows={ true } hasDots={ true } slidesToShow={ 3 } />;
-};
-
-export const fractional = () => {
-	return <DefaultWithState gap="10" length="12" hasArrows={ true } hasDots={ true } slidesToShow={ 3.5 } />;
-};
+export const _default = ( props ) => <DefaultWithState { ...props } />;
+export const single = () => <DefaultWithState gap="20" length="8" hasArrows hasDots />;
+export const multiple = () => <DefaultWithState gap="10" length="9" hasArrows hasDots slidesToShow={ 3 } />;
+export const fractional = () => <DefaultWithState gap="10" length="12" hasArrows hasDots slidesToShow={ 3.5 } />;
 
 const Wrapper = styled.div`
-	width: 80%;
 	margin: auto;
+	width: 80%;
 
 	.glider-dots {
 		margin-top: 15px;
 	}
 `;
+
+_default.argTypes = {
+	draggable: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Draggable',
+	},
+	hasArrows: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Arrows',
+	},
+	hasDots: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Dots',
+	},
+	gap: {
+		control: {
+			max: 50,
+			min: 0,
+			step: 5,
+			type: 'range',
+		},
+		defaultValue: 20,
+		name: 'Gap',
+		type: {
+			name: 'number',
+		},
+	},
+	length: {
+		control: {
+			max: 12,
+			min: 1,
+			step: 1,
+			type: 'range',
+		},
+		defaultValue: 6,
+		name: 'Items',
+		type: {
+			name: 'number',
+		},
+	},
+};

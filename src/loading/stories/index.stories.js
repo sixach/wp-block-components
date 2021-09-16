@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { text } from '@storybook/addon-knobs';
-
-/**
  * Internal dependencies
  */
 import Loading from '../';
@@ -11,6 +6,17 @@ import Loading from '../';
 export default {
 	title: 'Components/Loading',
 	component: Loading,
+	argTypes: {
+		className: {
+			table: {
+				disable: true,
+			},
+		},
+		label: {
+			defaultValue: 'Fetching',
+			type: { name: 'string' },
+		},
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -20,8 +26,4 @@ export default {
 	},
 };
 
-export const _default = () => {
-	const label = text( 'Label', 'Fetching…' );
-
-	return <Loading label={ label } />;
-};
+export const _default = ( props ) => <Loading { ...props } />;

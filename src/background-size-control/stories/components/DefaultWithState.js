@@ -1,13 +1,13 @@
 /**
- * External dependencies
+ * WordPress dependencies
  */
 import { Fragment, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import BackgroundSizeControl from '../';
-import Image from './image';
+import BackgroundSizeControl from '../../';
+import Image from './Image';
 
 function DefaultWithState( { label, help, allowReset } ) {
 	const [ size, setSize ] = useState( {} );

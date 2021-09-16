@@ -1,20 +1,53 @@
 /**
- * External dependencies
- */
-import { number, boolean } from '@storybook/addon-knobs';
-
-/**
  * Internal dependencies
  */
 import Sortable from '../';
-import GridWithState from './grid';
-import ListWithState from './list';
-
-const RANGE_CONFIG = { min: 1, step: 1, max: 15, range: true };
+import GridWithState from './components/GridWithState';
+import ListWithState from './components/ListWithState';
 
 export default {
 	title: 'Components/Sortable',
 	component: Sortable,
+	argTypes: {
+		className: {
+			table: {
+				disable: true,
+			},
+		},
+		children: {
+			table: {
+				disable: true,
+			},
+		},
+		draggedItemClassName: {
+			table: {
+				disable: true,
+			},
+		},
+		length: {
+			control: {
+				max: 15,
+				min: 1,
+				step: 1,
+				type: 'range',
+			},
+			defaultValue: 12,
+			name: 'Number of items',
+			type: {
+				name: 'number',
+			},
+		},
+		onChange: {
+			table: {
+				disable: true,
+			},
+		},
+		withSortableKnob: {
+			table: {
+				disable: true,
+			},
+		},
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -24,13 +57,16 @@ export default {
 	},
 };
 
-export const grid = () => {
-	const length = number( 'Number of items', 12, RANGE_CONFIG );
-	return <GridWithState length={ length } />;
-};
+export const grid = ( props ) => <GridWithState { ...props } />;
+export const list = ( props ) => <ListWithState { ...props } />;
 
-export const list = () => {
-	const length = number( 'Number of items', 8, RANGE_CONFIG );
-	const withKnobs = boolean( 'Drag knobs', true );
-	return <ListWithState length={ length } withKnobs={ withKnobs } />;
+list.argTypes = {
+	...list.argTypes,
+	withKnobs: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: true,
+		name: 'Drag knobs',
+	},
 };

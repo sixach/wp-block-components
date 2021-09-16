@@ -60,7 +60,7 @@ function SelectedTagList( { items, onChange, onRemove } ) {
 	return (
 		<SelectedTagListWrapper className="sixa-component-multiselect__tag-list" onChange={ handleOnChange }>
 			{ map( items, ( { value, label }, index ) => (
-				<Tag key={ value } label={ label } value={ value } onRemove={ () => onRemove( index ) } />
+				<Tag key={ value } label={ label } onRemove={ () => onRemove( index ) } value={ value } />
 			) ) }
 		</SelectedTagListWrapper>
 	);

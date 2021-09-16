@@ -66,14 +66,14 @@ const UNITCONTROL_UNIT = [ { value: '%', label: '%' } ];
  * 			   Introduced type checking.
  * @since 	   1.0.0
  * @param  	   {Object}         props                        The props that were defined by the caller of this component.
- * @param      {string}         props.label                  Label shown before the spinner.
- * @param      {boolean}        props.hideLabelFromVision    Whether to accessibly hide the label.
- * @param      {string}         props.help                   Optional help text for the control.
- * @param      {string}         props.className              The CSS class name(s) that will be added to the wrapper element.
  * @param      {boolean}        props.allowReset             Whether a button should be shown to reset the already stored value.
+ * @param      {string}         props.className              The CSS class name(s) that will be added to the wrapper element.
+ * @param      {string}         props.help                   Optional help text for the control.
+ * @param      {boolean}        props.hideLabelFromVision    Whether to accessibly hide the label.
+ * @param      {string}         props.label                  Label shown before the spinner.
+ * @param      {Function}       props.onChange               Handle changes.
  * @param      {Array}          props.sizes                  Optionally override background position options.
  * @param      {Object}         props.value                  Value of the control.
- * @param      {Function}       props.onChange               Handle changes.
  * @return 	   {JSX.Element}                               	 UI controls.
  * @example
  *
@@ -85,7 +85,7 @@ const UNITCONTROL_UNIT = [ { value: '%', label: '%' } ];
  *
  * // => Object { selection: "custom", width: "15%", height: "12%" }
  */
-function BackgroundSizeControl( { label, hideLabelFromVision, help, className, allowReset, sizes, value, onChange } ) {
+function BackgroundSizeControl( { allowReset, className, help, hideLabelFromVision, label, onChange, sizes, value } ) {
 	const instanceId = useInstanceId( BackgroundSizeControl );
 	const selection = get( value, 'selection' );
 	const valueX = get( value, 'width' );
@@ -104,18 +104,18 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 
 	return (
 		<BaseControl
-			id={ `sixa-component-background-size-${ instanceId }` }
-			label={ label }
+			className={ classnames( 'sixa-component-background-size', className ) }
 			help={ help }
 			hideLabelFromVision={ hideLabelFromVision }
-			className={ classnames( 'sixa-component-background-size', className ) }
+			id={ `sixa-component-background-size-${ instanceId }` }
+			label={ label }
 		>
 			<ComponentWrapper>
 				<Flex justify="space-between">
 					<FlexBlock>
 						<ButtonGroup>
 							{ map( sizes, ( { name, slug } ) => (
-								<Button key={ slug } isSmall value={ slug } isPrimary={ isEqual( slug, selection ) } onClick={ () => handleOnClick( slug ) }>
+								<Button isPrimary={ isEqual( slug, selection ) } isSmall key={ slug } onClick={ () => handleOnClick( slug ) } value={ slug }>
 									{ name }
 								</Button>
 							) ) }
@@ -123,7 +123,7 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 					</FlexBlock>
 					<FlexItem>
 						{ allowReset && (
-							<Button isSmall isDestructive disabled={ isEmpty( value ) } onClick={ () => onChange( {} ) }>
+							<Button disabled={ isEmpty( value ) } isDestructive isSmall onClick={ () => onChange( {} ) }>
 								{ __( 'Reset' ) }
 							</Button>
 						) }
@@ -133,26 +133,26 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 			{ isCustom() && (
 				<ControlWrapper>
 					<UnitControl
-						unit="%"
-						label={ __( 'Width' ) }
-						value={ getParsedCoordinate( valueX ) }
-						onChange={ ( next ) => handleOnChange( { width: getParsedCoordinate( next, 'auto' ) } ) }
 						dragDirection="e"
+						label={ __( 'Width' ) }
 						labelPosition="side"
 						max={ UNITCONTROL_MAX }
 						min={ UNITCONTROL_MIN }
+						onChange={ ( next ) => handleOnChange( { width: getParsedCoordinate( next, 'auto' ) } ) }
+						unit="%"
 						units={ UNITCONTROL_UNIT }
+						value={ getParsedCoordinate( valueX ) }
 					/>
 					<UnitControl
-						unit="%"
-						label={ __( 'Height' ) }
-						value={ getParsedCoordinate( valueY ) }
-						onChange={ ( next ) => handleOnChange( { height: getParsedCoordinate( next, 'auto' ) } ) }
 						dragDirection="s"
+						label={ __( 'Height' ) }
 						labelPosition="side"
 						max={ UNITCONTROL_MAX }
 						min={ UNITCONTROL_MIN }
+						onChange={ ( next ) => handleOnChange( { height: getParsedCoordinate( next, 'auto' ) } ) }
+						unit="%"
 						units={ UNITCONTROL_UNIT }
+						value={ getParsedCoordinate( valueY ) }
 					/>
 				</ControlWrapper>
 			) }
@@ -160,50 +160,52 @@ function BackgroundSizeControl( { label, hideLabelFromVision, help, className, a
 	);
 }
 
+// allowReset, className, help, hideLabelFromVision, label, onChange, sizes, value
+
 BackgroundSizeControl.propTypes = {
-	/**
-	 * If this property is added, a label will be generated using label property as the content.
-	 */
-	label: PropTypes.string,
-	/**
-	 * If true, the label will only be visible to screen readers.
-	 */
-	hideLabelFromVision: PropTypes.bool,
-	/**
-	 * If this property is added, a help text will be generated using help property as the content.
-	 */
-	help: PropTypes.string,
-	/**
-	 * A help text will be generated using help property as the content.
-	 */
-	className: PropTypes.string,
 	/**
 	 * Whether or not a button should be shown to reset the already stored value.
 	 */
 	allowReset: PropTypes.bool,
 	/**
-	 * Possible background position values.
+	 * A help text will be generated using help property as the content.
 	 */
-	sizes: PropTypes.array.isRequired,
+	className: PropTypes.string,
 	/**
-	 * Value of the control.
+	 * If this property is added, a help text will be generated using help property as the content.
 	 */
-	value: PropTypes.object.isRequired,
+	help: PropTypes.string,
+	/**
+	 * If true, the label will only be visible to screen readers.
+	 */
+	hideLabelFromVision: PropTypes.bool,
+	/**
+	 * If this property is added, a label will be generated using label property as the content.
+	 */
+	label: PropTypes.string,
 	/**
 	 * A function that receives the value of the control.
 	 */
 	onChange: PropTypes.func.isRequired,
+	/**
+	 * Possible background position values.
+	 */
+	sizes: PropTypes.array,
+	/**
+	 * Value of the control.
+	 */
+	value: PropTypes.object.isRequired,
 };
 
 BackgroundSizeControl.defaultProps = {
-	label: null,
-	hideLabelFromVision: false,
-	help: null,
-	className: null,
 	allowReset: true,
+	className: undefined,
+	help: undefined,
+	hideLabelFromVision: false,
+	label: undefined,
+	onChange: () => {},
 	sizes: sizesTable,
 	value: {},
-	onChange: undefined,
 };
 
 export default BackgroundSizeControl;

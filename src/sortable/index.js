@@ -1,7 +1,7 @@
 /**
  * Utility for libraries from the `Lodash`.
  */
-import { map } from 'lodash';
+import map from 'lodash/map';
 
 /**
  * Runtime type checking for React props and similar objects.
@@ -36,19 +36,19 @@ import SortableList, { SortableItem, SortableKnob } from 'react-easy-sort';
 import { useInstanceId } from '@wordpress/compose';
 
 /**
- * Import icons from the WordPress icon library.
- *
- * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-icons/
- */
-import { Icon, dragHandle } from '@wordpress/icons';
-
-/**
  * This packages includes a library of generic WordPress components to be used for
  * creating common UI elements shared between screens and features of the WordPress dashboard.
  *
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
 import { Flex } from '@wordpress/components';
+
+/**
+ * Import icons from the WordPress icon library.
+ *
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-icons/
+ */
+import { Icon, dragHandle } from '@wordpress/icons';
 
 /**
  * Sortable component designed to provide the ability to provide a set of higher-order components
@@ -76,7 +76,7 @@ import { Flex } from '@wordpress/components';
  *	   ) ) }
  * </Sortable>
  */
-function Sortable( { className, draggedItemClassName, withSortableKnob = false, children = [], onChange } ) {
+function Sortable( { className, children, draggedItemClassName, onChange, withSortableKnob } ) {
 	const instanceId = useInstanceId( Sortable );
 	const handleOnSortEnd = ( oldIndex, newIndex ) => {
 		const sortedItems = arrayMove( children, oldIndex, newIndex );
@@ -85,13 +85,13 @@ function Sortable( { className, draggedItemClassName, withSortableKnob = false, 
 
 	return (
 		<SortableList
-			onSortEnd={ handleOnSortEnd }
 			className={ classnames( 'sixa-component-sortable', className ) }
 			draggedItemClassName={ classnames( 'dragged', draggedItemClassName ) }
+			onSortEnd={ handleOnSortEnd }
 		>
 			{ map( children, ( item, index ) => (
 				<SortableItem key={ `${ index }-${ instanceId }` }>
-					<Flex className="sixa-component-sortable__item" expanded={ false } align="center" direction="row">
+					<Flex align="center" className="sixa-component-sortable__item" direction="row" expanded={ false }>
 						{ withSortableKnob && (
 							<SortableKnob>
 								<div className="sixa-component-sortable__knob">
@@ -113,29 +113,29 @@ Sortable.propTypes = {
 	 */
 	className: PropTypes.string,
 	/**
-	 * The CSS class name that will be added to the item being dragged.
-	 */
-	draggedItemClassName: PropTypes.string,
-	/**
-	 * Allow component to be only draggable only from a specific (knob) handle.
-	 */
-	withSortableKnob: PropTypes.bool,
-	/**
 	 * React elements that are being passed as children.
 	 */
 	children: PropTypes.arrayOf( PropTypes.element ).isRequired,
 	/**
+	 * The CSS class name that will be added to the item being dragged.
+	 */
+	draggedItemClassName: PropTypes.string,
+	/**
 	 * Callback function to be triggered when the user finishes a sorting gesture.
 	 */
 	onChange: PropTypes.func.isRequired,
+	/**
+	 * Allow component to be only draggable only from a specific (knob) handle.
+	 */
+	withSortableKnob: PropTypes.bool,
 };
 
 Sortable.defaultProps = {
-	className: null,
-	draggedItemClassName: null,
-	withSortableKnob: false,
+	className: undefined,
 	children: [],
-	onChange: undefined,
+	draggedItemClassName: undefined,
+	onChange: () => {},
+	withSortableKnob: false,
 };
 
 export default Sortable;

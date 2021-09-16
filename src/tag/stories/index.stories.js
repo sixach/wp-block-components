@@ -1,20 +1,60 @@
 /**
  * External dependencies
  */
-import { number } from '@storybook/addon-knobs';
+import size from 'lodash/size';
 
 /**
  * Internal dependencies
  */
 import Tag from '../';
-import DefaultWithState from './default';
-import OrderableWithState from './orderable';
-
-const RANGE_CONFIG = { min: 1, step: 1, max: 123, range: true };
+import DefaultWithState from './components/DefaultWithState';
+import OrderableWithState from './components/OrderableWithState';
+import list from '../../utils/list';
 
 export default {
 	title: 'Components/Tag',
 	component: Tag,
+	argTypes: {
+		className: {
+			table: {
+				disable: true,
+			},
+		},
+		label: {
+			table: {
+				disable: true,
+			},
+		},
+		length: {
+			control: {
+				max: size( list ),
+				min: 1,
+				step: 1,
+				type: 'range',
+			},
+			defaultValue: 10,
+			name: 'Number of tags',
+			type: {
+				name: 'number',
+			},
+		},
+		list: {
+			defaultValue: list,
+			table: {
+				disable: true,
+			},
+		},
+		screenReaderText: {
+			table: {
+				disable: true,
+			},
+		},
+		onRemove: {
+			table: {
+				disable: true,
+			},
+		},
+	},
 	parameters: {
 		docs: {
 			description: {
@@ -24,12 +64,5 @@ export default {
 	},
 };
 
-export const _default = () => {
-	const length = number( 'Number of tags', 10, RANGE_CONFIG );
-	return <DefaultWithState length={ length } />;
-};
-
-export const sortable = () => {
-	const length = number( 'Number of tags', 20, RANGE_CONFIG );
-	return <OrderableWithState length={ length } />;
-};
+export const _default = ( props ) => <DefaultWithState { ...props } />;
+export const sortable = ( props ) => <OrderableWithState { ...props } />;

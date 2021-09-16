@@ -2,17 +2,20 @@
  * External dependencies
  */
 import styled from '@emotion/styled';
-import { map, shuffle, without, take } from 'lodash';
-import { useState, useEffect } from '@wordpress/element';
+import { map, shuffle, take, without } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
+import { useEffect, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import Tag from '../';
-import Sortable from '../../sortable';
-import list from '../../utils/list';
+import Tag from '../../';
+import Sortable from '../../../sortable';
 
-function Orderable( { length } ) {
+function Orderable( { length, list } ) {
 	const [ items, setItems ] = useState( [] );
 	const handleOnRemove = ( value ) => {
 		setItems( ( i ) => without( i, value ) );
@@ -28,7 +31,7 @@ function Orderable( { length } ) {
 	return (
 		<OrderableWrapper onChange={ handleOnSortEnd }>
 			{ map( items, ( tag ) => (
-				<Tag key={ tag } label={ tag } action onRemove={ () => handleOnRemove( tag ) } />
+				<Tag action key={ tag } label={ tag } onRemove={ () => handleOnRemove( tag ) } />
 			) ) }
 		</OrderableWrapper>
 	);
@@ -36,8 +39,8 @@ function Orderable( { length } ) {
 
 const OrderableWrapper = styled( Sortable )`
 	display: flex;
-	flex-wrap: wrap;
 	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: flex-start;
 
 	.sixa-component-tag {

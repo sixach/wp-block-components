@@ -3,15 +3,19 @@
  */
 import styled from '@emotion/styled';
 import { map, range, get, add } from 'lodash';
-import { useState, useEffect } from '@wordpress/element';
-import { Flex } from '@wordpress/components';
 import { randomHexColor } from 'random-hex-color-generator';
 import isDarkColor from 'is-dark-color';
 
 /**
+ * WordPress dependencies
+ */
+import { Flex } from '@wordpress/components';
+import { useEffect, useState } from '@wordpress/element';
+
+/**
  * Internal dependencies
  */
-import Sortable from '../';
+import Sortable from '../../';
 
 function ListWithState( { length, withKnobs } ) {
 	const [ items, setItems ] = useState( [] );
@@ -27,12 +31,12 @@ function ListWithState( { length, withKnobs } ) {
 		<ListWrapper onChange={ handleOnSortEnd } withSortableKnob={ withKnobs }>
 			{ map( items, ( { item, backgroundColor } ) => (
 				<ListItem
-					key={ item }
 					align="center"
 					justify="center"
-					withKnobs={ withKnobs }
-					style={ { backgroundColor } }
 					isDark={ isDarkColor( backgroundColor ) }
+					key={ item }
+					style={ { backgroundColor } }
+					withKnobs={ withKnobs }
 				>
 					{ item }
 				</ListItem>

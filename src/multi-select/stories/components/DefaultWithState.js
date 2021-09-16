@@ -1,16 +1,19 @@
 /**
  * External dependencies
  */
-import { map, shuffle, take, nth, split } from 'lodash';
-import { useState, useEffect } from '@wordpress/element';
+import { map, nth, shuffle, split, take } from 'lodash';
+
+/**
+ * WordPress dependencies
+ */
+import { useEffect, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import MultiSelect from '../';
-import list from '../../utils/list';
+import MultiSelect from '../../';
 
-function DefaultWithState( { length, withSearchField, withSelectAll, messages } ) {
+function DefaultWithState( { length, list, withSearchField, withSelectAll, messages } ) {
 	const [ options, setOptions ] = useState( [] );
 	const [ selectedOptions, setSelectedOptions ] = useState( [] );
 	const handleOnChange = ( value ) => {
@@ -24,12 +27,12 @@ function DefaultWithState( { length, withSearchField, withSelectAll, messages } 
 
 	return (
 		<MultiSelect
-			options={ options }
 			messages={ messages }
+			onChange={ handleOnChange }
+			options={ options }
+			selectedOptions={ selectedOptions }
 			withSearchField={ withSearchField }
 			withSelectAll={ withSelectAll }
-			selectedOptions={ selectedOptions }
-			onChange={ handleOnChange }
 		/>
 	);
 }
