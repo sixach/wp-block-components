@@ -46,26 +46,26 @@ const Wrapper = styled.div`
 `;
 
 _default.argTypes = {
-	arrows: {
-		control: {
-			type: 'boolean',
-		},
-		defaultValue: false,
-		name: 'Arrows',
-	},
-	dots: {
-		control: {
-			type: 'boolean',
-		},
-		defaultValue: false,
-		name: 'Dots',
-	},
 	draggable: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
 		name: 'Draggable',
+	},
+	hasArrows: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Arrows',
+	},
+	hasDots: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Dots',
 	},
 	gap: {
 		control: {
@@ -92,12 +92,5 @@ _default.argTypes = {
 		type: {
 			name: 'number',
 		},
-	},
-	rewind: {
-		control: {
-			type: 'boolean',
-		},
-		defaultValue: false,
-		name: 'Rewind',
 	},
 };
