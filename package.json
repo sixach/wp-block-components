@@ -1,6 +1,6 @@
 {
 	"name": "@sixach/wp-block-components",
-	"version": "1.5.0-beta.1",
+	"version": "1.5.0",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"gutenberg",
@@ -39,20 +39,16 @@
 		"test:unit": "wp-scripts test-unit-js",
 		"storybook": "start-storybook -p 6006",
 		"deploy-storybook": "storybook-to-ghpages",
-		"build-storybook": "build-storybook"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
+		"build-storybook": "build-storybook",
+		"prepare": "husky install"
 	},
 	"lint-staged": {
-		"*.css": [
+		"*.{scss,css}": [
 			"npm run lint:css"
 		],
 		"*.{js,ts,tsx}": [
 			"npm run lint:js",
-			"npm run format:js"
+			"npm run format"
 		]
 	},
 	"dependencies": {
