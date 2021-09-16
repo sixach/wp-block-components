@@ -1,6 +1,6 @@
 {
 	"name": "@sixach/wp-block-components",
-	"version": "1.4.3",
+	"version": "1.5.0",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"gutenberg",
@@ -35,9 +35,12 @@
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
 		"prepublishOnly": "npm run format && npm run build",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js",
 		"storybook": "start-storybook -p 6006",
 		"deploy-storybook": "storybook-to-ghpages",
-		"build-storybook": "build-storybook"
+		"build-storybook": "build-storybook",
+		"prepare": "husky install"
 	},
 	"lint-staged": {
 		"*.{scss,css}": [
@@ -50,8 +53,10 @@
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.3.0",
+		"@sixa/wp-react-hooks": "^1.3.0",
 		"@sixach/icon-library": "^1.1.0",
 		"@wordpress/api-fetch": "^5.2.2",
+		"@wordpress/blob": "^3.2.1",
 		"@wordpress/block-editor": "^7.0.2",
 		"@wordpress/components": "^17.0.0",
 		"@wordpress/compose": "^5.0.2",
@@ -88,8 +93,8 @@
 		"is-dark-color": "1.2.0",
 		"lint-staged": "11.1.2",
 		"lodash": "4.17.21",
-		"prettier": "npm:wp-prettier@^2.2.1-beta-1",
-		"random-hex-color-generator": "1.0.12"
+		"random-hex-color-generator": "1.0.12",
+		"wp-prettier": "^2.2.1-beta-1"
 	},
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
