@@ -39,6 +39,7 @@ import Constants from './constants';
  * @param 	   {string}  	    props.className    The CSS class name(s) that will be added to the component element.
  * @param 	   {boolean}  	    props.isSave       Whether the field is meant to be rendered on the front-end.
  * @param 	   {Function}  	    props.onChange 	   Function that receives the value of the input.
+ * @param 	   {Function}  	    props.onFocus 	   Function that is called when the element receives focus.
  * @param 	   {string}  	    props.value        Title property as the content.
  * @return     {JSX.Element}                       Editable text component or static content element to render.
  * @example
@@ -52,7 +53,7 @@ import Constants from './constants';
  *	   value={ title }
  * />
  */
-function EditableText( { className, isSave, onChange, value, ...otherProps } ) {
+function EditableText( { className, isSave, onChange, onFocus, value, ...otherProps } ) {
 	return isSave ? (
 		RichText.isEmpty( value ) ? null : (
 			<RichText.Content className={ className } value={ value } { ...otherProps } />
@@ -63,6 +64,7 @@ function EditableText( { className, isSave, onChange, value, ...otherProps } ) {
 			className={ className }
 			multiline={ false }
 			onChange={ onChange }
+			unstableOnFocus={ onFocus }
 			placeholder={ __( 'Enter text…', 'sixa' ) }
 			preserveWhiteSpace
 			value={ value }
@@ -87,6 +89,10 @@ EditableText.propTypes = {
 	 */
 	onChange: PropTypes.func,
 	/**
+	 * Function that is called when the element receives focus.
+	 */
+	onFocus: PropTypes.func,
+	/**
 	 * Value of the control.
 	 */
 	value: PropTypes.string,
@@ -96,6 +102,8 @@ EditableText.defaultProps = {
 	className: undefined,
 	isSave: false,
 	onChange: () => {},
+	onFocus: () => {},
+	shouldRender: true,
 	value: undefined,
 };
 
