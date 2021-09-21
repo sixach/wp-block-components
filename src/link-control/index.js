@@ -134,6 +134,7 @@ LinkControl.defaultProps = {
 	anchorRef: {},
 	className: undefined,
 	onChange: () => {},
+	shouldRender: true,
 	richTextRef: {},
 	value: {},
 };

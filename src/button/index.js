@@ -169,6 +169,7 @@ Button.defaultProps = {
 	isSave: false,
 	onChange: () => {},
 	setLinkControlVisible: () => {},
+	shouldRender: true,
 	value: undefined,
 };
 
