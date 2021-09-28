@@ -41,7 +41,7 @@ import Constants from '../media-upload/constants';
  * @return     {JSX.Element}                       Media placeholder component to render.
  * @example
  *
- * <MediaUpload
+ * <Media
  *     className={ `${ className }__media` }
  *     id={ id }
  *     mediaType={ mediaType }
