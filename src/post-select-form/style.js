@@ -49,7 +49,7 @@ export const Select = styled( ComboboxControl )`
 	}
 
 	.components-form-token-field__suggestions-list {
-		margin-bottom: 0;
+		margin: 0;
 		padding: 0;
 	}
 `;
