@@ -96,7 +96,7 @@ function PostSelectForm( { buttonText, isEditing, icon, instructions, label, onC
 	) : (
 		<BlockControls group="other">
 			<ToolbarGroup>
-				<ToolbarButton icon={ <Icon /> } onClick={ onCancel } />
+				<ToolbarButton icon={ Icon } onClick={ onCancel } />
 			</ToolbarGroup>
 		</BlockControls>
 	);
@@ -144,7 +144,7 @@ PostSelectForm.propTypes = {
 PostSelectForm.defaultProps = {
 	buttonText: __( 'Select' ),
 	isEditing: false,
-	icon: <Icon />,
+	icon: Icon,
 	instructions: undefined,
 	label: undefined,
 	onCancel: () => {},
