@@ -39,6 +39,14 @@ import { BlockControls, BlockIcon, MediaPlaceholder, MediaUploadCheck } from '@w
 import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
 
 /**
+ * The compose package is a collection of handy Hooks and Higher Order Components (HOCs).
+ * The compose function is an alias to `flowRight` from Lodash.
+ *
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
+ */
+import { ifCondition } from '@wordpress/compose';
+
+/**
  * Import icons from the WordPress icon library.
  *
  * @see    https://github.com/WordPress/gutenberg/blob/trunk/packages/icons/README.md
@@ -145,14 +153,9 @@ MediaUpload.propTypes = {
 };
 
 MediaUpload.defaultProps = {
-	/**
-	 * A help text will be generated using help property as the content.
-	 */
 	onChange: () => {},
-	/**
-	 * A help text will be generated using help property as the content.
-	 */
+	shouldRender: true,
 	value: undefined,
 };
 
-export default MediaUpload;
+export default ifCondition( ( { shouldRender } ) => Boolean( shouldRender ) )( MediaUpload );

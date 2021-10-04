@@ -25,7 +25,15 @@ import { __ } from '@wordpress/i18n';
  *
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/
  */
-import { RichText } from '@wordpress/block-editor';
+import { BlockControls, RichText } from '@wordpress/block-editor';
+
+/**
+ * This packages includes a library of generic WordPress components to be used for
+ * creating common UI elements shared between screens and features of the WordPress dashboard.
+ *
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
+ */
+import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
 
 /**
  * The compose package is a collection of handy Hooks and Higher Order Components (HOCs).
@@ -34,6 +42,13 @@ import { RichText } from '@wordpress/block-editor';
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
  */
 import { ifCondition } from '@wordpress/compose';
+
+/**
+ * Import icons from the WordPress icon library.
+ *
+ * @see    https://github.com/WordPress/gutenberg/blob/trunk/packages/icons/README.md
+ */
+import { link as linkIcon } from '@wordpress/icons';
 
 /**
  * Renders a link control.
@@ -49,12 +64,13 @@ import Constants from './constants';
  * Button component.
  *
  * @function
- * @since	   1.5.0
+ * @since	   1.5.1
  * @param 	   {Object}  	    props               		  Component properties.
  * @param 	   {string}  	    props.className     		  The CSS class name(s) that will be added to the component element.
  * @param 	   {boolean}  	    props.isLinkControlVisible    Whether the LinkControl is set to be visible.
  * @param 	   {boolean}  	    props.isSave        		  Whether the field is meant to be rendered on the front-end.
  * @param 	   {Function}  	    props.onChange 	   			  Function that receives the value of the input.
+ * @param 	   {Function}  	    props.setLinkControlVisible   A toggle function. This allows for non boolean toggles.
  * @param 	   {string}  	    props.value         		  Label property as the content.
  * @return     {JSX.Element}                        		  Button element to render.
  * @example
@@ -63,11 +79,12 @@ import Constants from './constants';
  *     className={ `${ className }__button` }
  *	   isLinkControlVisible={ isLinkControlVisible }
  *	   onChange={ ( value ) => setAttributes( { button: value } ) }
+ * 	   setLinkControlVisible={ setLinkControlVisible }
  *	   shouldRender={ elements?.button }
  *	   value={ button }
  * />
  */
-function Button( { className, isLinkControlVisible, isSave, onChange, value: button, ...otherProps } ) {
+function Button( { className, isLinkControlVisible, isSave, onChange, setLinkControlVisible, value: button, ...otherProps } ) {
 	const anchorRef = useConditionalRef( isSave );
 	const richTextRef = useConditionalRef( isSave );
 	const { link, text } = button;
@@ -110,6 +127,11 @@ function Button( { className, isLinkControlVisible, isSave, onChange, value: but
 				richTextRef={ richTextRef }
 				value={ link }
 			/>
+			<BlockControls group="other">
+				<ToolbarGroup>
+					<ToolbarButton icon={ linkIcon } isActive={ isLinkControlVisible } onClick={ setLinkControlVisible } title={ __( 'Edit link', 'sixa' ) } />
+				</ToolbarGroup>
+			</BlockControls>
 		</>
 	);
 }
@@ -132,6 +154,10 @@ Button.propTypes = {
 	 */
 	onChange: PropTypes.func,
 	/**
+	 * Callback function to toggle the visibility of the link popover.
+	 */
+	setLinkControlVisible: PropTypes.func,
+	/**
 	 * Value of the control.
 	 */
 	value: PropTypes.string,
@@ -142,6 +168,8 @@ Button.defaultProps = {
 	isLinkControlVisible: false,
 	isSave: false,
 	onChange: () => {},
+	setLinkControlVisible: () => {},
+	shouldRender: true,
 	value: undefined,
 };
 
