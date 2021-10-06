@@ -2,7 +2,7 @@
  * External dependencies
  */
 import size from 'lodash/size';
-import * as icons from '@sixach/icon-library';
+import * as icons from '@sixa/icon-library';
 
 /**
  * Internal dependencies

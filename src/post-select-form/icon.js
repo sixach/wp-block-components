@@ -1,7 +1,7 @@
 /**
  * Sixa icon library.
  */
-import { edit } from '@sixach/icon-library';
+import { edit } from '@sixa/icon-library';
 
 /**
  * Generates corresponding HTML `Path` elements which enables each shape to be drawn.
