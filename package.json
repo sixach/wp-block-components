@@ -1,5 +1,5 @@
 {
-	"name": "@sixach/wp-block-components",
+	"name": "@sixa/wp-block-components",
 	"version": "1.6.0",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
@@ -97,6 +97,6 @@
 		"wp-prettier": "^2.2.1-beta-1"
 	},
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"access": "public"
 	}
 }
