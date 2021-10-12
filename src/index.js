@@ -12,6 +12,7 @@ export { default as LinkControl } from './link-control';
 export { default as Loading } from './loading';
 export { default as Media } from './media';
 export { default as MediaUpload } from './media-upload';
+export { default as MediaUploadToolbar } from './media-upload-toolbar';
 export { default as MultiSelect } from './multi-select';
 export { default as NodeList } from './node-list';
 export { default as PostSelectForm } from './post-select-form';
