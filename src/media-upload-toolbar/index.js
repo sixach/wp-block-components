@@ -54,7 +54,7 @@ import Constants from '../media-upload/constants';
  * This component is designed to allow uploading, replacing and removing cover medias.
  *
  * @function
- * @since	   1.6.0
+ * @since	   1.7.0
  * @param 	   {Object}  	    props             Component properties.
  * @param 	   {Function}  	    props.onChange    Function that receives the value of the media control.
  * @param 	   {Object}  	    props.value       ID and URL for the selected or stored media element.
