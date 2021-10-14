@@ -20,3 +20,4 @@ export { default as PrintHTML } from './print-html';
 export { default as Slider } from './slider';
 export { default as Sortable } from './sortable';
 export { default as Tag } from './tag';
+export { default as VisibilityToolbar } from './visibility-toolbar';
