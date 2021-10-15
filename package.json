@@ -1,6 +1,6 @@
 {
 	"name": "@sixa/wp-block-components",
-	"version": "1.8.0",
+	"version": "1.8.1",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"sixa",
@@ -63,6 +63,7 @@
 		"@wordpress/components": "^18.0.0",
 		"@wordpress/compose": "^5.0.3",
 		"@wordpress/element": "^4.0.2",
+		"@wordpress/hooks": "^3.2.1",
 		"@wordpress/html-entities": "^3.2.2",
 		"@wordpress/i18n": "^4.2.3",
 		"@wordpress/icons": "^6.0.0",
