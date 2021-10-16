@@ -4,6 +4,6 @@
  * being removed, and avoid the values of existing properties from being changed.
  */
 export default Object.freeze( {
-	ACTIVE_COLORS: [ '#0094FF', '#FFF', '#FFF' ],
+	ACTIVE_COLORS: [ '#1E1E1E', '#FFF', '#0094FF' ],
 	COLORS: [ '#0094FF', '#FFF', '#1E1E1E' ],
 } );
