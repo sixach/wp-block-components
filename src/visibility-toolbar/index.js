@@ -1,7 +1,7 @@
 /**
  * Utility for libraries from the `Lodash`.
  */
-import { get, map } from 'lodash';
+import { forEach, get, map, nth, set } from 'lodash';
 
 /**
  * Sixa icon library.
@@ -49,7 +49,15 @@ import { ifCondition } from '@wordpress/compose';
  *
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-element/
  */
-import { useMemo } from '@wordpress/element';
+import { useCallback, useMemo } from '@wordpress/element';
+
+/**
+ * EventManager for JavaScript.
+ * Hooks are used to manage component state and lifecycle.
+ *
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-hooks/
+ */
+import { applyFilters } from '@wordpress/hooks';
 
 /**
  * Generates corresponding HTML `Path` elements which enables each shape to be drawn.
@@ -57,10 +65,15 @@ import { useMemo } from '@wordpress/element';
 import GenerateSvgPaths from '../generate-svg-paths';
 
 /**
+ * Helper constants.
+ */
+import Constants from './constants';
+
+/**
  * VisibilityToolbar is a React component that renders a toolbar of viewport icon buttons.
  *
  * @function
- * @since	   1.8.0
+ * @since	   1.8.1
  * @param 	   {Object}  	    props             Component properties.
  * @param 	   {Function}  	    props.onChange    Function that receives the value of the visibility control.
  * @param 	   {Object}  	    props.value       An object with state of visibility defined across different viewports.
@@ -74,18 +87,33 @@ import GenerateSvgPaths from '../generate-svg-paths';
  * />
  */
 function VisibilityToolbar( { onChange, value } ) {
+	const activeColors = applyFilters( 'sixa.visibilityToolbarActiveIconColors', Constants.ACTIVE_COLORS );
+	const colors = applyFilters( 'sixa.visibilityToolbarIconColors', Constants.COLORS );
 	const viewports = useMemo( () => ( { widescreen, laptop, tablet, mobile } ), [] );
+	const paintPaths = useCallback(
+		( paths, palette ) =>
+			forEach( paths, ( { attrs }, index ) => {
+				set( attrs, 'fill', nth( palette, index ) );
+			} ),
+		[]
+	);
 
 	return (
 		<BlockControls group="other">
 			<ToolbarGroup
-				controls={ map( value, ( state, viewport ) => ( {
-					icon: <GenerateSvgPaths paths={ get( viewports, `${ viewport }.paths` ) } withSvgWrapper />,
-					isActive: Boolean( state ),
-					onClick: () => onChange( { visible: { ...value, [ viewport ]: ! state } } ),
-					/* translators: %s: Device name. */
-					title: sprintf( __( 'Hide on %s?', 'sixa' ), viewport ),
-				} ) ) }
+				controls={ map( value, ( state, viewport ) => {
+					const isActive = Boolean( state );
+					const colorPalette = isActive ? activeColors : colors;
+					const paths = get( viewports, `${ viewport }.paths` );
+					paintPaths( paths, colorPalette );
+					return {
+						icon: <GenerateSvgPaths paths={ paths } withSvgWrapper />,
+						isActive,
+						onClick: () => onChange( { visible: { ...value, [ viewport ]: ! state } } ),
+						/* translators: %s: Device name. */
+						title: sprintf( __( 'Hide on %s?', 'sixa' ), viewport ),
+					};
+				} ) }
 			/>
 		</BlockControls>
 	);
