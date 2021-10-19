@@ -1,6 +1,6 @@
 {
 	"name": "@sixa/wp-block-components",
-	"version": "1.8.2",
+	"version": "1.9.0",
 	"description": "A collection of most used React components crafted for the sixa projects.",
 	"keywords": [
 		"sixa",
@@ -54,9 +54,9 @@
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.3.0",
-		"@sixa/icon-library": "^1.1.1",
+		"@sixa/icon-library": "^1.2.0",
 		"@sixa/wp-block-utils": "1.0.4",
-		"@sixa/wp-react-hooks": "1.4.1",
+		"@sixa/wp-react-hooks": "^1.6.0",
 		"@wordpress/api-fetch": "^5.2.3",
 		"@wordpress/blob": "^3.2.1",
 		"@wordpress/block-editor": "^7.0.3",
@@ -82,20 +82,20 @@
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.15.7",
-		"@babel/core": "^7.15.5",
-		"@babel/preset-env": "^7.15.6",
+		"@babel/core": "^7.15.8",
+		"@babel/preset-env": "^7.15.8",
 		"@babel/preset-react": "7.14.5",
-		"@storybook/addon-a11y": "^6.3.8",
-		"@storybook/addon-essentials": "^6.3.8",
-		"@storybook/addon-links": "^6.3.8",
-		"@storybook/react": "^6.3.8",
+		"@storybook/addon-a11y": "^6.3.12",
+		"@storybook/addon-essentials": "^6.3.12",
+		"@storybook/addon-links": "^6.3.12",
+		"@storybook/react": "^6.3.12",
 		"@storybook/storybook-deployer": "2.8.10",
-		"@storybook/theming": "^6.3.8",
+		"@storybook/theming": "^6.3.12",
 		"@wordpress/scripts": "^18.1.0",
 		"babel-loader": "8.2.2",
 		"cross-env": "7.0.3",
 		"husky": "^7.0.2",
-		"lint-staged": "^11.2.0",
+		"lint-staged": "^11.2.3",
 		"prettier": "npm:wp-prettier@^2.2.1-beta-1"
 	},
 	"publishConfig": {
