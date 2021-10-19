@@ -15,6 +15,7 @@ export { default as MediaUpload } from './media-upload';
 export { default as MediaUploadToolbar } from './media-upload-toolbar';
 export { default as MultiSelect } from './multi-select';
 export { default as NodeList } from './node-list';
+export { default as NumberToolbar } from './number-toolbar';
 export { default as PostSelectForm } from './post-select-form';
 export { default as PrintHTML } from './print-html';
 export { default as Slider } from './slider';
