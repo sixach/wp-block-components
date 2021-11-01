@@ -17,7 +17,7 @@ import { Button, Flex, FlexItem } from '@wordpress/components';
  * Wrapper around the inner child components.
  *
  * @constant
- * @since	    2.0.0
+ * @since	    1.10.1
  * @type		{JSX.Element}
  */
 export const Wrapper = styled( Flex )`
@@ -31,7 +31,7 @@ export const Wrapper = styled( Flex )`
  * Skin item wrapper.
  *
  * @constant
- * @since	    2.0.0
+ * @since	    1.10.1
  * @type		{JSX.Element}
  */
 export const Item = styled( FlexItem )`
@@ -43,7 +43,7 @@ export const Item = styled( FlexItem )`
  * Theme element.
  *
  * @constant
- * @since	    2.0.0
+ * @since	    1.10.1
  * @type		{JSX.Element}
  */
 export const Theme = styled( Button )`
