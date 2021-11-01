@@ -46,7 +46,7 @@ import GenerateSvgPaths from '../generate-svg-paths';
  * instance of given component across different viewports.
  *
  * @function
- * @since	   2.0.0
+ * @since	   1.10.1
  * @param 	   {Object}  	    props              Component properties.
  * @param 	   {Function}  	    props.Component    Reference to the desired React component.
  * @param 	   {Function}  	    props.onChange     Function that receives the value of the control.

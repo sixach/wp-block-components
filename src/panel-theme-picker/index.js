@@ -54,7 +54,7 @@ import { Item, Theme, Wrapper } from './style';
  * element that enables the user to select from predefined themes available in the list.
  *
  * @function
- * @since	   2.0.0
+ * @since	   1.10.1
  * @param 	   {Object} 		props 			  Component properties.
  * @param 	   {Function} 	    props.onChange    Trigger change event when a theme is selected.
  * @param 	   {Function} 	    props.onReset 	  Empty any stored theme object from the attributes.
