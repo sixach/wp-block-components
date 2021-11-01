@@ -46,48 +46,49 @@ import { ifCondition } from '@wordpress/compose';
  *
  * @see    https://www.npmjs.com/package/@emotion/styled
  */
-import { Item, Skin, Wrapper } from './style';
+import { Item, Theme, Wrapper } from './style';
 
 /**
- * SkinPicker is a React component to render a UI that allows
- * users to select a desired skin from the options available.
+ * "PanelThemePicker" is a React component that allows for providing
+ * alternative styles to existing blocks. The component renders a UI
+ * element that enables the user to select from predefined themes available in the list.
  *
  * @function
  * @since	   2.0.0
  * @param 	   {Object} 		props 			  Component properties.
- * @param 	   {Function} 	    props.onChange    Trigger change event when any of the skins are selected.
- * @param 	   {Function} 	    props.onReset 	  Empty any stored skin object from the attributes.
- * @param 	   {Array} 		    props.skinList    List of map skin variations.
+ * @param 	   {Function} 	    props.onChange    Trigger change event when a theme is selected.
+ * @param 	   {Function} 	    props.onReset 	  Empty any stored theme object from the attributes.
+ * @param 	   {Array} 		    props.themes      List of theme variations.
  * @param 	   {string} 		props.title       Title of the `PanelBody`.
- * @param 	   {string} 		props.value 	  Selected skin’s id.
+ * @param 	   {string} 		props.value 	  Selected theme’s id.
  * @return     {JSX.Element}					  SkinPicker component to render.
  * @example
  *
- * <PanelSkinPicker
- *     onChange={ handleOnChangeSkin }
- *     onReset={ handleOnResetSkin }
+ * <PanelThemePicker
+ *     onChange={ handleOnChangeTheme }
+ *     onReset={ handleOnResetTheme }
  *     shouldRender={ withApi }
- *     skinList={ skinList }
- *     title={ __( 'Skins', 'sixa' ) }
- *     value={ skin?.id }
+ *     themes={ themes }
+ *     title={ __( 'Themes', 'sixa' ) }
+ *     value={ theme?.id }
  * />
  */
-function PanelSkinPicker( { onChange, onReset, skinList, title, value } ) {
+function PanelThemePicker( { onChange, onReset, themes, title, value } ) {
 	return (
 		<PanelBody initialOpen title={ title }>
 			<Wrapper className="block-editor-block-types-list" justify="flex-start" wrap>
-				{ map( skinList, ( { id, imageUri, title: name } ) => {
+				{ map( themes, ( { id, imageUri, title: name } ) => {
 					const isSelected = isEqual( id, value );
 
 					return (
 						<Item
 							className={ classnames( id, 'block-editor-block-types-list__list-item', {
-								'selected-skin': isSelected,
+								'selected-theme': isSelected,
 							} ) }
 							key={ id }
 						>
 							<Tooltip position="top" text={ name }>
-								<Skin
+								<Theme
 									className="editor-block-list-item-button"
 									imageUri={ imageUri }
 									isSelected={ isSelected }
@@ -95,7 +96,7 @@ function PanelSkinPicker( { onChange, onReset, skinList, title, value } ) {
 									onClick={ () => onChange( id ) }
 								>
 									<VisuallyHidden>{ name }</VisuallyHidden>
-								</Skin>
+								</Theme>
 							</Tooltip>
 						</Item>
 					);
@@ -112,10 +113,10 @@ function PanelSkinPicker( { onChange, onReset, skinList, title, value } ) {
 	);
 }
 
-PanelSkinPicker.propTypes = {
+PanelThemePicker.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	onReset: PropTypes.func.isRequired,
-	skinList: PropTypes.arrayOf(
+	themes: PropTypes.arrayOf(
 		PropTypes.shape( {
 			id: PropTypes.string.isRequired,
 			imageUri: PropTypes.string.isRequired,
@@ -126,12 +127,12 @@ PanelSkinPicker.propTypes = {
 	value: PropTypes.string,
 };
 
-PanelSkinPicker.defaultProps = {
+PanelThemePicker.defaultProps = {
 	onChange: () => {},
 	onReset: undefined,
-	skinList: [],
-	title: __( 'Skins', 'sixa' ),
+	themes: [],
+	title: __( 'Themes', 'sixa' ),
 	value: undefined,
 };
 
-export default ifCondition( ( { shouldRender, skinList } ) => Boolean( shouldRender ) && isNonEmptyArray( skinList ) )( PanelSkinPicker );
+export default ifCondition( ( { shouldRender, themes } ) => Boolean( shouldRender ) && isNonEmptyArray( themes ) )( PanelThemePicker );

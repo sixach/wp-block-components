@@ -40,13 +40,13 @@ export const Item = styled( FlexItem )`
 `;
 
 /**
- * Skin element.
+ * Theme element.
  *
  * @constant
  * @since	    2.0.0
  * @type		{JSX.Element}
  */
-export const Skin = styled( Button )`
+export const Theme = styled( Button )`
 	align-items: center;
 	display: flex;
 	justify-content: center;
