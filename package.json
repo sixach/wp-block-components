@@ -27,8 +27,6 @@
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
 		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:css-fix": "wp-scripts lint-style --fix",
 		"lint:js": "wp-scripts lint-js",
 		"lint:js-fix": "wp-scripts lint-js --fix",
 		"lint:md:docs": "wp-scripts lint-md-docs",
@@ -44,9 +42,6 @@
 		"prepare": "husky install"
 	},
 	"lint-staged": {
-		"*.{scss,css}": [
-			"npm run lint:css"
-		],
 		"*.{js,ts,tsx}": [
 			"npm run lint:js",
 			"npm run format"
