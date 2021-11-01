@@ -1,4 +1,4 @@
-/* eslint-disable @wordpress/no-unsafe-wp-apis */
+/* eslint-disable @wordpress/no-unsafe-wp-apis, import/named */
 
 /**
  * Collection of block editor components, hooks, layouts, stores, and utilities to be used
