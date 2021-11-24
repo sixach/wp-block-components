@@ -65,7 +65,7 @@
 		"@wordpress/icons": "^6.1.1",
 		"@wordpress/primitives": "^3.0.4",
 		"@wordpress/url": "^3.3.1",
-		"array-move": "^3.0.1",
+		"array-move": "^4.0.0",
 		"classnames": "2.3.1",
 		"glider-js": "^1.7.7",
 		"html-react-parser": "^1.4.0",
