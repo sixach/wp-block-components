@@ -5,6 +5,7 @@ export { default as Button } from './button';
 export { default as ConditionalWrap } from './conditional-wrap';
 export { default as DeleteButton } from './delete-button';
 export { default as EditableText } from './editable-text';
+export { default as FeaturedImageUpload } from './featured-image-upload';
 export { default as FullHeightAlignmentControl } from './full-height-alignment-control';
 export { default as GenerateSvgPaths } from './generate-svg-paths';
 export { default as InnerHTML } from './inner-html';

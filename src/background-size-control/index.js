@@ -160,8 +160,6 @@ function BackgroundSizeControl( { allowReset, className, help, hideLabelFromVisi
 	);
 }
 
-// allowReset, className, help, hideLabelFromVision, label, onChange, sizes, value
-
 BackgroundSizeControl.propTypes = {
 	/**
 	 * Whether or not a button should be shown to reset the already stored value.
