@@ -18,7 +18,7 @@ import classnames from 'classnames';
  *
  * @see    https://www.npmjs.com/package/array-move
  */
-import arrayMove from 'array-move';
+import { arrayMoveImmutable } from 'array-move';
 
 /**
  * A React component to sort items in lists or grids.
@@ -79,7 +79,7 @@ import { Icon, dragHandle } from '@wordpress/icons';
 function Sortable( { className, children, draggedItemClassName, onChange, withSortableKnob } ) {
 	const instanceId = useInstanceId( Sortable );
 	const handleOnSortEnd = ( oldIndex, newIndex ) => {
-		const sortedItems = arrayMove( children, oldIndex, newIndex );
+		const sortedItems = arrayMoveImmutable( children, oldIndex, newIndex );
 		onChange( sortedItems );
 	};
 
