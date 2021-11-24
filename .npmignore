@@ -75,3 +75,9 @@ src/
 
 # Storybook
 .storybook
+
+# ESLint configuration files
+.eslintrc.js
+
+# GitHub configuration files
+.github/
