@@ -1,7 +1,7 @@
 /**
  * Utility for libraries from the `Lodash`.
  */
-import has from 'lodash/has';
+import { has, toString } from 'lodash';
 
 /**
  * Runtime type checking for React props and similar objects.
@@ -48,6 +48,13 @@ import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
+ * The styled components generated using @emotion/react API.
+ *
+ * @see    https://www.npmjs.com/package/@emotion/styled
+ */
+import { Spinner } from './style';
+
+/**
  * Media component to represent image element.
  */
 import Media from '../media';
@@ -62,11 +69,11 @@ import Constants from '../media-upload/constants';
  * This can be used to represent an example state prior to any actual image being placed.
  *
  * @function
- * @since	   1.11.0
+ * @since	   1.11.1
  * @param 	   {Object}  	    props             Component properties.
  * @param 	   {string}  	    props.label    	  Label for representing a caption for the component in the user interface.
  * @param 	   {Function}  	    props.onChange    Function that receives the value of the image control.
- * @param 	   {number}  	    props.value       Image attachment ID.
+ * @param 	   {string}  	    props.value       Image attachment ID.
  * @return     {JSX.Element}                      Image upload component to render.
  * @example
  *
@@ -98,7 +105,7 @@ function FeaturedImageUpload( { label, onChange, value, ...otherProps } ) {
 			return;
 		}
 
-		onChange( media?.id );
+		onChange( toString( media?.id ) );
 	};
 
 	return (
@@ -111,27 +118,31 @@ function FeaturedImageUpload( { label, onChange, value, ...otherProps } ) {
 					multiple={ false }
 					onSelect={ handleOnSelectMedia }
 					render={ ( { open } ) =>
-						Boolean( hasPostThumbnail ) ? (
+						!! value ? (
 							<div className="editor-post-featured-image editor-post-featured-image__container">
-								<Button
-									aria-label={ __( 'Edit or update the image', 'sixa' ) }
-									className="editor-post-featured-image__preview"
-									onClick={ open }
-								>
-									<ResponsiveWrapper
-										isInline
-										naturalWidth={ thePostThumbnail?.media_details?.width }
-										naturalHeight={ thePostThumbnail?.media_details?.height }
+								{ ! Boolean( hasPostThumbnail ) ? (
+									<Spinner />
+								) : (
+									<Button
+										aria-label={ __( 'Edit or update the image', 'sixa' ) }
+										className="editor-post-featured-image__preview"
+										onClick={ open }
 									>
-										<Media
-											alt={ thePostThumbnail?.alt }
-											className={ `wp-image-${ thePostThumbnail?.id }` }
-											id={ thePostThumbnail?.id }
-											mediaType={ Constants.IMAGE_MEDIA_TYPE }
-											url={ thePostThumbnail?.source_url }
-										/>
-									</ResponsiveWrapper>
-								</Button>
+										<ResponsiveWrapper
+											isInline
+											naturalWidth={ thePostThumbnail?.media_details?.width }
+											naturalHeight={ thePostThumbnail?.media_details?.height }
+										>
+											<Media
+												alt={ thePostThumbnail?.alt }
+												className={ `wp-image-${ thePostThumbnail?.id }` }
+												id={ thePostThumbnail?.id }
+												mediaType={ Constants.IMAGE_MEDIA_TYPE }
+												url={ thePostThumbnail?.source_url }
+											/>
+										</ResponsiveWrapper>
+									</Button>
+								) }
 								<Button onClick={ handleOnRemoveMedia } isDestructive icon={ false } variant="link">
 									{ __( 'Remove image', 'sixa' ) }
 								</Button>
@@ -162,7 +173,7 @@ FeaturedImageUpload.propTypes = {
 	/**
 	 * Image attachment ID.
 	 */
-	value: PropTypes.number,
+	value: PropTypes.string,
 };
 
 FeaturedImageUpload.defaultProps = {
