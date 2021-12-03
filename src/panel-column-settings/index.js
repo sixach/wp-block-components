@@ -142,7 +142,7 @@ PanelColumnSettings.defaultProps = {
 		min: 1,
 		step: 1,
 	},
-	label: __( 'Columns Settings', 'sixa' ),
+	label: __( 'Column Settings', 'sixa' ),
 	onChange: () => {},
 	shouldRender: true,
 	value: { columns: { widescreen: false, laptop: false, tablet: false, mobile: false }, gap: '0px' },
