@@ -68,7 +68,7 @@
 		"array-move": "4.0.0",
 		"classnames": "2.3.1",
 		"glider-js": "1.7.7",
-		"html-react-parser": "1.4.1",
+		"html-react-parser": "1.4.2",
 		"is-dark-color": "1.2.0",
 		"lodash": "4.17.21",
 		"prop-types": "15.7.2",
