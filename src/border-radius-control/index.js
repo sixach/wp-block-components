@@ -206,7 +206,15 @@ BorderRadiusControl.propTypes = {
 	/**
 	 * Collection of available units.
 	 */
-	units: PropTypes.arrayOf( PropTypes.shape( { default: PropTypes.number, label: PropTypes.string, value: PropTypes.string } ) ),
+	units: PropTypes.arrayOf(
+		PropTypes.shape( {
+			a11yLabel: PropTypes.string,
+			default: PropTypes.number,
+			label: PropTypes.string,
+			step: PropTypes.number,
+			value: PropTypes.string,
+		} )
+	),
 	/**
 	 * Value of the control.
 	 */
@@ -222,7 +230,7 @@ BorderRadiusControl.defaultProps = {
 	allowReset: true,
 	label: __( 'Radius', 'sixa' ),
 	onChange: () => {},
-	units: [],
+	units: Constants.ALL_UNITS,
 	value: Constants.DEFAULT_VALUES,
 };
 
