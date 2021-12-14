@@ -1,6 +1,7 @@
 export { default as AddButton } from './add-button';
 export { default as BackgroundSizeControl } from './background-size-control';
 export { default as BlockAlignmentMatrixControl } from './block-alignment-matrix-control';
+export { default as BorderRadiusControl } from './border-radius-control';
 export { default as Button } from './button';
 export { default as ConditionalWrap } from './conditional-wrap';
 export { default as DeleteButton } from './delete-button';
