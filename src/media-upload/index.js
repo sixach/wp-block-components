@@ -36,7 +36,7 @@ import { BlockControls, BlockIcon, MediaPlaceholder, MediaUploadCheck } from '@w
  *
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-components/
  */
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
+import { ToolbarButton, ToolbarGroup, withNotices } from '@wordpress/components';
 
 /**
  * The compose package is a collection of handy Hooks and Higher Order Components (HOCs).
@@ -44,7 +44,7 @@ import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
  *
  * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/
  */
-import { ifCondition } from '@wordpress/compose';
+import { compose, ifCondition } from '@wordpress/compose';
 
 /**
  * Import icons from the WordPress icon library.
@@ -63,11 +63,15 @@ import Constants from './constants';
  * This can be used to represent an example state prior to any actual media being placed.
  *
  * @function
+ * @since	   1.14.1
+ * 			   Display notice messages when produced by the component.
  * @since	   1.5.0
- * @param 	   {Object}  	    props             Component properties.
- * @param 	   {Function}  	    props.onChange    Function that receives the value of the media control.
- * @param 	   {number}  	    props.value       ID of selected or stored media element.
- * @return     {JSX.Element}                      Media placeholder component to render.
+ * @param 	   {Object}  	    		props             		  Component properties.
+ * @param 	   {Function}  	    		props.onChange    		  Function that receives the value of the media control.
+ * @param 	   {Object} 	            props.noticeOperations    A number of functions to add notices to the editor.
+ * @param 	   {boolean|JSX.Element}    props.noticeUI            The rendered NoticeList.
+ * @param 	   {number}  	    		props.value       		  ID of selected or stored media element.
+ * @return     {JSX.Element}                      				  Media placeholder component to render.
  * @example
  *
  * <MediaUpload
@@ -76,7 +80,7 @@ import Constants from './constants';
  *     value={ id }
  * />
  */
-function MediaUpload( { onChange, value, ...otherProps } ) {
+function MediaUpload( { onChange, noticeOperations, noticeUI, value, ...otherProps } ) {
 	const handleOnRemoveMedia = () => {
 		onChange( { alt: undefined, id: undefined, mediaType: undefined, url: undefined } );
 	};
@@ -127,7 +131,9 @@ function MediaUpload( { onChange, value, ...otherProps } ) {
 					instructions: __( 'Upload an image or video file, or pick one from your media library.', 'sixa' ),
 				} }
 				multiple={ false }
+				onError={ noticeOperations.createErrorNotice }
 				onSelect={ handleOnSelectMedia }
+				notices={ noticeUI }
 				value={ { id: value } }
 				{ ...otherProps }
 			/>
@@ -158,4 +164,4 @@ MediaUpload.defaultProps = {
 	value: undefined,
 };
 
-export default ifCondition( ( { shouldRender } ) => Boolean( shouldRender ) )( MediaUpload );
+export default compose( [ ifCondition( ( { shouldRender } ) => Boolean( shouldRender ) ), withNotices ] )( MediaUpload );
