@@ -50,6 +50,13 @@ import { applyFilters } from '@wordpress/hooks';
 import GenerateSvgPaths from '../generate-svg-paths';
 
 /**
+ * The styled components generated using @emotion/react API.
+ *
+ * @see    https://www.npmjs.com/package/@emotion/styled
+ */
+import { Wrapper } from './style';
+
+/**
  * PanelViewports is a React component that organizes an
  * instance of given component across different viewports.
  *
@@ -85,12 +92,14 @@ function PanelViewports( { Component, onChange, value, ...otherProps } ) {
 			} ) }
 		>
 			{ ( { name } ) => (
-				<Component
-					checked={ get( value, name ) }
-					onChange={ ( newValue ) => onChange( { ...value, [ name ]: newValue } ) }
-					value={ get( value, name ) }
-					{ ...applyFilters( 'sixa.panelViewportsComponentOtherProps', otherProps, value, name ) }
-				/>
+				<Wrapper>
+					<Component
+						checked={ get( value, name ) }
+						onChange={ ( newValue ) => onChange( { ...value, [ name ]: newValue } ) }
+						value={ get( value, name ) }
+						{ ...applyFilters( 'sixa.panelViewportsComponentOtherProps', otherProps, value, name ) }
+					/>
+				</Wrapper>
 			) }
 		</TabPanel>
 	);
