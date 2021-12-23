@@ -9,10 +9,15 @@
 	"labels": [ "type: dependencies", "skip-changelog" ],
 	"packageRules": [
 		{
-			"updateTypes": [ "minor", "patch", "pin", "digest" ],
+			"updateTypes": [ "minor", "patch" ],
+			"depTypeList": [ "devDependencies", "dependencies" ],
 			"automerge": true,
 			"requiredStatusChecks": null
+		},
+		{
+			"updateTypes": [ "lockFileMaintenance" ],
+			"automerge": true
 		}
 	],
-  	"rebaseWhen": "conflicted"
+	"rebaseWhen": "conflicted"
 }
