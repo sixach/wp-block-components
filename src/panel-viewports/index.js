@@ -37,15 +37,32 @@ import { ifCondition } from '@wordpress/compose';
 import { useMemo } from '@wordpress/element';
 
 /**
+ * EventManager for JavaScript.
+ * Hooks are used to manage component state and lifecycle.
+ *
+ * @see    https://developer.wordpress.org/block-editor/reference-guides/packages/packages-hooks/
+ */
+import { applyFilters } from '@wordpress/hooks';
+
+/**
  * Generates corresponding HTML `Path` elements which enables each shape to be drawn.
  */
 import GenerateSvgPaths from '../generate-svg-paths';
+
+/**
+ * The styled components generated using @emotion/react API.
+ *
+ * @see    https://www.npmjs.com/package/@emotion/styled
+ */
+import { Wrapper } from './style';
 
 /**
  * PanelViewports is a React component that organizes an
  * instance of given component across different viewports.
  *
  * @function
+ * @since	   1.14.1
+ * 			   Allow additional properties for the component to be modified.
  * @since	   1.10.1
  * @param 	   {Object}  	    props              Component properties.
  * @param 	   {Function}  	    props.Component    Reference to the desired React component.
@@ -75,7 +92,14 @@ function PanelViewports( { Component, onChange, value, ...otherProps } ) {
 			} ) }
 		>
 			{ ( { name } ) => (
-				<Component onChange={ ( newValue ) => onChange( { ...value, [ name ]: newValue } ) } value={ get( value, name ) } { ...otherProps } />
+				<Wrapper>
+					<Component
+						checked={ get( value, name ) }
+						onChange={ ( newValue ) => onChange( { ...value, [ name ]: newValue } ) }
+						value={ get( value, name ) }
+						{ ...applyFilters( 'sixa.panelViewportsComponentOtherProps', otherProps, value, name ) }
+					/>
+				</Wrapper>
 			) }
 		</TabPanel>
 	);
