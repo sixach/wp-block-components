@@ -1,0 +1,48 @@
+name: Publish Package to npmjs
+
+on:
+    release:
+        types: [published]
+
+jobs:
+    wordpress-release:
+        name: Send to NPM
+        runs-on: ubuntu-latest
+        steps:
+            - name: Validate presense of NPM_TOKEN
+              run: |
+                  if [ "${{ secrets.NPM_TOKEN }}" == "" ]; then
+                    echo "NPM_TOKEN secret does not exist or empty"
+                    echo "Please verify it in https://github.com/$GITHUB_REPOSITORY/settings/secrets/actions"
+                    exit 1
+                  fi
+
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            # Setup .npmrc file to publish to npm
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16.x'
+                  registry-url: 'https://registry.npmjs.org'
+
+            - name: Get npm cache directory
+              id: npm-cache
+              run: echo "::set-output name=dir::$(npm config get cache)"
+
+            - name: Restore .npm cache
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.npm-cache.outputs.dir }}
+                  key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+                      ${{ runner.os }}-node-
+
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Publish a Package on NPM
+              run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
