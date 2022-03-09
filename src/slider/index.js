@@ -21,11 +21,11 @@ import classnames from 'classnames';
 import { forwardRef } from '@wordpress/element';
 
 /**
- * A react wrapper for glider.js
+ * A react Flickity component
  *
  * @see    https://github.com/hipstersmoothie/react-glider
  */
-import Glider from 'react-glider';
+import Flickity from 'react-flickity-component';
 
 /**
  * Shared Glider options.
@@ -37,7 +37,7 @@ import defaultOptions from './options';
  *
  * @see    https://www.npmjs.com/package/@emotion/styled
  */
-import { Track } from './style';
+// import { Track } from './style';
 
 /**
  * A react wrapper for the react-glider package.
@@ -62,12 +62,10 @@ import { Track } from './style';
  */
 function Slider( { className, children, gap, ...wrapperProps }, ref ) {
 	return (
-		<div className={ classnames( 'sixa-component-slider', 'glider-wrap', className ) }>
-			<Glider { ...merge( {}, defaultOptions, wrapperProps ) } skipTrack ref={ ref }>
-				<Track className="glider-track" gap={ gap }>
-					{ children }
-				</Track>
-			</Glider>
+		<div className={ classnames( 'sixa-component-slider', 'flickity-wrap', className ) }>
+			<Flickity options={ { ...merge( {}, defaultOptions, wrapperProps ) } } reloadOnUpdate ref={ ref }>
+				{ children }
+			</Flickity>
 		</div>
 	);
 }

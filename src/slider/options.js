@@ -1,22 +1,19 @@
 /**
  * Options.
  *
- * Default set of shared Glider options (methods).
+ * Default set of shared Flickity options (methods).
  *
  * @constant
  * @since    1.3.0
  * @type     {Object}
- * @see      https://github.com/hipstersmoothie/react-glider#glider-methods
+ * @see      https://github.com/metafizzy/flickity#options
  * @ignore
  */
 export default {
+	autoPlay: false,
 	draggable: false,
-	dragVelocity: 3.3,
-	duration: 0.5,
-	hasArrows: false,
-	hasDots: false,
-	scrollLock: false,
-	scrollLockDelay: 250,
-	slidesToShow: 1,
-	slidesToScroll: 1,
+	friction: 0.15,
+	selectedAttraction: 0.01,
+	prevNextButtons: false,
+	pageDots: false,
 };

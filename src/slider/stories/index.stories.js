@@ -32,9 +32,9 @@ export default {
 };
 
 export const _default = ( props ) => <DefaultWithState { ...props } />;
-export const single = () => <DefaultWithState gap="20" length="8" hasArrows hasDots />;
-export const multiple = () => <DefaultWithState gap="10" length="9" hasArrows hasDots slidesToShow={ 3 } />;
-export const fractional = () => <DefaultWithState gap="10" length="12" hasArrows hasDots slidesToShow={ 3.5 } />;
+// export const single = () => <DefaultWithState gap="20" length="8" hasArrows hasDots />;
+// export const multiple = () => <DefaultWithState gap="10" length="9" hasArrows hasDots slidesToShow={ 3 } />;
+// export const fractional = () => <DefaultWithState gap="10" length="12" hasArrows hasDots slidesToShow={ 3.5 } />;
 
 const Wrapper = styled.div`
 	margin: auto;
@@ -46,6 +46,13 @@ const Wrapper = styled.div`
 `;
 
 _default.argTypes = {
+	autoPlay: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Autoplay',
+	},
 	draggable: {
 		control: {
 			type: 'boolean',
@@ -53,14 +60,14 @@ _default.argTypes = {
 		defaultValue: false,
 		name: 'Draggable',
 	},
-	hasArrows: {
+	prevNextButtons: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
 		name: 'Arrows',
 	},
-	hasDots: {
+	pageDots: {
 		control: {
 			type: 'boolean',
 		},
