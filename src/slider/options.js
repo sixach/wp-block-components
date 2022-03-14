@@ -16,4 +16,7 @@ export default {
 	selectedAttraction: 0.01,
 	prevNextButtons: false,
 	pageDots: false,
+	wrapAround: false,
+	freeScroll: false,
+	freeScrollFriction: 0.03,
 };
