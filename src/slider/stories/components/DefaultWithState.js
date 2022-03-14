@@ -17,6 +17,7 @@ import { useEffect, useRef, useState } from '@wordpress/element';
 import Slider from '../../';
 
 function DefaultWithState( { length, ...wrapperProps } ) {
+	const { margin } = wrapperProps;
 	const sliderRef = useRef();
 	const [ items, setItems ] = useState( () => range( 0, length ) );
 
@@ -29,7 +30,7 @@ function DefaultWithState( { length, ...wrapperProps } ) {
 			{ map( items, ( item ) => {
 				const textContent = add( item, 1 );
 				return (
-					<Slide align="center" colors={ randomHexColorWithArray( 3 ) } key={ textContent } justify="center">
+					<Slide align="center" margin={ margin } colors={ randomHexColorWithArray( 3 ) } key={ textContent } justify="center">
 						{ textContent }
 					</Slide>
 				);
@@ -39,6 +40,8 @@ function DefaultWithState( { length, ...wrapperProps } ) {
 }
 
 const Slide = styled( Flex )`
+	width: 66%;
+	margin-right: ${ ( { margin } ) => `${ margin }px` };
 	background-color: #efefef;
 	border-image: ${ ( { colors } ) => `linear-gradient(to right, ${ join( colors, ',' ) } ) 5` };
 	border-style: solid;
