@@ -68,6 +68,7 @@
 		"array-move": "4.0.0",
 		"classnames": "2.3.1",
 		"clean-deep": "3.4.0",
+		"flickity": "^2.3.0",
 		"glider-js": "1.7.7",
 		"html-react-parser": "1.4.8",
 		"is-dark-color": "1.2.0",
