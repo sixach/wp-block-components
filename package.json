@@ -51,7 +51,7 @@
 		"@emotion/styled": "11.8.1",
 		"@sixa/icon-library": "1.3.1",
 		"@sixa/wp-block-utils": "1.2.0",
-		"@sixa/wp-react-hooks": "1.12.0",
+		"@sixa/wp-react-hooks": "1.13.0",
 		"@wordpress/api-fetch": "5.2.7",
 		"@wordpress/blob": "3.4.1",
 		"@wordpress/block-editor": "8.3.1",
