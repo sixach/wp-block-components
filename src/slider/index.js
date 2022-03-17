@@ -60,6 +60,7 @@ import 'flickity/dist/flickity.min.css';
  * </Slider>
  */
 function Slider( { className, children, ...wrapperProps }, ref ) {
+	const options = merge( {}, defaultOptions, wrapperProps );
 	return (
 		<Flickity
 			className={ classnames(
@@ -67,7 +68,7 @@ function Slider( { className, children, ...wrapperProps }, ref ) {
 				'flickity-wrap',
 				className
 			) }
-			options={ { ...merge( {}, defaultOptions, wrapperProps ) } }
+			options={ options }
 			reloadOnUpdate
 			ref={ ref }
 		>
