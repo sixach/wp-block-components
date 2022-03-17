@@ -16,8 +16,7 @@ import { useEffect, useRef, useState } from '@wordpress/element';
  */
 import Slider from '../../';
 
-function DefaultWithState( { length, ...wrapperProps } ) {
-	const { margin } = wrapperProps;
+function DefaultWithState( { length, margin, ...wrapperProps } ) {
 	const sliderRef = useRef();
 	const [ items, setItems ] = useState( () => range( 0, length ) );
 
