@@ -39,10 +39,6 @@ export const freeScroll = () => <DefaultWithState margin="20" length="12" freeSc
 const Wrapper = styled.div`
 	margin: auto;
 	width: 80%;
-
-	.glider-dots {
-		margin-top: 15px;
-	}
 `;
 
 _default.argTypes = {
