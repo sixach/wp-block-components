@@ -62,16 +62,7 @@ import 'flickity/dist/flickity.min.css';
 function Slider( { className, children, ...wrapperProps }, ref ) {
 	const options = merge( {}, defaultOptions, wrapperProps );
 	return (
-		<Flickity
-			className={ classnames(
-				'sixa-component-slider',
-				'flickity-wrap',
-				className
-			) }
-			options={ options }
-			reloadOnUpdate
-			ref={ ref }
-		>
+		<Flickity className={ classnames( 'sixa-component-slider', 'flickity-wrap', className ) } options={ options } reloadOnUpdate ref={ ref }>
 			{ children }
 		</Flickity>
 	);
