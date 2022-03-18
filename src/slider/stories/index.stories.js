@@ -32,20 +32,23 @@ export default {
 };
 
 export const _default = ( props ) => <DefaultWithState { ...props } />;
-export const single = () => <DefaultWithState gap="20" length="8" hasArrows hasDots />;
-export const multiple = () => <DefaultWithState gap="10" length="9" hasArrows hasDots slidesToShow={ 3 } />;
-export const fractional = () => <DefaultWithState gap="10" length="12" hasArrows hasDots slidesToShow={ 3.5 } />;
+export const autoPlay = () => <DefaultWithState margin="20" length="8" autoPlay prevNextButtons pageDots />;
+export const wrapAround = () => <DefaultWithState margin="20" length="3" wrapAround autoPlay prevNextButtons pageDots />;
+export const freeScroll = () => <DefaultWithState margin="20" length="12" freeScroll prevNextButtons pageDots draggable />;
 
 const Wrapper = styled.div`
 	margin: auto;
 	width: 80%;
-
-	.glider-dots {
-		margin-top: 15px;
-	}
 `;
 
 _default.argTypes = {
+	autoPlay: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Autoplay',
+	},
 	draggable: {
 		control: {
 			type: 'boolean',
@@ -53,21 +56,35 @@ _default.argTypes = {
 		defaultValue: false,
 		name: 'Draggable',
 	},
-	hasArrows: {
+	prevNextButtons: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
 		name: 'Arrows',
 	},
-	hasDots: {
+	pageDots: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
 		name: 'Dots',
 	},
-	gap: {
+	wrapAround: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Wrap around',
+	},
+	freeScroll: {
+		control: {
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Free scroll',
+	},
+	margin: {
 		control: {
 			max: 50,
 			min: 0,
@@ -75,7 +92,46 @@ _default.argTypes = {
 			type: 'range',
 		},
 		defaultValue: 20,
-		name: 'Gap',
+		name: 'Margin',
+		type: {
+			name: 'number',
+		},
+	},
+	friction: {
+		control: {
+			max: 1,
+			min: 0,
+			step: 0.01,
+			type: 'range',
+		},
+		defaultValue: 0.15,
+		name: 'Friction',
+		type: {
+			name: 'number',
+		},
+	},
+	selectedAttraction: {
+		control: {
+			max: 1,
+			min: 0,
+			step: 0.01,
+			type: 'range',
+		},
+		defaultValue: 0.01,
+		name: 'Selected attraction',
+		type: {
+			name: 'number',
+		},
+	},
+	freeScrollFriction: {
+		control: {
+			max: 1,
+			min: 0,
+			step: 0.01,
+			type: 'range',
+		},
+		defaultValue: 0.03,
+		name: 'Free scroll friction',
 		type: {
 			name: 'number',
 		},
