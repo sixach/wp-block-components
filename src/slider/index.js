@@ -21,23 +21,29 @@ import classnames from 'classnames';
 import { forwardRef } from '@wordpress/element';
 
 /**
- * A react wrapper for glider.js
+ * Import Swiper React components
  *
- * @see    https://github.com/hipstersmoothie/react-glider
+ * @see    https://swiperjs.com/react
  */
-import Glider from 'react-glider';
+import { Swiper } from 'swiper/react/swiper-react';
 
 /**
- * Shared Glider options.
+ * Import Swiper modules
+ *
+ * @see    https://swiperjs.com/swiper-api#modules
+ */
+import { Navigation, Pagination, Autoplay, A11y, FreeMode } from 'swiper';
+
+/**
+ * Shared Swiper options.
  */
 import defaultOptions from './options';
 
-/**
- * The styled components generated using @emotion/react API.
- *
- * @see    https://www.npmjs.com/package/@emotion/styled
- */
-import { Track } from './style';
+// Import Swiper core and modules styles
+import 'swiper/swiper.min.css';
+import 'swiper/modules/navigation/navigation.min.css';
+import 'swiper/modules/pagination/pagination.min.css';
+import 'swiper/modules/autoplay/autoplay.min.css';
 
 /**
  * A react wrapper for the react-glider package.
@@ -53,21 +59,22 @@ import { Track } from './style';
  * @return	   {JSX.Element}    				   Slider component.
  * @example
  *
- * <Slider hasArrows hasDots>
- *     <img src="https://picsum.photos/700/300" />
- *	   <img src="https://picsum.photos/700/300" />
- *	   <img src="https://picsum.photos/700/300" />
- *	   <img src="https://picsum.photos/700/300" />
- * </Slider>
+ * <Swiper modules={[Navigation, Pagination, A11y]} navigation pagination>
+ *     <SwiperSlide><img src="https://picsum.photos/700/300" /></SwiperSlide>
+ *     <SwiperSlide><img src="https://picsum.photos/700/300" /></SwiperSlide>
+ *     <SwiperSlide><img src="https://picsum.photos/700/300" /></SwiperSlide>
+ *     <SwiperSlide><img src="https://picsum.photos/700/300" /></SwiperSlide>
+ * </Swiper>
  */
 function Slider( { className, children, gap, ...wrapperProps }, ref ) {
 	return (
-		<div className={ classnames( 'sixa-component-slider', 'glider-wrap', className ) }>
-			<Glider { ...merge( {}, defaultOptions, wrapperProps ) } skipTrack ref={ ref }>
-				<Track className="glider-track" gap={ gap }>
-					{ children }
-				</Track>
-			</Glider>
+		<div className={ classnames( 'sixa-component-slider', 'swiper-wrap', className ) }>
+			<Swiper
+				modules={[Autoplay, Navigation, Pagination, A11y, FreeMode]}
+				{ ...merge( {}, defaultOptions, wrapperProps ) }
+			>
+				{ children }
+			</Swiper>
 		</div>
 	);
 }
@@ -81,16 +88,11 @@ Slider.propTypes = {
 	 * React elements that are being passed as children.
 	 */
 	children: PropTypes.arrayOf( PropTypes.element ).isRequired,
-	/**
-	 * Extra spacing value between rows and columns of each slide.
-	 */
-	gap: PropTypes.string,
 };
 
 Slider.defaultProps = {
 	className: undefined,
 	children: undefined,
-	gap: '0',
 };
 
 export default forwardRef( Slider );

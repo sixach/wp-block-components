@@ -6,17 +6,19 @@
  * @constant
  * @since    1.3.0
  * @type     {Object}
- * @see      https://github.com/hipstersmoothie/react-glider#glider-methods
+ * @see      https://swiperjs.com/swiper-api#parameters
  * @ignore
  */
 export default {
-	draggable: false,
-	dragVelocity: 3.3,
-	duration: 0.5,
-	hasArrows: false,
-	hasDots: false,
-	scrollLock: false,
-	scrollLockDelay: 250,
-	slidesToShow: 1,
-	slidesToScroll: 1,
+	autoplay: false,
+	allowTouchMove: false,
+	longSwipesMs: 500,
+	speed: 500,
+	navigation: false,
+	pagination: false,
+	loop: true,
+	threshold: 50,
+	slidesPerView: 1,
+	freeMode: false,
+	spaceBetween: 50,
 };
