@@ -32,50 +32,54 @@ export default {
 };
 
 export const _default = ( props ) => <DefaultWithState { ...props } />;
-export const single = () => <DefaultWithState gap="20" length="8" hasArrows hasDots />;
-export const multiple = () => <DefaultWithState gap="10" length="9" hasArrows hasDots slidesToShow={ 3 } />;
-export const fractional = () => <DefaultWithState gap="10" length="12" hasArrows hasDots slidesToShow={ 3.5 } />;
+export const multiple = () => <DefaultWithState gap="20" length="12" allowTouchMove navigation pagination slidesPerView={ 3 } />;
+export const autoPlay = () => <DefaultWithState gap="20" length="8" autoplay navigation pagination />;
+export const loop = () => <DefaultWithState gap="10" length="3" allowTouchMove loop autoplay navigation pagination />;
+export const freeMode = () => <DefaultWithState gap="10" length="5" allowTouchMove freeMode navigation pagination />;
 
 const Wrapper = styled.div`
 	margin: auto;
 	width: 80%;
-
-	.glider-dots {
-		margin-top: 15px;
-	}
 `;
 
 _default.argTypes = {
-	draggable: {
+	autoplay: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
-		name: 'Draggable',
+		name: 'Autoplay',
 	},
-	hasArrows: {
+	allowTouchMove: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
-		name: 'Arrows',
+		name: 'Allow touch move',
 	},
-	hasDots: {
+	navigation: {
 		control: {
 			type: 'boolean',
 		},
 		defaultValue: false,
-		name: 'Dots',
+		name: 'Navigation',
 	},
-	gap: {
+	pagination: {
 		control: {
-			max: 50,
+			type: 'boolean',
+		},
+		defaultValue: false,
+		name: 'Pagination',
+	},
+	spaceBetween: {
+		control: {
+			max: 200,
 			min: 0,
 			step: 5,
 			type: 'range',
 		},
-		defaultValue: 20,
-		name: 'Gap',
+		defaultValue: 50,
+		name: 'Space between',
 		type: {
 			name: 'number',
 		},

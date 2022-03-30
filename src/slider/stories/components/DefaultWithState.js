@@ -11,6 +11,8 @@ import { randomHexColorWithArray } from 'random-hex-color-generator';
 import { Flex } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
+import { SwiperSlide } from 'swiper/react/swiper-react';
+
 /**
  * Internal dependencies
  */
@@ -29,9 +31,11 @@ function DefaultWithState( { length, ...wrapperProps } ) {
 			{ map( items, ( item ) => {
 				const textContent = add( item, 1 );
 				return (
-					<Slide align="center" colors={ randomHexColorWithArray( 3 ) } key={ textContent } justify="center">
-						{ textContent }
-					</Slide>
+					<SwiperSlide>
+						<Slide align="center" colors={ randomHexColorWithArray( 3 ) } key={ textContent } justify="center">
+							{ textContent }
+						</Slide>
+					</SwiperSlide>
 				);
 			} ) }
 		</Slider>
@@ -44,6 +48,7 @@ const Slide = styled( Flex )`
 	border-style: solid;
 	border-width: 3px;
 	color: #555d66;
+	width: auto;
 	min-height: 300px;
 	font-size: 40px;
 	font-weight: 700;
