@@ -1,0 +1,45 @@
+{
+  "ignore_labels": ["duplicate", "question", "invalid", "wontfix", "skip-changelog"],
+  "categories": [
+      {
+          "title": "### 🚀 Enhancements",
+          "labels": ["feature"]
+      },
+      {
+          "title": "### 🐛 Bug Fixes",
+          "labels": ["fix"]
+      },
+      {
+          "title": "### 📦 Dependencies",
+          "labels": ["dependencies"]
+      },
+      {
+          "title": "### 🔄 Refactor Code",
+          "labels": ["refactor-code"]
+      },
+      {
+          "title": "### 🔧🔨 Hot fix",
+          "labels": ["hotfix"]
+      },
+      {
+          "title": "### 🔒 Security",
+          "labels": ["security"]
+      },
+      {
+          "title": "### ⚠️ Deprecations",
+          "labels": ["deprecated"]
+      },
+      {
+          "title": "### 💥 Breaking Changes",
+          "labels": ["breaking"]
+      },
+      {
+          "title": "### 🔥 Removals",
+          "labels": ["removed"]
+      },
+      {
+          "title": "### 📄 Documentation",
+          "labels": ["documentation"]
+      }
+  ]
+}

@@ -1,0 +1,204 @@
+name: Publish Release
+
+on:
+    workflow_dispatch:
+        inputs:
+            # The semantic version of the release
+            version:
+                description: 'The semver of the release'
+                required: true
+                default: 'patch'
+
+jobs:
+    release-prerequisites:
+        if: contains(github.event.inputs.version, 'major') ||
+            contains(github.event.inputs.version, 'minor') ||
+            contains(github.event.inputs.version, 'patch')
+        name: Prepare the Build Action
+        runs-on: ubuntu-latest
+        outputs:
+            bump: ${{ github.event.inputs.version }}
+            next_version: ${{ steps.next_version.outputs.version }}
+            package: ${{ steps.workflow.outputs.package }}
+
+        steps:
+            - name: Validate CD branch
+              if: ${{ github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/heads/hotfix/') }}
+              run: |
+                  echo "It's not allowed to run CD on other branch except main and hotfix."
+                  exit 1
+
+            - name: Setup Workflow Context
+              id: workflow
+              env:
+                  REPO: ${{ github.repository }}
+              run: echo ::set-output name=package::${REPO##*/}
+
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: 🔖 Calculate the next version
+              uses: zwaldowski/semver-release-action@v2
+              id: next_version
+              with:
+                  dry_run: true
+                  bump: ${{ github.event.inputs.version }}
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: 📢 Print current version of library
+              run: |
+                  echo "New version about to be pushed to repository: ${{ steps.next_version.outputs.version }}"
+
+    package-json-version-bump:
+        name: Package.json Version Bump
+        needs: [release-prerequisites]
+        continue-on-error: true
+        runs-on: ubuntu-latest
+        outputs:
+            releaseSha: ${{ steps.sha.outputs.releaseSha }}
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: main
+
+            - name: Check if project has package.json
+              id: packagejson
+              run: test -e ./package.json && echo "::set-output name=exists::true" || echo "::set-output name=exists::false"
+
+            - name: Package.json SemVer Update
+              if: steps.packagejson.outputs.exists == 'true'
+              uses: reedyuk/npm-version@1.1.1
+              with:
+                  version: ${{ needs.release-prerequisites.outputs.next_version }}
+                  # The location of the package.json file, defaults to current directory.
+                  package: ./
+
+            - name: Commit Changes
+              if: steps.packagejson.outputs.exists == 'true'
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  # Optional branch name where commit should be pushed to.
+                  # Defaults to the current branch.
+                  branch: main
+                  commit_message: Update Package.json Version
+                  file_pattern: 'package.json package-lock.json'
+
+            - name: Get commit sha
+              shell: bash
+              id: sha
+              run: |
+                  RELEASE_SHA="$(git rev-parse HEAD)"
+                  echo "::set-output name=releaseSha::$RELEASE_SHA"
+
+            # After package.json bump it's time to push a new tag
+            - name: Bump version and push tag
+              uses: zwaldowski/semver-release-action@v2
+              with:
+                  bump: ${{ needs.release-prerequisites.outputs.bump }}
+                  sha: ${{ steps.sha.outputs.releaseSha }}
+                  github_token: ${{ secrets.REPO_PUBLISH_TOKEN }}
+
+    # Build the package and upload artifact with dist files
+    build:
+        name: Build the Release
+        needs: [release-prerequisites, package-json-version-bump]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ needs.package-json-version-bump.outputs.releaseSha }}
+
+            - name: Setup Workflow Context
+              id: workflow
+              working-directory: ${{ runner.temp }}
+              run: |
+                  mkdir dist
+                  echo ::set-output name=dist::${PWD}/dist
+
+            - name: Set Node.js 14.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
+
+            - name: Install latest NPM version
+              run: npm i -g npm@latest
+
+            - name: Node version
+              run: node --version
+
+            - name: NPM version
+              run: npm --version
+
+            - name: Get npm cache directory
+              id: npm-cache
+              run: echo "::set-output name=dir::$(npm config get cache)"
+
+            - name: Restore .npm cache
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.npm-cache.outputs.dir }}
+                  key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+                      ${{ runner.os }}-node-
+
+            - name: Install Node.js dependencies
+              run: npm ci
+
+            - name: Build the Package
+              run: npm run build
+
+            - name: Pack Production NPM Bundle
+              run: npm pack --pack-destination ${{ steps.workflow.outputs.dist }}
+
+            - name: Upload Tar GZ arfifacts
+              uses: actions/upload-artifact@v2
+              with:
+                  name: ${{ needs.release-prerequisites.outputs.package }}
+                  path: ${{ steps.workflow.outputs.dist }}/*.tgz
+
+    # It will download artifact with and publish an update to Github
+    github-release:
+        name: Publish release on Github
+        needs: [release-prerequisites, build]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: main
+                  fetch-depth: 0
+
+            - name: Setup Workflow Context
+              id: workflow
+              working-directory: ${{ runner.temp }}
+              run: |
+                  mkdir dist
+                  echo ::set-output name=dist::${PWD}/dist
+
+            - name: Download ZIP artifact
+              uses: actions/download-artifact@v2
+              with:
+                  name: ${{ needs.release-prerequisites.outputs.package }}
+                  path: ${{ steps.workflow.outputs.dist }}
+
+            - name: Create Changelog
+              id: changelog
+              uses: mikepenz/release-changelog-builder-action@v2.4.1
+              with:
+                  configuration: .github/configs/changelog-config.json
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Create release
+              uses: ncipollo/release-action@v1
+              with:
+                  tag: ${{ needs.release-prerequisites.outputs.next_version }}
+                  artifacts: ${{ steps.workflow.outputs.dist }}/*.tgz
+                  artifactContentType: application/gzip
+                  token: ${{ secrets.REPO_PUBLISH_TOKEN }}
+                  name: 'Version v${{ needs.release-prerequisites.outputs.next_version }}'
+                  body: ${{ steps.changelog.outputs.changelog }}
+                  draft: false
