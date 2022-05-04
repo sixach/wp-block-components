@@ -78,9 +78,9 @@
 		"react-glider": "2.2.1"
 	},
 	"devDependencies": {
-		"@babel/cli": "7.17.6",
-		"@babel/core": "7.17.9",
-		"@babel/preset-env": "7.16.11",
+		"@babel/cli": "7.17.10",
+		"@babel/core": "7.17.10",
+		"@babel/preset-env": "7.17.10",
 		"@babel/preset-react": "7.16.7",
 		"@storybook/addon-a11y": "6.4.21",
 		"@storybook/addon-essentials": "6.4.21",
