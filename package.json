@@ -92,7 +92,7 @@
 		"babel-loader": "8.2.5",
 		"cross-env": "7.0.3",
 		"husky": "7.0.4",
-		"lint-staged": "12.3.7",
+		"lint-staged": "12.4.1",
 		"prettier": "npm:wp-prettier@2.2.1-beta-1"
 	},
 	"publishConfig": {
