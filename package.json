@@ -74,7 +74,7 @@
 		"lodash": "4.17.21",
 		"prop-types": "15.8.1",
 		"random-hex-color-generator": "1.0.12",
-		"react-easy-sort": "1.4.1",
+		"react-easy-sort": "1.5.0",
 		"react-glider": "2.2.1"
 	},
 	"devDependencies": {
