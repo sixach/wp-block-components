@@ -66,7 +66,7 @@
 		"@wordpress/primitives": "3.14.0",
 		"@wordpress/url": "3.17.0",
 		"array-move": "4.0.0",
-		"classnames": "2.3.1",
+		"classnames": "2.3.2",
 		"clean-deep": "3.4.0",
 		"glider-js": "1.7.7",
 		"html-react-parser": "1.4.14",
